@@ -11,16 +11,32 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<style>
-    body.homepage {
+    /* 1. Apply image to the main wrapper that holds everything */
+    #page-wrapper {
         background-image: url("images/openart-image_G7-gABUJ_1766853210094_raw.jpg");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        background-repeat: no-repeat;
     }
 
-    /* Optional: Make the white wrappers slightly transparent to see the image through them */
-    .wrapper {
-        background: rgba(255, 255, 255, 0.9) !important;
+    /* 2. Make the header and footer wrappers transparent so the image shows through */
+    #header-wrapper, 
+    #footer-wrapper {
+        background: transparent !important;
+    }
+
+    /* 3. Make the main content sections slightly transparent so text remains readable */
+    #main-wrapper .wrapper {
+        background: rgba(255, 255, 255, 0.85) !important; /* Adjust 0.85 to change transparency */
+        margin: 2em 0; /* Adds a gap to see the background between sections */
+        border-radius: 8px; /* Optional: rounds the corners of your content boxes */
+    }
+
+    /* 4. Ensure the banner text is white/readable if your image is dark */
+    #banner h2, #banner p {
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
 </style>
 	</head>
@@ -377,4 +393,5 @@
 
 	</body>
 </html>
+
 
