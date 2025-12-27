@@ -365,4 +365,43 @@
 	</body>
 </html>
 
+assets/css/main.css
+
+/* ================================
+   HOMEPAGE HERO BACKGROUND
+   ================================ */
+
+body.homepage #header-wrapper {
+  position: relative;
+  background-image: url("../../images/openart-image_G7-gABUJ_1766853210094_raw.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Dark overlay for readability */
+body.homepage #header-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+/* Ensure content stays above overlay */
+body.homepage #header-wrapper .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Improve banner spacing */
+body.homepage #banner {
+  padding: 6em 2em;
+}
+
+/* Optional: brighter text */
+body.homepage #banner h2,
+body.homepage #banner p {
+  color: #ffffff;
+}
 
