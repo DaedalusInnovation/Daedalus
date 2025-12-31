@@ -54,10 +54,7 @@
             max-width: 850px; padding: 4.5rem; background: var(--glass-bg); 
             border: 1px solid var(--border-color); border-radius: 20px; 
             backdrop-filter: blur(20px); text-align: center; 
-            
-            /* ADJUSTED: Pushed lower on the page */
             margin: 80vh auto 40vh auto; 
-            
             opacity: 0; transform: translateY(30px); transition: var(--transition-speed); 
         }
         .vision-box.active { opacity: 1; transform: translateY(0); }
@@ -82,7 +79,7 @@
         .step.active .side-text { opacity: 1; transform: translateX(0); }
 
         /* -----------------------------------------------------------
-           3. ABOUT PAGE (50/50 Layout)
+           3. ABOUT PAGE (Left Text / Right 2-Pics)
         ----------------------------------------------------------- */
         .about-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         .about-grid { display: flex; flex-direction: row; gap: 60px; align-items: center; }
@@ -104,19 +101,29 @@
         .contact-icon { width: 70px; height: 70px; filter: invert(1); transition: 0.3s; opacity: 0.8; }
 
         /* -----------------------------------------------------------
-           5. LEARN MORE (Split Sections with Space)
+           5. LEARN MORE (Expanded box to contain all images)
         ----------------------------------------------------------- */
         .learn-container { max-width: 95%; margin: 0 auto; padding: 120px 40px; }
+        
         .inspiration-box { 
             background: var(--glass-bg); padding: 5rem; border-radius: 40px; 
             border: 1px solid var(--border-color); backdrop-filter: blur(25px);
             margin-bottom: 100px; 
+            /* This line ensures the box expands to include floating images */
+            display: flow-root; 
         }
         .inspiration-box h1 { color: var(--primary-accent); margin-bottom: 2rem; }
         .inspiration-text { font-size: 1.25rem; line-height: 2.2; position: relative; }
-        .scatter-pic { width: 220px; height: 220px; border-radius: 20px; object-fit: cover; border: 1px solid var(--border-color); margin: 30px; }
-        .float-left { float: left; }
-        .float-right { float: right; }
+        
+        /* Updated scattered pictures */
+        .scatter-pic { 
+            width: 250px; height: 250px; border-radius: 20px; 
+            object-fit: cover; border: 1px solid var(--border-color); 
+            margin: 30px; 
+        }
+        .float-left { float: left; margin-left: 0; }
+        .float-right { float: right; margin-right: 0; }
+
         .pdf-box { background: var(--glass-bg); padding: 5rem; border-radius: 40px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); text-align: center; }
         .pdf-btn { display: inline-block; padding: 1.5rem 4rem; background: var(--primary-accent); color: #000; font-weight: 900; text-decoration: none; border-radius: 50px; transition: 0.3s; margin-top: 30px; }
 
@@ -150,7 +157,6 @@
             <p>PROJECT X: AVIATION CONCEPTS</p>
         </section>
         
-        <!-- VISION BOX (Lower Position) -->
         <div class="vision-box reveal">
             <h2>OUR VISION</h2>
             <p>Engineering a revolution in personal aviation. We bridge the gap between biological efficiency and aerospace composites to create a wearable wing suit that functions as a true extension of the human form.</p>
@@ -234,11 +240,12 @@
                 <h1>Inspirations & Design</h1>
                 <div class="inspiration-text">
                     <img src="https://images.unsplash.com/photo-1548681528-6a5c45b66b42?q=80&w=300" class="scatter-pic float-left">
-                    Our project draws from the pioneers of silent flight and the physics of avian biology. We look to the early masters of proximity flying to understand kinetic loads.
+                    Our project draws from the pioneers of silent flight and the physics of avian biology. We look to the early masters of proximity flying to understand how the human body reacts to extreme kinetic loads during atmospheric re-entry simulations.
                     <br><br>
-                    By studying wing-tip vortices, we developed a trailing-edge system that reduces drag by 14% compared to standard hang gliders. 
+                    By studying the wing-tip vortices of large soaring birds, we were able to develop a trailing-edge system that reduces drag by 14% compared to standard hang gliders. 
+                    <br><br>
+                    The Daedalus project is not just about speed; it is about the poetry of motion and the integration of machine into the organic rhythm of flight.
                     <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=300" class="scatter-pic float-right">
-                    Project Daedalus integrates machine into the organic rhythm of flight.
                 </div>
             </div>
             <div class="pdf-box">
@@ -296,7 +303,6 @@
     </div>
 
     <script>
-        // Dimmer Logic (Max 0.70 for 15% brighter background)
         const dimmer = document.getElementById('dimmer');
         window.addEventListener('scroll', () => {
             let opacity = 0.2 + (window.scrollY / 1500);
