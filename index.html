@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAEDALUS INNOVATION</title>
+    <title>DAEDALUS | Aviation Research</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
     
     <style>
@@ -13,7 +13,7 @@
         :root {
             --primary-accent: #00d4ff;    
             --text-main: #ffffff;
-            --glass-bg: rgba(0, 0, 0, 0.5); /* Darker glass for visibility */
+            --glass-bg: rgba(0, 0, 0, 0.5); 
             --border-color: rgba(255, 255, 255, 0.15);
             --main-bg-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1920');
 
@@ -47,16 +47,21 @@
         /* -----------------------------------------------------------
            2. HOME PAGE
         ----------------------------------------------------------- */
-        #hero h1 { font-size: 5.5rem; letter-spacing: 15px; font-weight: 800; text-transform: uppercase; text-align: center; margin-top: 20vh; }
+        #hero h1 { font-size: 5.5rem; letter-spacing: 15px; font-weight: 800; text-transform: uppercase; text-align: center; margin-top: 25vh; }
         #hero p { text-align: center; letter-spacing: 4px; opacity: 0.8; }
 
         .vision-box { 
             max-width: 850px; padding: 4.5rem; background: var(--glass-bg); 
             border: 1px solid var(--border-color); border-radius: 20px; 
-            backdrop-filter: blur(20px); text-align: center; margin: 40vh auto;
+            backdrop-filter: blur(20px); text-align: center; 
+            
+            /* ADJUSTED: Pushed lower on the page */
+            margin: 80vh auto 40vh auto; 
+            
             opacity: 0; transform: translateY(30px); transition: var(--transition-speed); 
         }
         .vision-box.active { opacity: 1; transform: translateY(0); }
+        .vision-box h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-accent); letter-spacing: 3px; }
 
         .sticky-visual { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; pointer-events: none; }
         .showcase-img { width: 700px; height: 450px; border-radius: 40px; object-fit: cover; border: 1px solid var(--border-color); position: absolute; opacity: 0; transition: var(--transition-speed); }
@@ -77,17 +82,13 @@
         .step.active .side-text { opacity: 1; transform: translateX(0); }
 
         /* -----------------------------------------------------------
-           3. ABOUT PAGE (New 50/50 Layout)
+           3. ABOUT PAGE (50/50 Layout)
         ----------------------------------------------------------- */
         .about-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         .about-grid { display: flex; flex-direction: row; gap: 60px; align-items: center; }
-        
-        /* Left Half: Text */
         .about-left-half { flex: 1; background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(15px); }
         .about-left-half h1 { color: var(--primary-accent); font-size: 3rem; margin-bottom: 1.5rem; }
         .about-left-half p { font-size: 1.2rem; line-height: 2; margin-bottom: 1.5rem; }
-
-        /* Right Half: 2 Pics side-by-side */
         .about-right-half { flex: 1; display: flex; flex-direction: row; gap: 20px; justify-content: center; }
         .oval-container { text-align: center; }
         .oval-pic { width: 240px; height: 320px; border-radius: 120px; object-fit: cover; border: 2.5px solid var(--primary-accent); }
@@ -106,29 +107,21 @@
            5. LEARN MORE (Split Sections with Space)
         ----------------------------------------------------------- */
         .learn-container { max-width: 95%; margin: 0 auto; padding: 120px 40px; }
-        
-        /* Inspiration Section */
         .inspiration-box { 
             background: var(--glass-bg); padding: 5rem; border-radius: 40px; 
             border: 1px solid var(--border-color); backdrop-filter: blur(25px);
-            margin-bottom: 100px; /* Big space between sections */
+            margin-bottom: 100px; 
         }
         .inspiration-box h1 { color: var(--primary-accent); margin-bottom: 2rem; }
         .inspiration-text { font-size: 1.25rem; line-height: 2.2; position: relative; }
         .scatter-pic { width: 220px; height: 220px; border-radius: 20px; object-fit: cover; border: 1px solid var(--border-color); margin: 30px; }
         .float-left { float: left; }
         .float-right { float: right; }
-
-        /* PDF Section */
-        .pdf-box { 
-            background: var(--glass-bg); padding: 5rem; border-radius: 40px; 
-            border: 1px solid var(--border-color); backdrop-filter: blur(25px);
-            text-align: center;
-        }
+        .pdf-box { background: var(--glass-bg); padding: 5rem; border-radius: 40px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); text-align: center; }
         .pdf-btn { display: inline-block; padding: 1.5rem 4rem; background: var(--primary-accent); color: #000; font-weight: 900; text-decoration: none; border-radius: 50px; transition: 0.3s; margin-top: 30px; }
 
         /* -----------------------------------------------------------
-           6. DETAIL PAGES
+           6. DETAIL PAGES (01, 02, 03)
         ----------------------------------------------------------- */
         .detail-layout { padding: 150px 10%; display: flex; flex-direction: column; align-items: center; }
         .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; max-width: 1200px; margin-top: 50px; }
@@ -156,11 +149,13 @@
             <h1>DAEDALUS</h1>
             <p>PROJECT X: AVIATION CONCEPTS</p>
         </section>
+        
+        <!-- VISION BOX (Lower Position) -->
         <div class="vision-box reveal">
-            <h2>OUR VISION
-            </h2>
+            <h2>OUR VISION</h2>
             <p>Engineering a revolution in personal aviation. We bridge the gap between biological efficiency and aerospace composites to create a wearable wing suit that functions as a true extension of the human form.</p>
         </div>
+
         <div class="scrolly-container">
             <div class="sticky-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536ad89?q=80&w=800" id="img1" class="showcase-img visible">
@@ -192,13 +187,11 @@
     <div id="about-page" class="page">
         <div class="about-wrap">
             <div class="about-grid">
-                <!-- Left Half -->
                 <div class="about-left-half">
                     <h1>The Research Team</h1>
                     <p>The Daedalus project removes the barriers between the pilot and the wind, creating an experience that is as safe as a hang glider but as intuitive as a bird in flight.</p>
-                    <p>Every component of Project X has been scrutinized by aerospace engineers and material scientists to ensure safety and meet the rigorous university research standards of the modern aviation community.</p>
+                    <p>Every component of Project X has been scrutinized by aerospace engineers and material scientists to ensure safety and meet university research standards.</p>
                 </div>
-                <!-- Right Half -->
                 <div class="about-right-half">
                     <div class="oval-container">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" class="oval-pic">
@@ -237,23 +230,20 @@
     <!-- LEARN MORE PAGE -->
     <div id="learn-page" class="page">
         <div class="learn-container">
-            <!-- Section 1: Inspiration -->
             <div class="inspiration-box">
                 <h1>Inspirations & Design</h1>
                 <div class="inspiration-text">
                     <img src="https://images.unsplash.com/photo-1548681528-6a5c45b66b42?q=80&w=300" class="scatter-pic float-left">
-                    Our project draws from the pioneers of silent flight and the physics of avian biology. We look to the early masters of proximity flying to understand how the human body reacts to extreme kinetic loads during atmospheric re-entry simulations.
+                    Our project draws from the pioneers of silent flight and the physics of avian biology. We look to the early masters of proximity flying to understand kinetic loads.
                     <br><br>
-                    By studying the wing-tip vortices of large soaring birds, we were able to develop a trailing-edge system that reduces drag by 14% compared to standard hang gliders. 
+                    By studying wing-tip vortices, we developed a trailing-edge system that reduces drag by 14% compared to standard hang gliders. 
                     <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=300" class="scatter-pic float-right">
-                    The Daedalus project is not just about speed; it is about the poetry of motion and the integration of machine into the organic rhythm of flight.
+                    Project Daedalus integrates machine into the organic rhythm of flight.
                 </div>
             </div>
-
-            <!-- Section 2: Technical -->
             <div class="pdf-box">
                 <h1>Technical Whitepaper</h1>
-                <p>For a full engineering breakdown of Project X, download the technical specifications PDF below.</p>
+                <p>Download the technical specifications PDF below.</p>
                 <a href="design-specs.pdf" class="pdf-btn">DOWNLOAD FULL SPECS (PDF)</a>
             </div>
         </div>
@@ -269,7 +259,7 @@
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500">
                 </div>
                 <div class="detail-text-side">
-                    Exploring high-tensile graphene weaves to create a skeletal wing structure that is virtually weightless yet durable under extreme pressure.
+                    Exploring graphene weaves for skeletal wing structures that are virtually weightless yet durable under extreme pressure.
                 </div>
             </div>
         </div>
@@ -284,7 +274,7 @@
                     <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=500">
                 </div>
                 <div class="detail-text-side">
-                    Translating pilot torque and joint movements into precise aerofoil control via a network of distributed bio-sensors.
+                    Translating pilot joint movements into precise aerofoil control via a network of distributed bio-sensors.
                 </div>
             </div>
         </div>
@@ -299,7 +289,7 @@
                     <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=500">
                 </div>
                 <div class="detail-text-side">
-                    Utilizing CFD (Computational Fluid Dynamics) and real-time sensor feedback to optimize flight paths within a digital twin environment.
+                    Utilizing CFD (Computational Fluid Dynamics) to optimize flight paths within a digital twin environment.
                 </div>
             </div>
         </div>
@@ -336,4 +326,3 @@
     </script>
 </body>
 </html>
-
