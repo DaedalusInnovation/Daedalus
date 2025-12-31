@@ -15,172 +15,80 @@
             --text-main: #ffffff;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --border-color: rgba(255, 255, 255, 0.15);
-            
-            /* Background Image */
             --main-bg-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1920');
 
-            /* Speeds & Sizes */
-            --transition-speed: 0.8s;
-            --box-width: 450px;
+            /* User Customizations */
+            --transition-speed: 0.5s;      /* Faster animations */
+            --box-width: 500px;            /* Slightly wider */
+            --box-min-height: 400px;       /* Taller boxes */
+            --edge-margin: 5%;             /* Further from center, closer to edge */
             --nav-height: 80px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            color: var(--text-main); 
-            background-color: #000; /* Fallback */
-            overflow-x: hidden;
-        }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #000; overflow-x: hidden; }
 
-        /* -----------------------------------------------------------
-           2. THE FIXED BACKGROUND ENGINE
-        ----------------------------------------------------------- */
-        .bg-fixed {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            background-image: var(--main-bg-image);
-            background-size: cover;
-            background-position: center;
-            z-index: -2; /* Furthest back */
-        }
+        /* Background Engine */
+        .bg-fixed { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-image: var(--main-bg-image); background-size: cover; background-position: center; z-index: -2; }
+        .bg-dimmer { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #000; opacity: 0.2; z-index: -1; pointer-events: none; }
 
-        /* This is the "Dimmer" layer controlled by JavaScript */
-        .bg-dimmer {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            background: #000;
-            opacity: 0.2; /* Initial darkness */
-            z-index: -1;  /* Between image and content */
-            pointer-events: none;
-        }
-
-        /* -----------------------------------------------------------
-           3. NAVIGATION
-        ----------------------------------------------------------- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            height: var(--nav-height);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
+        /* Navigation */
+        nav { position: fixed; top: 0; width: 100%; height: var(--nav-height); z-index: 9999; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
         nav ul { display: flex; list-style: none; gap: 40px; }
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 800;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+        nav ul li a { text-decoration: none; color: var(--text-main); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; transition: 0.3s; cursor: pointer; }
         nav ul li a:hover { color: var(--primary-accent); }
 
-        /* -----------------------------------------------------------
-           4. PAGE & SECTION STYLES
-        ----------------------------------------------------------- */
         .page { min-height: 100vh; width: 100%; display: none; }
         .page.active { display: block; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 5%; }
 
-        /* Section Layouts */
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 10%; }
-
-        /* Hero */
+        /* Home Page Elements */
         #hero h1 { font-size: 5rem; letter-spacing: 15px; text-transform: uppercase; }
-        #hero p { letter-spacing: 5px; opacity: 0.7; }
-
-        /* Vision */
-        .vision-box {
-            max-width: 800px;
-            padding: 4rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition-speed);
-        }
+        .vision-box { max-width: 800px; padding: 4rem; background: var(--glass-bg); border: 1px solid var(--border-color); border-radius: 20px; backdrop-filter: blur(15px); text-align: center; opacity: 0; transform: translateY(30px); transition: var(--transition-speed); }
         .vision-box.active { opacity: 1; transform: translateY(0); }
-        .vision-box h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-accent); }
 
-        /* -----------------------------------------------------------
-           5. SCROLLY SHOWCASE (Rounded Image in Middle)
-        ----------------------------------------------------------- */
-        .scrolly-container { position: relative; }
-        
-        .sticky-visual {
-            position: sticky;
-            top: 0; height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            pointer-events: none;
-        }
-
-        .showcase-img {
-            width: 700px; height: 450px;
-            border-radius: 40px;
-            object-fit: cover;
-            border: 1px solid var(--border-color);
-            position: absolute;
-            opacity: 0;
-            transition: var(--transition-speed);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
+        /* Scrolly Showcase */
+        .sticky-visual { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+        .showcase-img { width: 600px; height: 400px; border-radius: 40px; object-fit: cover; border: 1px solid var(--border-color); position: absolute; opacity: 0; transition: var(--transition-speed); }
         .showcase-img.visible { opacity: 1; }
 
-        .step { height: 100vh; display: flex; align-items: center; position: relative; z-index: 10; }
-        
+        .step { height: 100vh; display: flex; align-items: center; position: relative; z-index: 10; width: 100%; }
         .side-text {
             width: var(--box-width);
+            min-height: var(--box-min-height);
             background: var(--glass-bg);
-            padding: 2.5rem;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 25px;
+            backdrop-filter: blur(25px);
             border: 1px solid var(--border-color);
             opacity: 0;
             transition: var(--transition-speed);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
+        .side-text h3 { color: var(--primary-accent); cursor: pointer; margin-bottom: 15px; font-size: 1.8rem; text-decoration: underline; text-decoration-color: transparent; transition: 0.3s; }
+        .side-text h3:hover { text-decoration-color: var(--primary-accent); }
 
-        .left-box { transform: translateX(-100px); }
-        .right-box { transform: translateX(100px); margin-left: auto; }
+        .left-box { transform: translateX(-150px); margin-left: var(--edge-margin); }
+        .right-box { transform: translateX(150px); margin-right: var(--edge-margin); margin-left: auto; }
         .step.active .side-text { opacity: 1; transform: translateX(0); }
 
-        /* -----------------------------------------------------------
-           6. ABOUT, CONTACT, LEARN MORE (Layouts)
-        ----------------------------------------------------------- */
+        /* Detail Page Layout (Used for .1, .2, .3) */
+        .detail-layout { display: flex; flex-direction: column; align-items: center; padding: 120px 10%; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 1200px; margin-top: 40px; }
+        .detail-pics { display: flex; flex-direction: column; gap: 20px; }
+        .detail-pics img { width: 100%; height: 250px; border-radius: 20px; object-fit: cover; border: 1px solid var(--border-color); }
+        .detail-text { background: var(--glass-bg); padding: 3rem; border-radius: 20px; border: 1px solid var(--border-color); line-height: 1.8; font-size: 1.1rem; }
+
+        /* About & Contact */
         .content-wrap { max-width: 1200px; margin: 0 auto; padding: 120px 20px; }
-        
-        /* About Grid */
-        .about-grid { display: flex; gap: 60px; align-items: flex-start; }
-        .about-text { flex: 1; line-height: 1.8; font-size: 1.1rem; }
-        .about-pics { flex: 1; display: flex; flex-direction: column; gap: 40px; align-items: center; }
+        .about-grid { display: flex; gap: 60px; }
         .oval-pic { width: 280px; height: 380px; border-radius: 140px; object-fit: cover; border: 2px solid var(--primary-accent); }
-        .name-tag { margin-top: 10px; background: var(--glass-bg); padding: 5px 20px; border-radius: 50px; font-weight: bold; font-size: 0.9rem; }
-
-        /* Contact Grid */
-        .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 50px; }
-        .contact-item { text-align: center; }
-        .contact-icon { width: 60px; height: 60px; margin-top: 15px; filter: invert(1); transition: 0.3s; }
-        .contact-icon:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--primary-accent)); }
-
-        /* Learn More PDF */
-        .pdf-btn { display: inline-block; padding: 20px 40px; background: var(--primary-accent); color: #000; border-radius: 50px; text-decoration: none; font-weight: 800; margin-top: 40px; }
-
     </style>
 </head>
 <body>
 
-    <!-- BACKGROUND ENGINE -->
     <div class="bg-fixed"></div>
     <div id="dimmer" class="bg-dimmer"></div>
 
@@ -195,139 +103,106 @@
 
     <!-- HOME PAGE -->
     <div id="home-page" class="page active">
-        <section id="hero">
-            <h1>DAEDALUS</h1>
-            <p>Aviation Research & Concept Design</p>
-        </section>
-
-        <section id="vision">
-            <div class="vision-box reveal">
-                <h2>OUR VISION</h2>
-                <p>We aim to bridge the gap between high-performance hang gliding and the portability of wingsuit flight. By utilizing advanced carbon-fiber composites and bio-inspired aerodynamics, Daedalus offers a wearable flight platform that demands no compromises on safety or control.</p>
-            </div>
-        </section>
-
+        <section id="hero"><h1>DAEDALUS</h1><p>Aviation Research & Design</p></section>
+        <section id="vision"><div class="vision-box reveal"><h2>OUR VISION</h2><p>Engineering the future of wearable flight.</p></div></section>
         <div class="scrolly-container">
             <div class="sticky-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536ad89?q=80&w=800" id="img1" class="showcase-img visible">
                 <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=800" id="img2" class="showcase-img">
                 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800" id="img3" class="showcase-img">
             </div>
-
             <div class="step" data-img="img1">
                 <div class="side-text left-box">
-                    <h3>01. Material Research</h3>
-                    <p>Utilizing high-tensile graphene weaves to create wings that are lighter than air yet stronger than steel.</p>
+                    <h3 onclick="showPage('detail-1')">01. Material Research</h3>
+                    <p>Advanced composites for high-altitude durability.</p>
                 </div>
             </div>
-
             <div class="step" data-img="img2">
                 <div class="side-text right-box">
-                    <h3>02. Kinetic Integration</h3>
-                    <p>The suit utilizes the pilot's own movements to adjust control surfaces, creating an intuitive flight experience.</p>
+                    <h3 onclick="showPage('detail-2')">02. Kinetic Integration</h3>
+                    <p>Pilot-driven control surface mechanics.</p>
                 </div>
             </div>
-
             <div class="step" data-img="img3">
                 <div class="side-text left-box">
-                    <h3>03. Digital Simulation</h3>
-                    <p>Extensive wind-tunnel testing and VR simulations ensure every flight path is mapped for maximum efficiency.</p>
+                    <h3 onclick="showPage('detail-3')">03. Digital Simulation</h3>
+                    <p>Virtual wind-tunnel path optimization.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ABOUT PAGE -->
-    <div id="about-page" class="page">
-        <div class="content-wrap">
-            <div class="about-grid">
-                <div class="about-text">
-                    <h2 style="color:var(--primary-accent); font-size:3rem; margin-bottom:2rem;">The Team</h2>
-                    <p>Daedalus began as a specialized research project focused on portable aviation. Our lead researchers come from backgrounds in Aerospace Engineering and Biomechanics.</p>
-                    <br>
-                    <p>We believe that human flight should be an extension of the body. Our design process involves studying the skeletal structures of large soaring birds to replicate their efficiency in a wearable format.</p>
+    <!-- DETAIL PAGES (.1, .2, .3) -->
+    <div id="detail-1" class="page">
+        <div class="detail-layout">
+            <h1 style="color:var(--primary-accent)">01. Material Research</h1>
+            <div class="detail-grid">
+                <div class="detail-pics">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400">
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=400">
                 </div>
-                <div class="about-pics">
-                    <div class="person">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400" class="oval-pic">
-                        <center><div class="name-tag">ALEX RIVERA</div></center>
-                    </div>
-                    <div class="person">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400" class="oval-pic">
-                        <center><div class="name-tag">SARAH CHEN</div></center>
-                    </div>
+                <div class="detail-text">
+                    <p>Our research focuses on the molecular structure of high-tensile carbon weaves. By integrating graphene layers, we have achieved a weight-to-strength ratio that was previously thought impossible in wearable aviation. This section explores the stressors and thermal dynamics of the Daedalus wing ribs during rapid descent.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- CONTACT PAGE -->
-    <div id="contact-page" class="page">
-        <div class="content-wrap" style="text-align: center;">
-            <h2>Contact Us</h2>
-            <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="name-tag">EMAIL</div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="contact-icon">
+    <div id="detail-2" class="page">
+        <div class="detail-layout">
+            <h1 style="color:var(--primary-accent)">02. Kinetic Integration</h1>
+            <div class="detail-grid">
+                <div class="detail-pics">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=400">
                 </div>
-                <div class="contact-item">
-                    <div class="name-tag">GITHUB</div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" class="contact-icon">
-                </div>
-                <div class="contact-item">
-                    <div class="name-tag">LINKEDIN</div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" class="contact-icon">
+                <div class="detail-text">
+                    <p>Kinetic integration allows the pilot to become one with the aircraft. The suit's sensors translate elbow and shoulder torque into precise movements of the primary aerofoils. This eliminates the need for heavy mechanical levers, relying instead on intuitive pilot instinct honed through thousand of hours of simulation.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- LEARN MORE PAGE -->
-    <div id="learn-page" class="page">
-        <div class="content-wrap">
-            <h2>Inspirations</h2>
-            <p style="margin-top:20px;">Our work is built on the shoulders of giants. We look to the early pioneers of hang gliding and the modern masters of wingsuit proximity flying.</p>
-            <div style="display:flex; gap:20px; margin-top:40px;">
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=500" style="width:50%; border-radius:20px;">
-                <img src="https://images.unsplash.com/photo-1527489377706-5bf97e608892?q=80&w=500" style="width:50%; border-radius:20px;">
+    <div id="detail-3" class="page">
+        <div class="detail-layout">
+            <h1 style="color:var(--primary-accent)">03. Digital Simulation</h1>
+            <div class="detail-grid">
+                <div class="detail-pics">
+                    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=400">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=400">
+                </div>
+                <div class="detail-text">
+                    <p>Every flight begins in the digital twin. Our software suite runs CFD (Computational Fluid Dynamics) analysis on thousands of environmental variables—wind shear, altitude, temperature, and pilot weight—to calculate the safest and most efficient glide paths for the project.</p>
+                </div>
             </div>
-            <center>
-                <a href="your-design.pdf" class="pdf-btn">DOWNLOAD FULL DESIGN SPECS (PDF)</a>
-            </center>
         </div>
     </div>
+
+    <!-- OTHER PAGES (STUBS) -->
+    <div id="about-page" class="page"><div class="content-wrap"><h1>About Us</h1></div></div>
+    <div id="contact-page" class="page"><div class="content-wrap"><h1>Contact</h1></div></div>
+    <div id="learn-page" class="page"><div class="content-wrap"><h1>Learn More</h1></div></div>
 
     <script>
-        /* 1. DIMMER LOGIC: Makes background darker as you scroll */
+        // Dimmer logic
         const dimmer = document.getElementById('dimmer');
         window.addEventListener('scroll', () => {
-            const scrollPos = window.scrollY;
-            const windowHeight = window.innerHeight;
-            
-            // Adjust these numbers to change how fast it darkens
-            // 0.2 is the starting darkness, scrollPos/2000 is the rate
-            let opacity = 0.2 + (scrollPos / 2500); 
-            
-            // Cap the darkness at 0.85 (so it's never fully pitch black)
-            if (opacity > 0.85) opacity = 0.85;
-            
-            dimmer.style.opacity = opacity;
+            let opacity = 0.2 + (window.scrollY / 1500);
+            dimmer.style.opacity = Math.min(opacity, 0.85);
         });
 
-        /* 2. NAVIGATION LOGIC */
+        // Navigation
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        /* 3. SCROLL REVEAL & IMAGE SWAP LOGIC */
+        // Trigger logic: Lower threshold (0.3) makes boxes appear sooner
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    
-                    // If it's a showcase step, swap the image
                     if (entry.target.classList.contains('step')) {
                         const imgId = entry.target.getAttribute('data-img');
                         document.querySelectorAll('.showcase-img').forEach(img => img.classList.remove('visible'));
@@ -335,10 +210,9 @@
                     }
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 }); // Changed from 0.5 to 0.3 for faster entry
 
         document.querySelectorAll('.step, .reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
-
