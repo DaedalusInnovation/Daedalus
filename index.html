@@ -13,8 +13,7 @@
         :root {
             --primary-accent: #00d4ff;    
             --text-main: #ffffff;
-            /* Updated to a darker glass for better text visibility */
-            --glass-bg: rgba(0, 0, 0, 0.5); 
+            --glass-bg: rgba(0, 0, 0, 0.5); /* Darker glass for visibility */
             --border-color: rgba(255, 255, 255, 0.15);
             --main-bg-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1920');
 
@@ -32,47 +31,38 @@
         .bg-fixed { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background-image: var(--main-bg-image); background-size: cover; background-position: center; z-index: -2; }
         .bg-dimmer { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #000; opacity: 0.2; z-index: -1; pointer-events: none; }
 
-        /* Centered Navigation */
+        /* Navigation */
         nav { 
             position: fixed; top: 0; width: 100%; height: var(--nav-height); 
             z-index: 9999; display: flex; justify-content: center; align-items: center; 
             background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); 
         }
         nav ul { display: flex; list-style: none; gap: 45px; align-items: center; }
-        nav ul li a { 
-            text-decoration: none; color: var(--text-main); font-weight: 800; 
-            letter-spacing: 2px; font-size: 0.85rem; transition: 0.3s; cursor: pointer; 
-        }
+        nav ul li a { text-decoration: none; color: var(--text-main); font-weight: 800; letter-spacing: 2px; font-size: 0.85rem; transition: 0.3s; cursor: pointer; }
         nav ul li a:hover { color: var(--primary-accent); }
 
         .page { min-height: 100vh; width: 100%; display: none; }
         .page.active { display: block; }
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 5%; }
 
         /* -----------------------------------------------------------
            2. HOME PAGE
         ----------------------------------------------------------- */
-        #hero h1 { font-size: 5.5rem; letter-spacing: 15px; font-weight: 800; text-transform: uppercase; }
-        #hero p { letter-spacing: 4px; opacity: 0.8; }
+        #hero h1 { font-size: 5.5rem; letter-spacing: 15px; font-weight: 800; text-transform: uppercase; text-align: center; margin-top: 20vh; }
+        #hero p { text-align: center; letter-spacing: 4px; opacity: 0.8; }
 
         .vision-box { 
             max-width: 850px; padding: 4.5rem; background: var(--glass-bg); 
             border: 1px solid var(--border-color); border-radius: 20px; 
-            backdrop-filter: blur(20px); text-align: center; 
+            backdrop-filter: blur(20px); text-align: center; margin: 40vh auto;
             opacity: 0; transform: translateY(30px); transition: var(--transition-speed); 
         }
         .vision-box.active { opacity: 1; transform: translateY(0); }
-        .vision-box h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--primary-accent); letter-spacing: 3px; }
 
         .sticky-visual { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-        .showcase-img { 
-            width: 700px; height: 450px; border-radius: 40px; object-fit: cover; 
-            border: 1px solid var(--border-color); position: absolute; opacity: 0; transition: var(--transition-speed); 
-        }
+        .showcase-img { width: 700px; height: 450px; border-radius: 40px; object-fit: cover; border: 1px solid var(--border-color); position: absolute; opacity: 0; transition: var(--transition-speed); }
         .showcase-img.visible { opacity: 1; }
 
         .step { height: 100vh; display: flex; align-items: center; position: relative; z-index: 10; width: 100%; }
-        
         .side-text {
             width: var(--box-width); min-height: var(--box-min-height);
             background: var(--glass-bg); padding: 3.5rem; border-radius: 30px;
@@ -80,76 +70,70 @@
             opacity: 0; transition: var(--transition-speed);
             display: flex; flex-direction: column; justify-content: center;
         }
-        .side-text h3 { 
-            color: var(--primary-accent); cursor: pointer; margin-bottom: 20px; font-size: 2rem; 
-            text-decoration: underline; text-decoration-color: transparent; transition: 0.3s;
-        }
+        .side-text h3 { color: var(--primary-accent); cursor: pointer; margin-bottom: 20px; font-size: 2rem; text-decoration: underline; text-decoration-color: transparent; transition: 0.3s; }
         .side-text h3:hover { text-decoration-color: var(--primary-accent); }
-
         .left-box { transform: translateX(-150px); margin-left: var(--edge-margin); }
         .right-box { transform: translateX(150px); margin-right: var(--edge-margin); margin-left: auto; }
         .step.active .side-text { opacity: 1; transform: translateX(0); }
 
         /* -----------------------------------------------------------
-           3. ABOUT PAGE (Horizontal Pics)
+           3. ABOUT PAGE (New 50/50 Layout)
         ----------------------------------------------------------- */
-        .about-wrap { max-width: 1300px; margin: 0 auto; padding: 120px 20px; }
-        .about-grid { display: flex; flex-direction: column; gap: 40px; }
-        .about-top-content { display: flex; gap: 50px; align-items: center; }
-        .about-left { flex: 1; background: var(--glass-bg); padding: 3rem; border-radius: 20px; backdrop-filter: blur(15px); }
-        .about-left p { font-size: 1.15rem; line-height: 1.9; margin-bottom: 1.5rem; }
+        .about-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
+        .about-grid { display: flex; flex-direction: row; gap: 60px; align-items: center; }
         
-        /* Updated: Pictures right next to each other and smaller */
-        .about-right-row { display: flex; flex-direction: row; gap: 20px; justify-content: center; margin-top: 20px; }
+        /* Left Half: Text */
+        .about-left-half { flex: 1; background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(15px); }
+        .about-left-half h1 { color: var(--primary-accent); font-size: 3rem; margin-bottom: 1.5rem; }
+        .about-left-half p { font-size: 1.2rem; line-height: 2; margin-bottom: 1.5rem; }
+
+        /* Right Half: 2 Pics side-by-side */
+        .about-right-half { flex: 1; display: flex; flex-direction: row; gap: 20px; justify-content: center; }
         .oval-container { text-align: center; }
-        .oval-pic { 
-            width: 220px; height: 300px; border-radius: 110px; 
-            object-fit: cover; border: 2px solid var(--primary-accent); 
-        }
-        .name-box { 
-            margin-top: 10px; background: rgba(0,0,0,0.6); padding: 5px 15px; 
-            border-radius: 50px; border: 1px solid var(--border-color); font-weight: 800; font-size: 0.8rem;
-        }
+        .oval-pic { width: 240px; height: 320px; border-radius: 120px; object-fit: cover; border: 2.5px solid var(--primary-accent); }
+        .name-box { margin-top: 15px; background: rgba(0,0,0,0.6); padding: 8px 20px; border-radius: 50px; border: 1px solid var(--border-color); font-weight: 800; font-size: 0.8rem; letter-spacing: 1px; }
 
         /* -----------------------------------------------------------
            4. CONTACT PAGE
         ----------------------------------------------------------- */
-        .contact-wrap { text-align: center; padding: 120px 10%; }
+        .contact-wrap { text-align: center; padding: 150px 10%; }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 60px; margin-top: 60px; }
         .contact-item { display: flex; flex-direction: column; align-items: center; }
-        .contact-label-box { background: var(--glass-bg); padding: 6px 20px; border-radius: 5px; border: 1px solid var(--border-color); margin-bottom: 15px; font-size: 0.75rem; color: var(--primary-accent); }
+        .contact-label-box { background: var(--glass-bg); padding: 8px 25px; border-radius: 5px; border: 1px solid var(--border-color); margin-bottom: 15px; font-size: 0.8rem; font-weight: 800; color: var(--primary-accent); }
         .contact-icon { width: 70px; height: 70px; filter: invert(1); transition: 0.3s; opacity: 0.8; }
 
         /* -----------------------------------------------------------
-           5. LEARN MORE (Inspiration: Large box, Scattered small pics)
+           5. LEARN MORE (Split Sections with Space)
         ----------------------------------------------------------- */
-        .learn-content { 
-            max-width: 95%; /* Much larger text box */
-            margin: 0 auto; padding: 120px 40px; 
-            background: var(--glass-bg); border-radius: 30px; 
-            backdrop-filter: blur(25px); border: 1px solid var(--border-color);
-        }
-        .inspiration-text { font-size: 1.2rem; line-height: 2; position: relative; }
+        .learn-container { max-width: 95%; margin: 0 auto; padding: 120px 40px; }
         
-        /* Small scattered images */
-        .scatter-pic { 
-            width: 200px; height: 200px; border-radius: 15px; 
-            object-fit: cover; border: 1px solid var(--border-color);
-            margin: 20px;
+        /* Inspiration Section */
+        .inspiration-box { 
+            background: var(--glass-bg); padding: 5rem; border-radius: 40px; 
+            border: 1px solid var(--border-color); backdrop-filter: blur(25px);
+            margin-bottom: 100px; /* Big space between sections */
         }
+        .inspiration-box h1 { color: var(--primary-accent); margin-bottom: 2rem; }
+        .inspiration-text { font-size: 1.25rem; line-height: 2.2; position: relative; }
+        .scatter-pic { width: 220px; height: 220px; border-radius: 20px; object-fit: cover; border: 1px solid var(--border-color); margin: 30px; }
         .float-left { float: left; }
         .float-right { float: right; }
 
-        .pdf-section { margin-top: 60px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 40px; }
-        .pdf-btn { display: inline-block; padding: 1.2rem 3rem; background: var(--primary-accent); color: #000; font-weight: 900; text-decoration: none; border-radius: 50px; }
+        /* PDF Section */
+        .pdf-box { 
+            background: var(--glass-bg); padding: 5rem; border-radius: 40px; 
+            border: 1px solid var(--border-color); backdrop-filter: blur(25px);
+            text-align: center;
+        }
+        .pdf-btn { display: inline-block; padding: 1.5rem 4rem; background: var(--primary-accent); color: #000; font-weight: 900; text-decoration: none; border-radius: 50px; transition: 0.3s; margin-top: 30px; }
 
         /* -----------------------------------------------------------
            6. DETAIL PAGES
         ----------------------------------------------------------- */
-        .detail-layout { padding: 120px 10%; display: flex; flex-direction: column; align-items: center; }
-        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; width: 100%; max-width: 1200px; margin-top: 50px; }
-        .detail-pics-side img { width: 100%; height: 300px; border-radius: 25px; object-fit: cover; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .detail-text-side { background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(20px); line-height: 1.9; font-size: 1.15rem; }
+        .detail-layout { padding: 150px 10%; display: flex; flex-direction: column; align-items: center; }
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; max-width: 1200px; margin-top: 50px; }
+        .detail-pics-side img { width: 100%; height: 320px; border-radius: 30px; object-fit: cover; border: 1px solid var(--border-color); margin-bottom: 30px; }
+        .detail-text-side { background: var(--glass-bg); padding: 4rem; border-radius: 40px; border: 1px solid var(--border-color); backdrop-filter: blur(20px); line-height: 2; font-size: 1.2rem; }
     </style>
 </head>
 <body>
@@ -172,12 +156,10 @@
             <h1>DAEDALUS</h1>
             <p>PROJECT X: AVIATION CONCEPTS</p>
         </section>
-        <section id="vision">
-            <div class="vision-box reveal">
-                <h2>OUR VISION</h2>
-                <p>Engineering a revolution in personal aviation. Merging skeletal efficiency with aerospace composites for a wearable extension of the human form.</p>
-            </div>
-        </section>
+        <div class="vision-box reveal">
+            <h2>OUR VISION</h2>
+            <p>Engineering a revolution in personal aviation. We bridge the gap between biological efficiency and aerospace composites to create a wearable wing suit that functions as a true extension of the human form.</p>
+        </div>
         <div class="scrolly-container">
             <div class="sticky-visual">
                 <img src="https://images.unsplash.com/photo-1551288049-bbbda536ad89?q=80&w=800" id="img1" class="showcase-img visible">
@@ -187,19 +169,19 @@
             <div class="step" data-img="img1">
                 <div class="side-text left-box">
                     <h3 onclick="showPage('detail-1')">01. Material Research</h3>
-                    <p>Click to explore graphene weaves and aerodynamic stability layers.</p>
+                    <p>Click to explore graphene weaves and aerodynamic stability layers designed for extreme high-altitude endurance.</p>
                 </div>
             </div>
             <div class="step" data-img="img2">
                 <div class="side-text right-box">
                     <h3 onclick="showPage('detail-2')">02. Kinetic Integration</h3>
-                    <p>Click to learn how pilot movements translate to control surface adjustments.</p>
+                    <p>Click to learn how pilot movements translate into control surface adjustments through intuitive bio-sensors.</p>
                 </div>
             </div>
             <div class="step" data-img="img3">
                 <div class="side-text left-box">
                     <h3 onclick="showPage('detail-3')">03. Digital Simulation</h3>
-                    <p>Click to view flight path algorithms and wind-tunnel data.</p>
+                    <p>Click to view flight path algorithms and wind-tunnel data derived from 5,000+ simulation hours.</p>
                 </div>
             </div>
         </div>
@@ -208,19 +190,23 @@
     <!-- ABOUT PAGE -->
     <div id="about-page" class="page">
         <div class="about-wrap">
-            <div class="about-left">
-                <h1 style="color: var(--primary-accent); margin-bottom: 20px;">The Research Team</h1>
-                <p>The Daedalus project focuses on removing the barriers between the pilot and the wind, creating an experience that is as safe as a hang glider but as intuitive as a bird in flight.</p>
-                <p>Every component of Project X has been scrutinized by aerospace engineers and material scientists to ensure safety and university research standards.</p>
-            </div>
-            <div class="about-right-row">
-                <div class="oval-container">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" class="oval-pic">
-                    <div class="name-box">PROJECT LEAD</div>
+            <div class="about-grid">
+                <!-- Left Half -->
+                <div class="about-left-half">
+                    <h1>The Research Team</h1>
+                    <p>The Daedalus project removes the barriers between the pilot and the wind, creating an experience that is as safe as a hang glider but as intuitive as a bird in flight.</p>
+                    <p>Every component of Project X has been scrutinized by aerospace engineers and material scientists to ensure safety and meet the rigorous university research standards of the modern aviation community.</p>
                 </div>
-                <div class="oval-container">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400" class="oval-pic">
-                    <div class="name-box">AERO ENGINEER</div>
+                <!-- Right Half -->
+                <div class="about-right-half">
+                    <div class="oval-container">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" class="oval-pic">
+                        <div class="name-box">PROJECT LEAD</div>
+                    </div>
+                    <div class="oval-container">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400" class="oval-pic">
+                        <div class="name-box">AERO ENGINEER</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,7 +215,7 @@
     <!-- CONTACT PAGE -->
     <div id="contact-page" class="page">
         <div class="contact-wrap">
-            <h1>Connect With Us</h1>
+            <h1>Establish Communication</h1>
             <div class="contact-grid">
                 <div class="contact-item">
                     <div class="contact-label-box">EMAIL SERVICE</div>
@@ -249,18 +235,24 @@
 
     <!-- LEARN MORE PAGE -->
     <div id="learn-page" class="page">
-        <div class="learn-content">
-            <h1 style="color: var(--primary-accent); margin-bottom: 30px;">Inspirations & Design</h1>
-            <div class="inspiration-text">
-                <img src="https://images.unsplash.com/photo-1548681528-6a5c45b66b42?q=80&w=300" class="scatter-pic float-left">
-                Our project draws from the pioneers of silent flight and the physics of avian biology. We look to the early masters of proximity flying to understand how the human body reacts to extreme kinetic loads.
-                <br><br>
-                By studying the wing-tip vortices of large soaring birds, we were able to develop a trailing-edge system that reduces drag by 14% compared to standard hang gliders. 
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=300" class="scatter-pic float-right">
-                The Daedalus project is not just about speed; it is about the poetry of motion and the integration of machine into the organic rhythm of flight.
+        <div class="learn-container">
+            <!-- Section 1: Inspiration -->
+            <div class="inspiration-box">
+                <h1>Inspirations & Design</h1>
+                <div class="inspiration-text">
+                    <img src="https://images.unsplash.com/photo-1548681528-6a5c45b66b42?q=80&w=300" class="scatter-pic float-left">
+                    Our project draws from the pioneers of silent flight and the physics of avian biology. We look to the early masters of proximity flying to understand how the human body reacts to extreme kinetic loads during atmospheric re-entry simulations.
+                    <br><br>
+                    By studying the wing-tip vortices of large soaring birds, we were able to develop a trailing-edge system that reduces drag by 14% compared to standard hang gliders. 
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=300" class="scatter-pic float-right">
+                    The Daedalus project is not just about speed; it is about the poetry of motion and the integration of machine into the organic rhythm of flight.
+                </div>
             </div>
-            <div class="pdf-section">
-                <h2>Technical Whitepaper</h2>
+
+            <!-- Section 2: Technical -->
+            <div class="pdf-box">
+                <h1>Technical Whitepaper</h1>
+                <p>For a full engineering breakdown of Project X, download the technical specifications PDF below.</p>
                 <a href="design-specs.pdf" class="pdf-btn">DOWNLOAD FULL SPECS (PDF)</a>
             </div>
         </div>
@@ -269,14 +261,14 @@
     <!-- DETAIL PAGES (01, 02, 03) -->
     <div id="detail-1" class="page">
         <div class="detail-layout">
-            <h1 style="color:var(--primary-accent);">01. Material Research</h1>
+            <h1 style="color:var(--primary-accent); font-size: 3rem;">01. Material Research</h1>
             <div class="detail-grid">
                 <div class="detail-pics-side">
                     <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=500">
                     <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=500">
                 </div>
                 <div class="detail-text-side">
-                    Exploring graphene weaves and high-tensile carbon for extreme weight-to-strength ratios.
+                    Exploring high-tensile graphene weaves to create a skeletal wing structure that is virtually weightless yet durable under extreme pressure.
                 </div>
             </div>
         </div>
@@ -284,14 +276,14 @@
 
     <div id="detail-2" class="page">
         <div class="detail-layout">
-            <h1 style="color:var(--primary-accent);">02. Kinetic Integration</h1>
+            <h1 style="color:var(--primary-accent); font-size: 3rem;">02. Kinetic Integration</h1>
             <div class="detail-grid">
                 <div class="detail-pics-side">
                     <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=500">
                     <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=500">
                 </div>
                 <div class="detail-text-side">
-                    Translating pilot torque into precise aerofoil control via bio-sensors.
+                    Translating pilot torque and joint movements into precise aerofoil control via a network of distributed bio-sensors.
                 </div>
             </div>
         </div>
@@ -299,25 +291,25 @@
 
     <div id="detail-3" class="page">
         <div class="detail-layout">
-            <h1 style="color:var(--primary-accent);">03. Digital Simulation</h1>
+            <h1 style="color:var(--primary-accent); font-size: 3rem;">03. Digital Simulation</h1>
             <div class="detail-grid">
                 <div class="detail-pics-side">
                     <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=500">
                     <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=500">
                 </div>
                 <div class="detail-text-side">
-                    Calculating flight efficiency via CFD analysis and digital twin simulations.
+                    Utilizing CFD (Computational Fluid Dynamics) and real-time sensor feedback to optimize flight paths within a digital twin environment.
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Updated Dimmer logic (15% Brighter max)
+        // Dimmer Logic (Max 0.70 for 15% brighter background)
         const dimmer = document.getElementById('dimmer');
         window.addEventListener('scroll', () => {
             let opacity = 0.2 + (window.scrollY / 1500);
-            dimmer.style.opacity = Math.min(opacity, 0.70); // Max darkness is now 0.70
+            dimmer.style.opacity = Math.min(opacity, 0.70);
         });
 
         function showPage(pageId) {
