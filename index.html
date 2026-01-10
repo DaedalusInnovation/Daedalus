@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAEDALUS INNOVATION</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
-    
+
     <style>
         /* 1. VARIABLE CONTROL CENTER */
         :root {
@@ -14,10 +14,10 @@
             --glass-bg: rgba(0, 0, 0, 0.4); 
             --glass-darker: rgba(0, 0, 0, 0.7);
             --border-color: rgba(255, 255, 255, 0.25);
-            
+
             /* High-Altitude Earth Cloud Background */
             --main-bg-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&q=80&w=1920');
-            
+
             --transition-speed: 0.8s;      
             --nav-height: 80px;
 
@@ -42,7 +42,7 @@
             background-position: center; 
             z-index: -2; 
         }
-        
+
         /* STATIC OVERLAY */
         .bg-dimmer { 
             position: fixed; 
@@ -82,8 +82,12 @@
             list-style: none;
             flex-direction: column;
             gap: 10px;
+
+            /* Hidden state */
             opacity: 0;
             visibility: hidden;
+
+            /* The Magic Delay: Transition visibility/opacity with a delay on the 'exit' */
             transition: opacity 0.3s ease, visibility 0s linear 1s; 
         }
 
@@ -93,9 +97,11 @@
             white-space: nowrap;
         }
 
+        /* Hover State for Dropdown */
         nav ul li:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
+            /* Remove delay when entering so it appears instantly */
             transition: opacity 0.3s ease, visibility 0s linear 0s;
         }
 
@@ -103,9 +109,9 @@
         .page.active { display: block; }
 
         /* -----------------------------------------------------------
-           HOME PAGE STYLES - CINEMATIC UPDATES
+           HOME PAGE STYLES
         ----------------------------------------------------------- */
-        
+
         #hero-header { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         #hero-header h1 { 
             font-size: 4.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; 
@@ -113,52 +119,35 @@
             text-shadow: var(--neon-glow), 2px 2px 10px rgba(0,0,0,0.5); 
         }
 
-        .main-video-section { max-width: 1200px; margin: 0 auto 150px auto; padding: 0 20px; }
-        
-        /* 21:9 ASPECT RATIO BOX (Main Hero) */
+        .main-video-section { max-width: 1000px; margin: 0 auto 150px auto; padding: 0 20px; }
         .video-box { 
-            position: relative; 
-            width: 100%; 
-            padding-bottom: 42.85%; /* Updated for 21:9 Ratio */
-            background: #000; 
-            border-radius: 10px; 
-            border: 1px solid var(--border-color); 
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            position: relative; width: 100%; padding-bottom: 56.25%; background: #000; 
+            border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
         }
-        
-        .video-box video, .video-box iframe { 
+
+        /* VIDEO STYLING - NON-INTERACTIVE */
+        .video-box video { 
             position: absolute; 
             top: 0; 
             left: 0; 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
+            /* Disables all mouse events (pausing, right-click, etc.) */
             pointer-events: none; 
-            border: 0;
         }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
-        /* 21:9 ASPECT RATIO BOX (Scrolling Videos) */
-        .scroll-video-row { width: 100%; padding: 80px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
+        /* Scrolling horizontal videos */
+        .scroll-video-row { width: 100%; padding: 60px 10%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
-        
         .wide-video { 
-            width: 85%; /* Wider for more cinematic feel */
-            aspect-ratio: 21 / 9; /* Modern 21:9 property */
-            border-radius: 10px; 
-            border: 1px solid var(--border-color); 
-            overflow: hidden; 
-            background: #000; 
-            position: relative; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            width: 75%; aspect-ratio: 21 / 9; border-radius: 20px; 
+            border: 1px solid var(--border-color); overflow: hidden; 
+            background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
-        
-        /* Fallback for older browsers using padding-bottom method */
-        @supports not (aspect-ratio: 21/9) {
-            .wide-video { padding-bottom: 36.4%; height: 0; }
-        }
-
-        .wide-video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+        .wide-video iframe { position: absolute; top: -15%; left: 0; width: 100%; height: 130%; border: 0; pointer-events: none; }
         .left-align { justify-content: flex-start; }
         .right-align { justify-content: flex-end; }
 
@@ -178,7 +167,7 @@
             border: 1px solid var(--border-color); filter: brightness(0.85); 
             transition: 1s; box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
-        
+
         .feature-box { 
             position: absolute; width: 330px; padding: 2.5rem; background: var(--glass-bg); 
             backdrop-filter: blur(30px); border: 1px solid var(--border-color); border-radius: 25px; 
@@ -203,7 +192,7 @@
         /* Sub Pages Common Styles */
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         .glass-panel { background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); margin-bottom: 50px; }
-        
+
         .sub-page-header {
             text-align: center; margin-bottom: 80px;
         }
@@ -227,6 +216,7 @@
             width: 100%; height: 100%; object-fit: cover; opacity: 0.8;
         }
 
+        /* Specific style for spec list */
         .spec-list {
             list-style: none;
             padding: 20px;
@@ -241,17 +231,18 @@
             justify-content: space-between;
         }
         .spec-list li strong { color: var(--primary-accent); }
-        
+
     </style>
 </head>
 <body>
 
     <div class="bg-fixed"></div>
-    <div class="bg-dimmer"></div>
+    <div id="dimmer" class="bg-dimmer"></div>
 
     <nav>
         <ul>
             <li><a onclick="showPage('home-page')">DAEDALUS</a></li>
+
             <li>
                 <a href="#">DESIGN</a>
                 <ul class="dropdown-menu">
@@ -261,6 +252,7 @@
                     <li><a onclick="showPage('systems-page')">SYSTEMS/UI</a></li>
                 </ul>
             </li>
+
             <li>
                 <a href="#">PRACTICALITY</a>
                 <ul class="dropdown-menu">
@@ -269,26 +261,27 @@
                     <li><a onclick="showPage('cost-page')">COST</a></li>
                 </ul>
             </li>
+
             <li><a onclick="showPage('contact-page')">CONTACT</a></li>
         </ul>
     </nav>
 
     <div id="home-page" class="page active">
+
         <section id="hero-header">
             <h1>Humans have always dreamed of flight</h1>
         </section>
 
-        <!-- FIRST CINEMATIC 21:9 VIDEO -->
         <div class="main-video-section">
             <div class="video-box">
+                <!-- UPDATED SOURCE TO VIDEOS FOLDER -->
                 <video autoplay muted loop playsinline>
-                    <source src="Videos/Bird_video" type="video/mp4">
+                    <source src="Videos/Bird_video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
         </div>
 
-        <!-- STAGGERED CINEMATIC 21:9 VIDEOS -->
         <div class="scroll-video-row left-align reveal">
             <div class="wide-video">
                 <iframe src="https://www.youtube.com/embed/yq-0EOn7vSg?autoplay=1&mute=1&loop=1&playlist=yq-0EOn7vSg&controls=0&modestbranding=1&rel=0" frameborder="0"></iframe>
@@ -356,21 +349,34 @@
         </section>
     </div>
 
-    <!-- [DESIGN PAGES - WINGS, BODY, TAIL, SYSTEMS] -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
                 <h1>WINGS</h1>
                 <p style="font-size:1.5rem;">One Wing. Every Function.</p>
             </div>
+
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Morphing Architecture</h2>
-                <p class="text-content">We believe that with only one set of wings, a pilot should be able to experience easy takeoff, efficient cruising, fast dives, and quick turns. This versatility is made possible by physically morphing the wings in flight.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1524388484152-4fe193d50893?q=80&w=1200" alt="Wing Structure"></div>
+                <p class="text-content">
+                    We believe that with only one set of wings, a pilot should be able to experience easy takeoff, efficient cruising, fast dives, and quick turns. This versatility is made possible by physically morphing the wings in flight. 
+                    <br><br>
+                    The suit is a one-piece design; the wings work in tandem with the body unit to provide a wearable, aerodynamic shell. To achieve this, the wing structure is broken into three main segments that fit the dimensional criteria of the human form while maintaining high-performance output.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1524388484152-4fe193d50893?q=80&w=1200" alt="Wing Structure">
+                </div>
             </div>
+
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Dimensional Properties & Wing Load</h2>
-                <p class="text-content">To effectively carry a human, we look to nature's most efficient glider: the Wandering Albatross. An albatross typically has a wing load of approx. 24 kg/m². Our engineering goal is to match this natural upper limit.</p>
+                <p class="text-content">
+                    To effectively carry a human, we look to nature's most efficient glider: the Wandering Albatross. An albatross typically has a wing load of approx. 24 kg/m². Our engineering goal is to match this natural upper limit.
+                </p>
+                <p class="text-content">
+                    We calculate Wing Load as <em>Total Weight / Surface Area</em>. Assuming a maximum pilot weight of 100kg (~200lbs) and a structural craft weight of 40kg, our total load is 140kg. To maintain the target efficiency, the wings require a precise surface area.
+                </p>
+
                 <ul class="spec-list">
                     <li><strong>Max Pilot Weight</strong> <span>100 kg</span></li>
                     <li><strong>Est. Craft Weight</strong> <span>40 kg</span></li>
@@ -379,72 +385,211 @@
                     <li><strong>Req. Surface Area</strong> <span>5.6 m²</span></li>
                 </ul>
             </div>
+
+            <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Mechanical Segmentation</h2>
+                <p class="text-content">
+                    The morphing mechanism is symmetrical, but for this breakdown, we analyze one side. Each wing half is divided into two primary sections: a stationary base and a moving array.
+                    <br><br>
+                    <strong>The Overlap System:</strong> The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries (Figure X) to ensure they morph under one another smoothly without mechanical binding.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation">
+                </div>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Tension-Based Actuation</h2>
+                <p class="text-content">
+                    All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process.
+                    <br><br>
+                    <strong>Passive Extension:</strong> The system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended. This is a safety feature; if power is lost, the wings automatically spread to maximum glide surface area.
+                    <br><br>
+                    <strong>Active Retraction:</strong> To tuck the wings for dives or speed, user controls activate a mechanical assistance motor. This motor pulls a high-strength cable attached to the wingtip, overcoming the spring tension to retract the segments into the desired aerodynamic profile.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1567084518774-7d2d34208a3d?q=80&w=1200" alt="Tension Cable Mechanism">
+                </div>
+            </div>
+
         </div>
     </div>
 
     <div id="body-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>BODY</h1><p style="font-size:1.5rem;">Safety Core & Propulsion</p></div>
+            <div class="sub-page-header">
+                <h1>BODY</h1>
+                <p style="font-size:1.5rem;">Safety Core & Propulsion</p>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Emergency Wing Detachment</h2>
+                <p class="text-content">
+                    With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures beyond that which is built into the wings. In case of emergency, the back of the suit can detach the wings from the body and release a parachute. 
+                </p>
+                <p class="text-content">
+                    Detaching the wings eliminates the danger of any wing malfunction. Then, the parachute is free to guide the user slowly down to safety.
+                </p>
+                <div class="media-placeholder">
+                     <img src="https://images.unsplash.com/photo-1545624773-7729b5a32b6e?q=80&w=1200" alt="Parachute Safety System">
+                </div>
+            </div>
+
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Ventral Electric Turbine</h2>
-                <p class="text-content">The primary power source consists of an electric turbine attached to the belly. High-torque output ensures vertical takeoff capability.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1582235940566-b33346d0a7da?q=80&w=1200" alt="Electric Turbine"></div>
+                <p class="text-content">
+                    The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit. 
+                </p>
+                <p class="text-content">
+                    A battery pack will be on the back (between the user and parachute safety measures) of the suit to power this turbine.
+                </p>
+
+                <ul class="spec-list">
+                    <li><strong>Thrust Output</strong> <span>X Newtons</span></li>
+                    <li><strong>Run Time</strong> <span>X Minutes</span></li>
+                    <li><strong>Energy Consumed</strong> <span>X kWh</span></li>
+                </ul>
+
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1582235940566-b33346d0a7da?q=80&w=1200" alt="Electric Turbine">
+                </div>
             </div>
         </div>
     </div>
 
     <div id="tail-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>TAIL</h1><p style="font-size:1.5rem;">Stability & Flight Control</p></div>
+            <div class="sub-page-header">
+                <h1>TAIL</h1>
+                <p style="font-size:1.5rem;">Stability & Flight Control</p>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">The Aerodynamic Glue</h2>
+                <p class="text-content">
+                    The Tail is the glue that holds the whole design together. Its surface area is specifically matched to the surface area of the wings to balance and control the center of lift for the system. This results in stable flight.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1534327732298-9676e7371d37?q=80&w=1200" alt="Tail Structure">
+                </div>
+            </div>
+
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Pitch Authority</h2>
-                <p class="text-content">The Tail is the center of flight controls. It changes the angle of attack to generate lift or initiate precise dives.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?q=80&w=1200" alt="Flight Control Surfaces"></div>
+                <p class="text-content">
+                    The Tail also is the center of flight controls. With the ability to move up/down the tail can change the angle of attack aka the pitch of the suit in order to generate lift or initiate a dive.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?q=80&w=1200" alt="Flight Control Surfaces">
+                </div>
             </div>
         </div>
     </div>
 
     <div id="systems-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>SYSTEMS / UI</h1><p style="font-size:1.5rem;">Augmented Reality Flight Deck</p></div>
+            <div class="sub-page-header">
+                <h1>SYSTEMS / UI</h1>
+                <p style="font-size:1.5rem;">Augmented Reality Flight Deck</p>
+            </div>
+
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Haptic Feedback</h2>
-                <p class="text-content">The suit "speaks" to the pilot through localized vibration motors, allowing for instinctive flight reactions without looking at gauges.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface"></div>
+                <p class="text-content">
+                    Physical gauges are obsolete. The FALCON helmet utilizes a waveguide holographic display, projecting altitude, airspeed, and thermal updraft visualizations directly onto the pilot's retina. The interface is minimal—only showing data when it is critical.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" alt="HUD Interface">
+                </div>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <p class="text-content">
+                    <strong>Haptic Feedback Loop:</strong> The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface">
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- [PRACTICALITY PAGES - SAFETY, STRUCTURE, COST] -->
     <div id="safety-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>SAFETY</h1><p style="font-size:1.5rem;">Redundancy & Recovery</p></div>
+            <div class="sub-page-header">
+                <h1>SAFETY</h1>
+                <p style="font-size:1.5rem;">Redundancy & Recovery</p>
+            </div>
+
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">The Ultimate Failsafe</h2>
-                <p class="text-content">A Ballistic Recovery System (BRS) deploys a canopy parachute in milliseconds, even in total electrical failure.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment"></div>
+                <p class="text-content">
+                    Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds, imperceptible to the pilot.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems">
+                </div>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <p class="text-content">
+                    <strong>The Ultimate Failsafe:</strong> The Ballistic Recovery System (BRS). Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment">
+                </div>
             </div>
         </div>
     </div>
 
     <div id="structure-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>STRUCTURE</h1><p style="font-size:1.5rem;">Materials Science & Integrity</p></div>
+            <div class="sub-page-header">
+                <h1>STRUCTURE</h1>
+                <p style="font-size:1.5rem;">Materials Science & Integrity</p>
+            </div>
+
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Generative Design</h2>
-                <p class="text-content">We utilize AI to 3D print titanium nodes connected by carbon fiber, placing material only where structural loads exist.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1200" alt="Stress Test"></div>
+                <p class="text-content">
+                    The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40% compared to traditional aluminum frames.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure">
+                </div>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <p class="text-content">
+                    Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1200" alt="Stress Test">
+                </div>
             </div>
         </div>
     </div>
 
     <div id="cost-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>COST</h1><p style="font-size:1.5rem;">Accessibility & Economics</p></div>
+            <div class="sub-page-header">
+                <h1>COST</h1>
+                <p style="font-size:1.5rem;">Accessibility & Market Economics</p>
+            </div>
+
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Scaling for the Future</h2>
-                <p class="text-content">By utilizing off-the-shelf EV battery technology and additive manufacturing, we project the FALCON reaching standard vehicle price points within 7 years.</p>
-                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line"></div>
+                <p class="text-content">
+                    Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and off-the-shelf EV battery technology, we reduce production costs significantly compared to traditional light aircraft.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200" alt="Market Graph">
+                </div>
+            </div>
+
+            <div class="glass-panel content-block reveal">
+                <p class="text-content">
+                    <strong>Projected Market Entry:</strong> Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
+                </p>
+                <div class="media-placeholder">
+                    <img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line">
+                </div>
             </div>
         </div>
     </div>
@@ -460,6 +605,7 @@
     </div>
 
     <script>
+        // NAVIGATION LOGIC
         function showPage(pageId, pushToHistory = true) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const targetPage = document.getElementById(pageId);
@@ -473,6 +619,7 @@
         window.addEventListener('popstate', (e) => showPage(e.state ? e.state.pageId : 'home-page', false));
         window.addEventListener('load', () => { if (window.location.hash) showPage(window.location.hash.replace('#', ''), false); });
 
+        // ANIMATION LOGIC
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
