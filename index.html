@@ -154,6 +154,18 @@
             border: 1px solid var(--border-color); overflow: hidden; 
             background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
+        
+        /* NEW EDIT: Styling for local videos inside wide-video container */
+        .wide-video video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
         .wide-video iframe { position: absolute; top: -15%; left: 0; width: 100%; height: 130%; border: 0; pointer-events: none; }
         .left-align { justify-content: flex-start; }
         .right-align { justify-content: flex-end; }
@@ -291,6 +303,7 @@
 
         <div class="scroll-video-row left-align reveal">
             <div class="wide-video">
+                <!-- Fix: Local video path Gliders+suits.mp4 -->
                 <video autoplay muted loop playsinline>
                     <source src="Videos/Gliders+suits.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -359,6 +372,7 @@
         </section>
     </div>
 
+    <!-- Rest of your code follows exactly as provided -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -642,4 +656,3 @@
     </script>
 </body>
 </html>
-
