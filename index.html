@@ -132,7 +132,7 @@
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
         /* -----------------------------------------------------------
-           SIMPLE BLACK LINE STYLES (HOME TOP ONLY)
+           SIMPLE BLACK LINE STYLES (SHIFTED UPWARD)
         ----------------------------------------------------------- */
         
         .line-layer {
@@ -149,9 +149,9 @@
         .black-connection-line {
             fill: none;
             stroke: #000000;
-            stroke-width: 2;
+            stroke-width: 2.5;
             stroke-linecap: round;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         /* Glass Text Box Styling */
@@ -291,14 +291,14 @@
 
     <div id="home-page" class="page active" style="position: relative;">
         
-        <!-- SIMPLE BLACK CONNECTION LINES (TOP ONLY) -->
-        <svg class="line-layer" viewBox="0 0 100 3200" preserveAspectRatio="none">
-            <!-- Box 1 (Natural Standard) -> Box 2 (Engineering Giants) -->
-            <path class="black-connection-line" d="M 50,1150 C 50,1250 85,1300 85,1450" />
-            <!-- Box 2 (Engineering Giants) -> Box 3 (Recreational Freedom) -->
-            <path class="black-connection-line" d="M 85,1650 C 85,1850 15,1850 15,2050" />
-            <!-- Box 3 (Recreational Freedom) -> Box 4 (Modern Frontier) -->
-            <path class="black-connection-line" d="M 15,2250 C 15,2450 85,2450 85,2650" />
+        <!-- ADJUSTED BLACK CONNECTION LINES (MOVED UPWARD TO ALIGN WITH BOXES) -->
+        <svg class="line-layer" viewBox="0 0 100 2800" preserveAspectRatio="none">
+            <!-- Box 1 (Standard) Bottom -> Box 2 (Giants) Top -->
+            <path class="black-connection-line" d="M 50,960 C 50,1050 85,1080 85,1200" />
+            <!-- Box 2 (Giants) Bottom -> Box 3 (Freedom) Top -->
+            <path class="black-connection-line" d="M 85,1420 C 85,1550 15,1550 15,1700" />
+            <!-- Box 3 (Freedom) Bottom -> Box 4 (Frontier) Top -->
+            <path class="black-connection-line" d="M 15,1930 C 15,2100 85,2150 85,2250" />
         </svg>
 
         <section id="hero-header">
@@ -483,9 +483,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       BODY PAGE
-    ----------------------------------------------------------- -->
     <div id="body-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -528,9 +525,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       TAIL PAGE
-    ----------------------------------------------------------- -->
     <div id="tail-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -560,9 +554,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       SYSTEMS PAGE
-    ----------------------------------------------------------- -->
     <div id="systems-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -590,9 +581,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       SAFETY PAGE
-    ----------------------------------------------------------- -->
     <div id="safety-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -620,9 +608,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       STRUCTURE PAGE
-    ----------------------------------------------------------- -->
     <div id="structure-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -650,9 +635,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       COST PAGE
-    ----------------------------------------------------------- -->
     <div id="cost-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -680,9 +662,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       CONTACT PAGE
-    ----------------------------------------------------------- -->
     <div id="contact-page" class="page">
         <div class="sub-wrap" style="text-align:center;">
             <div class="glass-panel">
@@ -707,7 +686,7 @@
         window.addEventListener('popstate', (e) => showPage(e.state ? e.state.pageId : 'home-page', false));
         window.addEventListener('load', () => { if (window.location.hash) showPage(window.location.hash.replace('#', ''), false); });
         
-        // ANIMATION LOGIC (Reveal elements on scroll)
+        // ANIMATION LOGIC
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -715,7 +694,6 @@
                 }
             });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
