@@ -9,7 +9,7 @@
     <style>
         /* 1. VARIABLE CONTROL CENTER */
         :root {
-            --primary-accent: #00d4ff;    
+            --primary-accent: #00d4ff;      
             --text-main: #ffffff;
             --glass-bg: rgba(0, 0, 0, 0.4); 
             --glass-darker: rgba(0, 0, 0, 0.7);
@@ -18,7 +18,7 @@
             /* High-Altitude Earth Cloud Background */
             --main-bg-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&q=80&w=1920');
 
-            --transition-speed: 0.8s;      
+            --transition-speed: 0.8s;       
             --nav-height: 80px;
 
             /* Neon Blue Backlight Effect */
@@ -82,28 +82,13 @@
             list-style: none;
             flex-direction: column;
             gap: 10px;
-
-            /* Hidden state */
             opacity: 0;
             visibility: hidden;
-
-            /* The Magic Delay: Transition visibility/opacity with a delay on the 'exit' */
             transition: opacity 0.3s ease, visibility 0s linear 1s; 
         }
 
-        .dropdown-menu li a {
-            padding: 10px 20px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-
-        /* Hover State for Dropdown */
-        nav ul li:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            /* Remove delay when entering so it appears instantly */
-            transition: opacity 0.3s ease, visibility 0s linear 0s;
-        }
+        .dropdown-menu li a { padding: 10px 20px; font-size: 0.8rem; white-space: nowrap; }
+        nav ul li:hover .dropdown-menu { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s linear 0s; }
 
         .page { width: 100%; display: none; }
         .page.active { display: block; }
@@ -119,53 +104,128 @@
             text-shadow: var(--neon-glow), 2px 2px 10px rgba(0,0,0,0.5); 
         }
 
-        .main-video-section { max-width: 1200px; margin: 0 auto 150px auto; padding: 0 20px; }
+        .main-video-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
         
         .video-box { 
             position: relative; 
             width: 100%; 
             padding-bottom: 42.85%; /* 21:9 Aspect Ratio */
             background: #000; 
-            border-radius: 40px; /* Rounded corners */
+            border-radius: 40px; 
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
-            border: none; /* No border as requested */
+            border: none; 
         }
 
-        .video-box video { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            pointer-events: none; 
-        }
+        .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
         .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
         /* Scrolling horizontal videos */
-        .scroll-video-row { width: 100%; padding: 60px 10%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
+        .scroll-video-row { width: 100%; padding: 60px 10%; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
+        
         .wide-video { 
             width: 75%; aspect-ratio: 21 / 9; border-radius: 20px; 
             border: 1px solid var(--border-color); overflow: hidden; 
             background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
-
-        /* NEW EDIT: This rule allows local videos in scroll rows to be visible */
-        .wide-video video {
+        .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .wide-video iframe { position: absolute; top: -15%; left: 0; width: 100%; height: 130%; border: 0; pointer-events: none; }
+        
+        /* -----------------------------------------------------------
+           NEW: TEXT BOXES & NEURAL LINES
+        ----------------------------------------------------------- */
+        
+        /* The container for the neural path SVG background */
+        .neural-layer {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            z-index: -1;
             pointer-events: none;
+            overflow: visible;
+        }
+        
+        /* UPDATED: The SVG Path styling for DOTS */
+        .neural-path-line {
+            fill: none;
+            stroke: #000000; /* Black Dots */
+            stroke-width: 4;     /* Size of the dot */
+            stroke-linecap: round; /* Makes them circular */
+            stroke-dasharray: 0, 10; /* 0 length dash (dot), 10 space gap (density) */
+            
+            /* Neon Blue Highlight */
+            filter: drop-shadow(0 0 2px var(--primary-accent)) 
+                    drop-shadow(0 0 5px var(--primary-accent));
+            opacity: 0.9;
         }
 
-        .wide-video iframe { position: absolute; top: -15%; left: 0; width: 100%; height: 130%; border: 0; pointer-events: none; }
-        .left-align { justify-content: flex-start; }
-        .right-align { justify-content: flex-end; }
+        /* Glass Text Box Styling */
+        .glass-text-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 25px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 400px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        /* WIDE Text Box */
+        .intro-text-box {
+            max-width: 900px !important; 
+            width: 90%;
+            font-size: 1.25rem; 
+            text-align: center;
+        }
+        
+        .glass-text-box:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-accent);
+            box-shadow: var(--neon-glow);
+        }
+
+        /* Specific Layouts for the Video Rows */
+        .video-text-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .center-text-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        
+        /* Adjust Wide Video width when sharing row with text */
+        .scroll-video-row .wide-video {
+            width: 60%; 
+            flex-shrink: 0;
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 900px) {
+            .video-text-container { flex-direction: column; }
+            .scroll-video-row .wide-video { width: 100%; }
+            .glass-text-box { max-width: 100%; margin-top: 20px; }
+            .intro-text-box { font-size: 1rem; }
+            .neural-layer { display: none; } 
+        }
+
+        /* -----------------------------------------------------------
+           END NEW STYLES
+        ----------------------------------------------------------- */
 
         /* Headings with Neon Glow */
         .text-break { text-align: center; padding: 150px 15%; opacity: 0; transform: translateY(30px); transition: 1s; }
@@ -209,43 +269,19 @@
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         .glass-panel { background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); margin-bottom: 50px; }
 
-        .sub-page-header {
-            text-align: center; margin-bottom: 80px;
-        }
-        .sub-page-header h1 {
-            font-size: 4rem; color: var(--primary-accent); text-transform: uppercase;
-            text-shadow: var(--neon-glow); margin-bottom: 20px;
-        }
-        .content-block {
-            display: flex; flex-direction: column; gap: 40px;
-        }
-        .text-content {
-            font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;
-        }
+        .sub-page-header { text-align: center; margin-bottom: 80px; }
+        .sub-page-header h1 { font-size: 4rem; color: var(--primary-accent); text-transform: uppercase; text-shadow: var(--neon-glow); margin-bottom: 20px; }
+        .content-block { display: flex; flex-direction: column; gap: 40px; }
+        .text-content { font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; }
         .media-placeholder {
             width: 100%; height: 500px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
             border-radius: 20px; display: flex; align-items: center; justify-content: center;
             font-weight: 800; letter-spacing: 2px; color: var(--primary-accent);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden;
         }
-        .media-placeholder img {
-            width: 100%; height: 100%; object-fit: cover; opacity: 0.8;
-        }
-
-        /* Specific style for spec list */
-        .spec-list {
-            list-style: none;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
-            margin-top: 20px;
-        }
-        .spec-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-between;
-        }
+        .media-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .spec-list { list-style: none; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; margin-top: 20px; }
+        .spec-list li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
         .spec-list li strong { color: var(--primary-accent); }
 
     </style>
@@ -258,7 +294,6 @@
     <nav>
         <ul>
             <li><a onclick="showPage('home-page')">DAEDALUS</a></li>
-
             <li>
                 <a href="#">DESIGN</a>
                 <ul class="dropdown-menu">
@@ -268,7 +303,6 @@
                     <li><a onclick="showPage('systems-page')">SYSTEMS/UI</a></li>
                 </ul>
             </li>
-
             <li>
                 <a href="#">PRACTICALITY</a>
                 <ul class="dropdown-menu">
@@ -277,12 +311,29 @@
                     <li><a onclick="showPage('cost-page')">COST</a></li>
                 </ul>
             </li>
-
             <li><a onclick="showPage('contact-page')">CONTACT</a></li>
         </ul>
     </nav>
 
-    <div id="home-page" class="page active">
+    <div id="home-page" class="page active" style="position: relative;">
+        
+        <svg class="neural-layer" viewBox="0 0 100 2800" preserveAspectRatio="none">
+            <path class="neural-path-line" d="
+                M 50,1100 
+                C 50,1200 80,1200 80,1400
+            " />
+
+            <path class="neural-path-line" d="
+                M 80,1650
+                C 80,1800 20,1750 20,1950
+            " />
+
+            <path class="neural-path-line" d="
+                M 20,2250
+                C 20,2350 80,2350 80,2450
+            " />
+
+        </svg>
 
         <section id="hero-header">
             <h1>Humans have always dreamed of flight</h1>
@@ -295,29 +346,60 @@
                     Your browser does not support the video tag.
                 </video>
             </div>
-        </div>
-
-        <div class="scroll-video-row left-align reveal">
-            <div class="wide-video">
-                <video autoplay muted loop playsinline>
-                    <source src="Videos/Planes+Helicopters.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+            
+            <div class="center-text-wrapper reveal">
+                <div class="glass-text-box intro-text-box">
+                    <strong style="color: var(--primary-accent);">THE NATURAL STANDARD</strong><br><br>
+                    Birds navigate the skies with effortless grace, utilizing every updraft and thermal current. We aspire to capture this natural intuition, moving beyond simple mechanics to achieve a state of true, instinctual flight.
+                </div>
             </div>
         </div>
 
-        <div class="scroll-video-row right-align reveal">
-            <div class="wide-video">
-                 <video autoplay muted loop playsinline>
-                     <source src="Videos/Gliders+Suits.mp4" type="video/mp4">
-                     Your browser does not support the video tag.
+        <div class="scroll-video-row reveal">
+            <div class="video-text-container">
+                <div class="wide-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="Videos/Planes+Helicopters.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="glass-text-box">
+                    <strong style="color: var(--primary-accent);">ENGINEERING GIANTS</strong><br><br>
+                    Planes, Jets, and Helicopters are undeniable feats of engineering that have connected the globe. However, they are not the flying experience we dream of; enclosed in pressurized cabins, they lack the immersive, personal connection to the air itself.
+                </div>
             </div>
         </div>
 
-        <div class="scroll-video-row left-align reveal">
-            <div class="wide-video">
-                <video autoplay muted loop playsinline>
-                     <source src="" type="video/mp4">
-                     Your browser does not support the video tag.
+        <div class="scroll-video-row reveal">
+            <div class="video-text-container">
+                <div class="glass-text-box" style="order: -1;">
+                    <strong style="color: var(--primary-accent);">RECREATIONAL FREEDOM</strong><br><br>
+                    Hang gliders, wingsuits, and parasails are amazing recreational achievements that bring us a step closer to true flight. Yet, they often rely on gravity or specific weather conditions, falling short in active control, speed, and total self-propulsion.
+                </div>
+
+                <div class="wide-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="Videos/Gliders+Suits.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-video-row reveal">
+            <div class="video-text-container">
+                <div class="wide-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="Videos/Jetson+Jetman.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="glass-text-box">
+                    <strong style="color: var(--primary-accent);">THE MODERN FRONTIER</strong><br><br>
+                    Innovations like the Jetson 1 and Jetman are massive modern improvements, yet they still fall just short of the true immersion and control we dream of. The FALCON is the next evolution in human flight, fulfilling these deficits to create a seamless extension of the body.
+                </div>
             </div>
         </div>
 
@@ -376,7 +458,6 @@
                 <h1>WINGS</h1>
                 <p style="font-size:1.5rem;">One Wing. Every Function.</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Morphing Architecture</h2>
                 <p class="text-content">
@@ -388,7 +469,6 @@
                     <img src="https://images.unsplash.com/photo-1524388484152-4fe193d50893?q=80&w=1200" alt="Wing Structure">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Dimensional Properties & Wing Load</h2>
                 <p class="text-content">
@@ -397,7 +477,6 @@
                 <p class="text-content">
                     We calculate Wing Load as <em>Total Weight / Surface Area</em>. Assuming a maximum pilot weight of 100kg (~200lbs) and a structural craft weight of 40kg, our total load is 140kg. To maintain the target efficiency, the wings require a precise surface area.
                 </p>
-
                 <ul class="spec-list">
                     <li><strong>Max Pilot Weight</strong> <span>100 kg</span></li>
                     <li><strong>Est. Craft Weight</strong> <span>40 kg</span></li>
@@ -406,7 +485,6 @@
                     <li><strong>Req. Surface Area</strong> <span>5.6 m²</span></li>
                 </ul>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Mechanical Segmentation</h2>
                 <p class="text-content">
@@ -418,7 +496,6 @@
                     <img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Tension-Based Actuation</h2>
                 <p class="text-content">
@@ -432,7 +509,6 @@
                     <img src="https://images.unsplash.com/photo-1567084518774-7d2d34208a3d?q=80&w=1200" alt="Tension Cable Mechanism">
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -442,7 +518,6 @@
                 <h1>BODY</h1>
                 <p style="font-size:1.5rem;">Safety Core & Propulsion</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Emergency Wing Detachment</h2>
                 <p class="text-content">
@@ -455,7 +530,6 @@
                      <img src="https://images.unsplash.com/photo-1545624773-7729b5a32b6e?q=80&w=1200" alt="Parachute Safety System">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Ventral Electric Turbine</h2>
                 <p class="text-content">
@@ -464,13 +538,11 @@
                 <p class="text-content">
                     A battery pack will be on the back (between the user and parachute safety measures) of the suit to power this turbine.
                 </p>
-
                 <ul class="spec-list">
                     <li><strong>Thrust Output</strong> <span>X Newtons</span></li>
                     <li><strong>Run Time</strong> <span>X Minutes</span></li>
                     <li><strong>Energy Consumed</strong> <span>X kWh</span></li>
                 </ul>
-
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1582235940566-b33346d0a7da?q=80&w=1200" alt="Electric Turbine">
                 </div>
@@ -484,7 +556,6 @@
                 <h1>TAIL</h1>
                 <p style="font-size:1.5rem;">Stability & Flight Control</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">The Aerodynamic Glue</h2>
                 <p class="text-content">
@@ -494,7 +565,6 @@
                     <img src="https://images.unsplash.com/photo-1534327732298-9676e7371d37?q=80&w=1200" alt="Tail Structure">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Pitch Authority</h2>
                 <p class="text-content">
@@ -513,7 +583,6 @@
                 <h1>SYSTEMS / UI</h1>
                 <p style="font-size:1.5rem;">Augmented Reality Flight Deck</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     Physical gauges are obsolete. The FALCON helmet utilizes a waveguide holographic display, projecting altitude, airspeed, and thermal updraft visualizations directly onto the pilot's retina. The interface is minimal—only showing data when it is critical.
@@ -522,7 +591,6 @@
                     <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" alt="HUD Interface">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     <strong>Haptic Feedback Loop:</strong> The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
@@ -540,7 +608,6 @@
                 <h1>SAFETY</h1>
                 <p style="font-size:1.5rem;">Redundancy & Recovery</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds, imperceptible to the pilot.
@@ -549,7 +616,6 @@
                     <img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     <strong>The Ultimate Failsafe:</strong> The Ballistic Recovery System (BRS). Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
@@ -567,7 +633,6 @@
                 <h1>STRUCTURE</h1>
                 <p style="font-size:1.5rem;">Materials Science & Integrity</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40% compared to traditional aluminum frames.
@@ -576,7 +641,6 @@
                     <img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.
@@ -594,7 +658,6 @@
                 <h1>COST</h1>
                 <p style="font-size:1.5rem;">Accessibility & Market Economics</p>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and off-the-shelf EV battery technology, we reduce production costs significantly compared to traditional light aircraft.
@@ -603,7 +666,6 @@
                     <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200" alt="Market Graph">
                 </div>
             </div>
-
             <div class="glass-panel content-block reveal">
                 <p class="text-content">
                     <strong>Projected Market Entry:</strong> Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
@@ -648,12 +710,7 @@
                 }
             });
         }, { threshold: 0.15 });
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
-
-
-
-
