@@ -109,7 +109,7 @@
         .video-box { 
             position: relative; 
             width: 100%; 
-            padding-bottom: 42.85%; /* 21:9 Aspect Ratio */
+            padding-bottom: 42.85%; /* Cinematic 21:9 */
             background: #000; 
             border-radius: 40px; 
             overflow: hidden;
@@ -120,7 +120,7 @@
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
         /* Scrolling horizontal videos */
-        .scroll-video-row { width: 100%; padding: 60px 10%; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
+        .scroll-video-row { width: 100%; padding: 60px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
         
         .wide-video { 
@@ -131,18 +131,46 @@
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
+        /* -----------------------------------------------------------
+           NEURAL NETWORK CHAIN STYLES
+        ----------------------------------------------------------- */
+        
+        .neural-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            pointer-events: none;
+            overflow: visible;
+        }
+        
+        .neural-path {
+            fill: none;
+            stroke: #000000; /* Black dots */
+            stroke-width: 5; /* Dot size */
+            stroke-linecap: round; /* Makes them circular */
+            stroke-dasharray: 0, 18; /* 0 length dash creates dots, 18px gap */
+            
+            /* Neon Blue Aura behind the dots */
+            filter: drop-shadow(0 0 4px var(--primary-accent)) 
+                    drop-shadow(0 0 12px var(--primary-accent));
+            opacity: 0.8;
+        }
+
         /* Glass Text Box Styling */
         .glass-text-box {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 20px;
+            padding: 30px;
             font-size: 1rem;
             line-height: 1.6;
             color: var(--text-main);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            max-width: 400px;
+            max-width: 450px;
             position: relative;
             transition: transform 0.3s ease;
         }
@@ -164,27 +192,24 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 40px;
+            gap: 50px;
             width: 100%;
         }
 
         .center-text-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
-            margin-bottom: 50px;
+            margin: 50px 0 100px 0;
         }
 
-        @media (max-width: 900px) {
-            .video-text-container { flex-direction: column; }
+        @media (max-width: 1100px) {
+            .video-text-container { flex-direction: column; text-align: center; }
             .wide-video { width: 100%; }
-            .glass-text-box { max-width: 100%; margin-top: 20px; }
+            .glass-text-box { max-width: 100%; }
+            .neural-layer { display: none; } /* Complex SVG paths hidden on mobile for cleaner view */
         }
 
-        /* -----------------------------------------------------------
-           FEATURE & SUBPAGE STYLES
-        ----------------------------------------------------------- */
-
+        /* SUB-PAGE & FEATURE SHARED STYLES */
         .text-break { text-align: center; padding: 150px 15%; opacity: 0; transform: translateY(30px); transition: 1s; }
         .text-break.active { opacity: 1; transform: translateY(0); }
         .text-break h2 { 
@@ -269,8 +294,18 @@
         </ul>
     </nav>
 
-    <div id="home-page" class="page active">
+    <div id="home-page" class="page active" style="position: relative;">
         
+        <!-- NEURAL NETWORK SVG LAYER -->
+        <svg class="neural-layer" viewBox="0 0 100 3200" preserveAspectRatio="none">
+            <!-- Path from Intro box down to first row -->
+            <path class="neural-path" d="M 50,1150 C 50,1250 85,1300 85,1450" />
+            <!-- Path between Row 1 and Row 2 -->
+            <path class="neural-path" d="M 85,1650 C 85,1850 15,1850 15,2050" />
+            <!-- Path between Row 2 and Row 3 -->
+            <path class="neural-path" d="M 15,2250 C 15,2450 85,2450 85,2650" />
+        </svg>
+
         <section id="hero-header">
             <h1>Humans have always dreamed of flight</h1>
         </section>
@@ -299,7 +334,6 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                
                 <div class="glass-text-box">
                     <strong style="color: var(--primary-accent);">ENGINEERING GIANTS</strong><br><br>
                     Planes, Jets, and Helicopters are undeniable feats of engineering that have connected the globe. However, they are not the flying experience we dream of; enclosed in pressurized cabins, they lack the immersive, personal connection to the air itself.
@@ -313,7 +347,6 @@
                     <strong style="color: var(--primary-accent);">RECREATIONAL FREEDOM</strong><br><br>
                     Hang gliders, wingsuits, and parasails are amazing recreational achievements that bring us a step closer to true flight. Yet, they often rely on gravity or specific weather conditions, falling short in active control, speed, and total self-propulsion.
                 </div>
-
                 <div class="wide-video">
                     <video autoplay muted loop playsinline>
                         <source src="Videos/Gliders+Suits.mp4" type="video/mp4">
@@ -331,7 +364,6 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-
                 <div class="glass-text-box">
                     <strong style="color: var(--primary-accent);">THE MODERN FRONTIER</strong><br><br>
                     Innovations like the Jetson 1 and Jetman are massive modern improvements, yet they still fall just short of the true immersion and control we dream of. The FALCON is the next evolution in human flight, fulfilling these deficits to create a seamless extension of the body.
@@ -378,7 +410,7 @@
                 The active tail design balances the entire suit, providing precise multi-directional movement and efficiency.
             </div>
             <div class="feature-box bottom-right">
-                <strong>INTUITIVE CONTROL</strong><br><br>
+                <strong>INTUITIVE NEURAL-LINK</strong><br><br>
                 Translating pilot joint movements into aerofoil control via a high-speed network of distributed bio-sensors.
             </div>
         </div>
@@ -388,7 +420,9 @@
         </section>
     </div>
 
-    <!-- SUB PAGES - FULL ORIGINAL CONTENT RESTORED -->
+    <!-- -----------------------------------------------------------
+       WINGS PAGE
+    ----------------------------------------------------------- -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -454,6 +488,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       BODY PAGE
+    ----------------------------------------------------------- -->
     <div id="body-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -496,6 +533,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       TAIL PAGE
+    ----------------------------------------------------------- -->
     <div id="tail-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -525,6 +565,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       SYSTEMS PAGE
+    ----------------------------------------------------------- -->
     <div id="systems-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -552,6 +595,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       SAFETY PAGE
+    ----------------------------------------------------------- -->
     <div id="safety-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -579,6 +625,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       STRUCTURE PAGE
+    ----------------------------------------------------------- -->
     <div id="structure-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -606,6 +655,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       COST PAGE
+    ----------------------------------------------------------- -->
     <div id="cost-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -633,6 +685,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       CONTACT PAGE
+    ----------------------------------------------------------- -->
     <div id="contact-page" class="page">
         <div class="sub-wrap" style="text-align:center;">
             <div class="glass-panel">
@@ -654,10 +709,11 @@
                 if (pushToHistory) history.pushState({ pageId: pageId }, '', '#' + pageId);
             }
         }
+
         window.addEventListener('popstate', (e) => showPage(e.state ? e.state.pageId : 'home-page', false));
         window.addEventListener('load', () => { if (window.location.hash) showPage(window.location.hash.replace('#', ''), false); });
-        
-        // ANIMATION LOGIC
+
+        // ANIMATION LOGIC (Reveal elements on scroll)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -665,6 +721,7 @@
                 }
             });
         }, { threshold: 0.15 });
+
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
