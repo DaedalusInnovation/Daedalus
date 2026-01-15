@@ -98,6 +98,7 @@
 
         #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
+        /* Shared Header Styling for Hero, Sub-Hero, and Final Hero */
         #hero-header h1, .hero-sub, .final-hero h1, .sub-page-header h1 { 
             max-width: 1000px; padding: 0 20px; line-height: 1.2;
             color: #e0faff; 
@@ -129,6 +130,7 @@
 
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
+        /* Spacing between video rows on home page */
         .scroll-video-row { width: 100%; padding: 120px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
         
@@ -140,6 +142,7 @@
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
+        /* Glass Text Box Styling */
         .glass-text-box {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -161,9 +164,29 @@
             font-size: 1.25rem; 
             text-align: center;
         }
+        
+        .glass-text-box:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-accent);
+            box-shadow: var(--neon-glow);
+        }
+
+        .video-text-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        .center-text-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 50px 0 100px 0;
+        }
 
         /* -----------------------------------------------------------
-           LANDING GRID STYLES (NEW)
+           LANDING GRID STYLES
         ----------------------------------------------------------- */
         .landing-grid {
             display: grid;
@@ -215,6 +238,7 @@
             .glass-text-box { max-width: 100%; margin-top: 20px; }
         }
 
+        /* Feature Sections */
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
         .text-break.active { opacity: 1; transform: translateY(0); }
         .text-break h2 { 
@@ -297,7 +321,6 @@
         <ul>
             <li><a onclick="showPage('home-page')">DAEDALUS</a></li>
             <li>
-                <!-- Updated DESIGN parent link -->
                 <a onclick="showPage('design-landing')">DESIGN</a>
                 <ul class="dropdown-menu">
                     <li><a onclick="showPage('wings-page')">WINGS</a></li>
@@ -307,7 +330,6 @@
                 </ul>
             </li>
             <li>
-                <!-- Updated PRACTICALITY parent link -->
                 <a onclick="showPage('practicality-landing')">PRACTICALITY</a>
                 <ul class="dropdown-menu">
                     <li><a onclick="showPage('safety-page')">SAFETY</a></li>
@@ -319,7 +341,9 @@
         </ul>
     </nav>
 
-    <!-- HOME PAGE -->
+    <!-- -----------------------------------------------------------
+       HOME PAGE
+    ----------------------------------------------------------- -->
     <div id="home-page" class="page active">
         
         <section id="hero-header">
@@ -435,7 +459,7 @@
     </div>
 
     <!-- -----------------------------------------------------------
-       DESIGN LANDING PAGE (NEW)
+       DESIGN LANDING PAGE
     ----------------------------------------------------------- -->
     <div id="design-landing" class="page">
         <div class="sub-wrap">
@@ -473,7 +497,7 @@
     </div>
 
     <!-- -----------------------------------------------------------
-       PRACTICALITY LANDING PAGE (NEW)
+       PRACTICALITY LANDING PAGE
     ----------------------------------------------------------- -->
     <div id="practicality-landing" class="page">
         <div class="sub-wrap">
@@ -507,7 +531,7 @@
     </div>
 
     <!-- -----------------------------------------------------------
-       EXISTING SUBPAGES
+       WINGS PAGE
     ----------------------------------------------------------- -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
@@ -574,6 +598,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       BODY PAGE
+    ----------------------------------------------------------- -->
     <div id="body-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -616,6 +643,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       TAIL PAGE
+    ----------------------------------------------------------- -->
     <div id="tail-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -645,6 +675,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       SYSTEMS PAGE
+    ----------------------------------------------------------- -->
     <div id="systems-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -672,6 +705,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       SAFETY PAGE
+    ----------------------------------------------------------- -->
     <div id="safety-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -699,6 +735,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       STRUCTURE PAGE
+    ----------------------------------------------------------- -->
     <div id="structure-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -726,6 +765,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       COST PAGE
+    ----------------------------------------------------------- -->
     <div id="cost-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -753,6 +795,9 @@
         </div>
     </div>
 
+    <!-- -----------------------------------------------------------
+       CONTACT PAGE
+    ----------------------------------------------------------- -->
     <div id="contact-page" class="page">
         <div class="sub-wrap" style="text-align:center;">
             <div class="glass-panel">
