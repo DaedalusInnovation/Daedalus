@@ -98,23 +98,21 @@
 
         #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
-        /* Updated H1 Color and Shadow for readability */
-        #hero-header h1 { 
-            font-size: 4.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; 
+        /* Shared Header Styling for Hero, Sub-Hero, and Final Hero */
+        #hero-header h1, .hero-sub, .final-hero h1 { 
             max-width: 1000px; padding: 0 20px; line-height: 1.2;
-            color: #e0faff; /* Slightly icy white for better contrast */
+            color: #e0faff; 
             text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 2px 2px 15px rgba(0,0,0,0.7); 
         }
 
-        /* Subheader style */
+        #hero-header h1 { font-size: 4.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; }
+
         .hero-sub {
             font-size: 1rem;
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-top: 25px;
-            color: var(--primary-accent);
             font-weight: 400;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         .main-video-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
@@ -132,8 +130,8 @@
 
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        /* Scrolling horizontal videos */
-        .scroll-video-row { width: 100%; padding: 60px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
+        /* Increased vertical spacing between video rows */
+        .scroll-video-row { width: 100%; padding: 120px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
         
         .wide-video { 
@@ -240,11 +238,11 @@
         .top-right { top: 0; right: 0; }
         .bottom-left { bottom: 0; left: 0; }
 
+        /* Final hero styling updated to match top hero */
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .final-hero h1 { 
-            font-size: 4rem; letter-spacing: 12px; color: var(--primary-accent); 
+            font-size: 3.5rem; letter-spacing: 10px;
             text-transform: uppercase; font-weight: 800; 
-            text-shadow: var(--neon-glow), 2px 2px 15px rgba(0,0,0,0.4); 
         }
 
         /* Sub Pages Common Styles */
@@ -365,7 +363,6 @@
             </div>
         </div>
 
-        <!-- NEW SECTION: REPLACED TRANSITION TEXT & ADDED ARROW -->
         <div class="text-break reveal">
             <h2>Here is how the FALCON will take us to our next evolution of human flight:</h2>
             <div class="scroll-arrow"></div>
@@ -408,7 +405,7 @@
         </div>
 
         <section class="final-hero reveal">
-            <h1>Putting these together, the FALCON is made.</h1>
+            <h1>Explore the DESIGN and PRACTICALITY pages to learn more</h1>
         </section>
     </div>
 
