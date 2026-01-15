@@ -104,7 +104,6 @@
             text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 2px 2px 15px rgba(0,0,0,0.7); 
         }
 
-        /* MAIN HEADER SIZE INCREASED */
         #hero-header h1 { font-size: 5.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; }
 
         .hero-sub {
@@ -126,6 +125,7 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
             border: none; 
+            z-index: 2;
         }
 
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
@@ -138,6 +138,7 @@
             border: 1px solid var(--border-color); overflow: hidden; 
             background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             flex-shrink: 0;
+            z-index: 2;
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
@@ -154,6 +155,7 @@
             max-width: 450px;
             position: relative;
             transition: transform 0.3s ease;
+            z-index: 2;
         }
 
         .intro-text-box {
@@ -173,7 +175,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 50px;
+            gap: 80px; /* Increased gap to make room for lines */
             width: 100%;
         }
 
@@ -181,7 +183,63 @@
             display: flex;
             justify-content: center;
             margin: 50px 0 100px 0;
+            opacity: 0; transform: translateY(30px); transition: var(--transition-speed);
         }
+        .center-text-wrapper.active { opacity: 1; transform: translateY(0); }
+
+        /* -----------------------------------------------------------
+           NEW: CORRECTED CONNECTING LINES FOR INTRO SECTION
+        ----------------------------------------------------------- */
+        
+        /* 1. Vertical Line for "Natural Standard" (Connects Text Up to Video) */
+        .intro-text-box::before {
+            content: '';
+            position: absolute;
+            background: var(--primary-accent);
+            box-shadow: var(--neon-glow);
+            width: 2px;
+            height: 0; /* Starts at 0 */
+            top: -50px; /* Start position relative to box */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: height 1s ease 0.5s; /* Delay for smooth reveal */
+        }
+
+        /* Trigger Animation */
+        .center-text-wrapper.active .intro-text-box::before {
+            height: 50px; /* Connects to the bottom of the video */
+        }
+
+
+        /* 2. Horizontal Lines for Side-by-Side sections */
+        .scroll-video-row .glass-text-box::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            background: var(--primary-accent);
+            box-shadow: var(--neon-glow);
+            top: 50%;
+            width: 0; /* Starts hidden */
+            transition: width 1s ease 0.5s;
+            transform: translateY(-50%);
+        }
+
+        /* When the row becomes active, extend the line */
+        .scroll-video-row.active .glass-text-box::after {
+            width: 80px; /* Spans the gap between text and video */
+        }
+
+        /* CASE A: Text is on the RIGHT (Default) -> Line goes LEFT */
+        .scroll-video-row .glass-text-box.right-text::after {
+            right: 100%; /* Position at left edge of box */
+        }
+
+        /* CASE B: Text is on the LEFT (Reversed) -> Line goes RIGHT */
+        .scroll-video-row .glass-text-box.left-text::after {
+            left: 100%; /* Position at right edge of box */
+        }
+
+        /* ----------------------------------------------------------- */
 
         /* LANDING GRID STYLES */
         .landing-grid {
@@ -232,14 +290,14 @@
         }
 
         @media (max-width: 1100px) {
-            .video-text-container { flex-direction: column; text-align: center; }
+            .video-text-container { flex-direction: column; text-align: center; gap: 40px; }
             .wide-video { width: 100%; }
             .glass-text-box { max-width: 100%; margin-top: 20px; }
             #hero-header h1 { font-size: 3.5rem; }
             .sub-page-header h1 { font-size: 3.2rem; }
             
-            /* Hide connecting lines on small screens */
-            .feature-box::before, .feature-box::after { display: none; }
+            /* Hide lines on mobile/tablet */
+            .glass-text-box::after, .intro-text-box::before { display: none !important; }
         }
 
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
@@ -292,57 +350,11 @@
         .top-right { top: 0; right: 0; }
         .bottom-left { bottom: 0; left: 0; }
 
-        /* -----------------------------------------------------------
-           NEW: CONNECTING LINES
-           This adds the lines connecting the text boxes to the image
-        ----------------------------------------------------------- */
-        .feature-box::after {
-            content: '';
-            position: absolute;
-            height: 2px;
-            background: var(--primary-accent);
-            box-shadow: var(--neon-glow);
-            width: 0; /* Starts at 0 width for animation */
-            transition: width 1s ease 0.5s; /* Delay ensures box fades in first */
-            z-index: -1;
-        }
-
-        /* Animate line width when active */
-        .feature-container.active .feature-box::after {
-            width: 150px; 
-        }
-
-        /* Specific Angles for each corner */
-        .top-left::after {
-            bottom: 30px; right: -140px;
-            transform-origin: left;
-            transform: rotate(25deg);
-        }
-
-        .top-right::after {
-            bottom: 30px; left: 10px;
-            transform-origin: right;
-            transform: rotate(-155deg); /* Pointing left-down */
-        }
-
-        .bottom-left::after {
-            top: 30px; right: -140px;
-            transform-origin: left;
-            transform: rotate(-25deg);
-        }
-
-        .bottom-right::after {
-            top: 30px; left: 10px;
-            transform-origin: right;
-            transform: rotate(155deg); /* Pointing left-up */
-        }
-        /* ----------------------------------------------------------- */
-
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .final-hero h1 { font-size: 4.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
 
         /* -----------------------------------------------------------
-           SUB-PAGE STYLES - UPDATED FOR LARGER HEADERS & TEXT
+           SUB-PAGE STYLES
         ----------------------------------------------------------- */
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         
@@ -356,7 +368,6 @@
             width: 100%;
         }
 
-        /* INCREASED SUB PAGE HEADER SIZE */
         .sub-page-header h1 { font-size: 5.2rem !important; }
 
         .glass-panel { 
@@ -371,7 +382,6 @@
         
         .content-block { display: flex; flex-direction: column; gap: 40px; align-items: center; }
         
-        /* Centered description text */
         .text-content { 
             font-size: 1.2rem; 
             line-height: 1.8; 
@@ -380,7 +390,6 @@
             max-width: 1000px;
         }
         
-        /* Panel Heading Size Increased */
         .glass-panel h2 { 
             font-size: 2.2rem; 
             color: var(--primary-accent); 
@@ -477,7 +486,7 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="glass-text-box">
+                <div class="glass-text-box right-text">
                     <strong style="color: var(--primary-accent);">ENGINEERING GIANTS</strong><br><br>
                     Planes, Jets, and Helicopters are undeniable feats of engineering that have connected the globe. However, they are not the flying experience we dream of; enclosed in pressurized cabins, they lack the immersive, personal connection to the air itself.
                 </div>
@@ -486,7 +495,7 @@
 
         <div class="scroll-video-row reveal">
             <div class="video-text-container">
-                <div class="glass-text-box" style="order: -1;">
+                <div class="glass-text-box left-text" style="order: -1;">
                     <strong style="color: var(--primary-accent);">RECREATIONAL FREEDOM</strong><br><br>
                     Hang gliders, wingsuits, and parasails are amazing recreational achievements that bring us a step closer to true flight. Yet, they often rely on gravity or specific weather conditions, falling short in active control, speed, and total self-propulsion.
                 </div>
@@ -507,7 +516,7 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-                <div class="glass-text-box">
+                <div class="glass-text-box right-text">
                     <strong style="color: var(--primary-accent);">THE MODERN FRONTIER</strong><br><br>
                     Innovations like the Jetson 1 and Jetman are massive modern improvements, yet they still fall just short of the true immersion and control we dream of. The FALCON is the next evolution in human flight, fulfilling these deficits to create a seamless extension of the body.
                 </div>
@@ -906,6 +915,9 @@
             observer.observe(el);
         });
         document.querySelectorAll('.scroll-video-row').forEach(el => {
+            observer.observe(el);
+        });
+        document.querySelectorAll('.center-text-wrapper').forEach(el => {
             observer.observe(el);
         });
         document.querySelectorAll('.text-break').forEach(el => {
