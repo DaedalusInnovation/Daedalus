@@ -21,10 +21,9 @@
             --transition-speed: 0.8s;      
             --nav-height: 80px;
 
-            /* Neon Blue Backlight Effect */
-            --neon-glow: 0 0 10px rgba(0, 212, 255, 0.8), 
-                         0 0 20px rgba(0, 212, 255, 0.5), 
-                         0 0 30px rgba(0, 212, 255, 0.3);
+            /* Defined Neon Blue Glow */
+            --neon-glow: 0 0 15px rgba(0, 212, 255, 0.9), 
+                         0 0 30px rgba(0, 212, 255, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -97,11 +96,25 @@
            HOME PAGE STYLES
         ----------------------------------------------------------- */
 
-        #hero-header { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        
+        /* Updated H1 Color and Shadow for readability */
         #hero-header h1 { 
             font-size: 4.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; 
             max-width: 1000px; padding: 0 20px; line-height: 1.2;
-            text-shadow: var(--neon-glow), 2px 2px 10px rgba(0,0,0,0.5); 
+            color: #e0faff; /* Slightly icy white for better contrast */
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 2px 2px 15px rgba(0,0,0,0.7); 
+        }
+
+        /* Subheader style */
+        .hero-sub {
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 25px;
+            color: var(--primary-accent);
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
 
         .main-video-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
@@ -126,7 +139,7 @@
         .wide-video { 
             width: 60%; aspect-ratio: 21 / 9; border-radius: 20px; 
             border: 1px solid var(--border-color); overflow: hidden; 
-            background: #000; position: relative; box-shadow: 0 15px 40px rgba(0, 212, 255, 0.1);
+            background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
             flex-shrink: 0;
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
@@ -177,17 +190,35 @@
         @media (max-width: 1100px) {
             .video-text-container { flex-direction: column; text-align: center; }
             .wide-video { width: 100%; }
-            .glass-text-box { max-width: 100%; }
+            .glass-text-box { max-width: 100%; margin-top: 20px; }
         }
 
-        /* SUB-PAGE & FEATURE SHARED STYLES */
-        .text-break { text-align: center; padding: 150px 15%; opacity: 0; transform: translateY(30px); transition: 1s; }
+        /* Feature Sections */
+        .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
         .text-break.active { opacity: 1; transform: translateY(0); }
         .text-break h2 { 
             font-size: 2.5rem; letter-spacing: 5px; line-height: 1.5; font-weight: 400; 
             text-shadow: var(--neon-glow), 2px 2px 10px rgba(0,0,0,0.5);
+            max-width: 900px;
         }
-        .intro-section h2 { color: var(--primary-accent); font-weight: 800; font-size: 2.8rem; text-transform: uppercase; }
+
+        /* Scroll Arrow Design */
+        .scroll-arrow {
+            margin-top: 40px;
+            width: 40px;
+            height: 40px;
+            border-right: 4px solid var(--primary-accent);
+            border-bottom: 4px solid var(--primary-accent);
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+            filter: drop-shadow(var(--neon-glow));
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) rotate(45deg);}
+            40% {transform: translateY(-20px) rotate(45deg);}
+            60% {transform: translateY(-10px) rotate(45deg);}
+        }
 
         .feature-container { position: relative; width: 100%; max-width: 1300px; margin: 120px auto; height: 85vh; display: flex; align-items: center; justify-content: center; }
         .feature-img { 
@@ -216,6 +247,7 @@
             text-shadow: var(--neon-glow), 2px 2px 15px rgba(0,0,0,0.4); 
         }
 
+        /* Sub Pages Common Styles */
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         .glass-panel { background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); margin-bottom: 50px; }
 
@@ -269,6 +301,7 @@
         
         <section id="hero-header">
             <h1>Humans have always dreamed of flight</h1>
+            <p class="hero-sub">Scroll down to learn about turning the dream into a reality.</p>
         </section>
 
         <div class="main-video-section">
@@ -332,12 +365,10 @@
             </div>
         </div>
 
+        <!-- NEW SECTION: REPLACED TRANSITION TEXT & ADDED ARROW -->
         <div class="text-break reveal">
-            <h2>These are amazing feats of engineering, yet they still fall short of the true, unencumbered flight experience humans desire.</h2>
-        </div>
-
-        <div class="text-break intro-section reveal">
-            <h2>How we can improve:</h2>
+            <h2>Here is how the FALCON will take us to our next evolution of human flight:</h2>
+            <div class="scroll-arrow"></div>
         </div>
 
         <div class="feature-container reveal">
@@ -382,7 +413,7 @@
     </div>
 
     <!-- -----------------------------------------------------------
-       WINGS PAGE
+       SUBPAGES
     ----------------------------------------------------------- -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
@@ -449,9 +480,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       BODY PAGE
-    ----------------------------------------------------------- -->
     <div id="body-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -494,9 +522,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       TAIL PAGE
-    ----------------------------------------------------------- -->
     <div id="tail-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -526,9 +551,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       SYSTEMS PAGE
-    ----------------------------------------------------------- -->
     <div id="systems-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -556,9 +578,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       SAFETY PAGE
-    ----------------------------------------------------------- -->
     <div id="safety-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -586,9 +605,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       STRUCTURE PAGE
-    ----------------------------------------------------------- -->
     <div id="structure-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -616,9 +632,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       COST PAGE
-    ----------------------------------------------------------- -->
     <div id="cost-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -646,9 +659,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       CONTACT PAGE
-    ----------------------------------------------------------- -->
     <div id="contact-page" class="page">
         <div class="sub-wrap" style="text-align:center;">
             <div class="glass-panel">
@@ -670,9 +680,10 @@
                 if (pushToHistory) history.pushState({ pageId: pageId }, '', '#' + pageId);
             }
         }
+
         window.addEventListener('popstate', (e) => showPage(e.state ? e.state.pageId : 'home-page', false));
         window.addEventListener('load', () => { if (window.location.hash) showPage(window.location.hash.replace('#', ''), false); });
-        
+
         // ANIMATION LOGIC
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -681,6 +692,7 @@
                 }
             });
         }, { threshold: 0.15 });
+
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
