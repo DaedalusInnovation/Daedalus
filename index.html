@@ -98,7 +98,6 @@
 
         #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
-        /* Shared Header Styling for Hero, Sub-Hero, and Final Hero */
         #hero-header h1, .hero-sub, .final-hero h1, .sub-page-header h1 { 
             max-width: 1000px; padding: 0 20px; line-height: 1.2;
             color: #e0faff; 
@@ -130,7 +129,6 @@
 
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        /* Spacing between video rows on home page */
         .scroll-video-row { width: 100%; padding: 120px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
         
@@ -142,7 +140,6 @@
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        /* Glass Text Box Styling */
         .glass-text-box {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -185,12 +182,11 @@
             margin: 50px 0 100px 0;
         }
 
-        /* -----------------------------------------------------------
-           LANDING GRID STYLES
-        ----------------------------------------------------------- */
+        /* LANDING GRID STYLES */
         .landing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
             margin-top: 60px;
         }
@@ -209,6 +205,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 300px;
+            min-height: 200px;
         }
 
         .landing-card:hover {
@@ -238,7 +236,6 @@
             .glass-text-box { max-width: 100%; margin-top: 20px; }
         }
 
-        /* Feature Sections */
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
         .text-break.active { opacity: 1; transform: translateY(0); }
         .text-break h2 { 
@@ -291,14 +288,41 @@
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .final-hero h1 { font-size: 3.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
 
-        /* Sub Pages Common Styles */
+        /* -----------------------------------------------------------
+           SUB-PAGE STYLES - UPDATED FOR CENTERING
+        ----------------------------------------------------------- */
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
-        .glass-panel { background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); margin-bottom: 50px; }
+        
+        .sub-page-header { 
+            text-align: center; 
+            margin-bottom: 80px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
 
-        .sub-page-header { text-align: center; margin-bottom: 80px; }
-        .sub-page-header h1 { font-size: 4rem; color: var(--primary-accent); text-transform: uppercase; text-shadow: var(--neon-glow); margin-bottom: 20px; }
-        .content-block { display: flex; flex-direction: column; gap: 40px; }
-        .text-content { font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; }
+        .glass-panel { 
+            background: var(--glass-bg); 
+            padding: 4rem; 
+            border-radius: 30px; 
+            border: 1px solid var(--border-color); 
+            backdrop-filter: blur(25px); 
+            margin-bottom: 50px; 
+            text-align: center; /* Center everything inside panels */
+        }
+        
+        .content-block { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+        
+        .text-content { 
+            font-size: 1.2rem; 
+            line-height: 1.8; 
+            margin-bottom: 30px; 
+            text-align: center; /* Centered description text */
+            max-width: 1000px;
+        }
+        
         .media-placeholder {
             width: 100%; height: 500px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
             border-radius: 20px; display: flex; align-items: center; justify-content: center;
@@ -306,8 +330,23 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden;
         }
         .media-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-        .spec-list { list-style: none; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; margin-top: 20px; }
-        .spec-list li { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
+        
+        .spec-list { 
+            list-style: none; 
+            padding: 20px; 
+            background: rgba(0,0,0,0.3); 
+            border-radius: 15px; 
+            margin-top: 20px; 
+            display: inline-block; /* Helps in centering the list container */
+            min-width: 400px;
+        }
+        .spec-list li { 
+            padding: 10px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            display: flex; 
+            justify-content: space-between; 
+            gap: 40px;
+        }
         .spec-list li strong { color: var(--primary-accent); }
 
     </style>
@@ -487,6 +526,7 @@
                         <h3>TAIL</h3>
                         <p>Stability & Pitch Authority</p>
                     </div>
+                    <!-- Centered Row via Flex Container -->
                     <div class="landing-card" onclick="showPage('systems-page')">
                         <h3>SYSTEMS/UI</h3>
                         <p>Holographic HUD & Neural-Link</p>
@@ -557,9 +597,6 @@
                 <p class="text-content">
                     To effectively carry a human, we look to nature's most efficient glider: the Wandering Albatross. An albatross typically has a wing load of approx. 24 kg/m². Our engineering goal is to match this natural upper limit.
                 </p>
-                <p class="text-content">
-                    We calculate Wing Load as <em>Total Weight / Surface Area</em>. Assuming a maximum pilot weight of 100kg (~200lbs) and a structural craft weight of 40kg, our total load is 140kg. To maintain the target efficiency, the wings require a precise surface area.
-                </p>
 
                 <ul class="spec-list">
                     <li><strong>Max Pilot Weight</strong> <span>100 kg</span></li>
@@ -575,7 +612,7 @@
                 <p class="text-content">
                     The morphing mechanism is symmetrical, but for this breakdown, we analyze one side. Each wing half is divided into two primary sections: a stationary base and a moving array.
                     <br><br>
-                    <strong>The Overlap System:</strong> The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries (Figure X) to ensure they morph under one another smoothly without mechanical binding.
+                    The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries to ensure they morph under one another smoothly without mechanical binding.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation">
@@ -587,9 +624,7 @@
                 <p class="text-content">
                     All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process.
                     <br><br>
-                    <strong>Passive Extension:</strong> The system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended. This is a safety feature; if power is lost, the wings automatically spread to maximum glide surface area.
-                    <br><br>
-                    <strong>Active Retraction:</strong> To tuck the wings for dives or speed, user controls activate a mechanical assistance motor. This motor pulls a high-strength cable attached to the wingtip, overcoming the spring tension to retract the segments into the desired aerodynamic profile.
+                    The system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended. This is a safety feature; if power is lost, the wings automatically spread to maximum glide surface area.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1567084518774-7d2d34208a3d?q=80&w=1200" alt="Tension Cable Mechanism">
@@ -611,9 +646,8 @@
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Emergency Wing Detachment</h2>
                 <p class="text-content">
-                    With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures beyond that which is built into the wings. In case of emergency, the back of the suit can detach the wings from the body and release a parachute. 
-                </p>
-                <p class="text-content">
+                    With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures beyond that which is built into the wings. In case of emergency, the back of the suit can detach the wings from the body and release a parachute.
+                    <br><br>
                     Detaching the wings eliminates the danger of any wing malfunction. Then, the parachute is free to guide the user slowly down to safety.
                 </p>
                 <div class="media-placeholder">
@@ -624,10 +658,7 @@
             <div class="glass-panel content-block reveal">
                 <h2 style="color:var(--primary-accent); margin-bottom:15px;">Ventral Electric Turbine</h2>
                 <p class="text-content">
-                    The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit. 
-                </p>
-                <p class="text-content">
-                    A battery pack will be on the back (between the user and parachute safety measures) of the suit to power this turbine.
+                    The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit.
                 </p>
 
                 <ul class="spec-list">
@@ -695,8 +726,9 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Neural-Link & Haptics</h2>
                 <p class="text-content">
-                    <strong>Haptic Feedback Loop:</strong> The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
+                    The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface">
@@ -716,8 +748,9 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Triple-Redundant Architecture</h2>
                 <p class="text-content">
-                    Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds, imperceptible to the pilot.
+                    Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems">
@@ -725,8 +758,9 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Ballistic Recovery System (BRS)</h2>
                 <p class="text-content">
-                    <strong>The Ultimate Failsafe:</strong> The Ballistic Recovery System (BRS). Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
+                    The Ultimate Failsafe: Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment">
@@ -746,6 +780,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">AI-Generative Frame Design</h2>
                 <p class="text-content">
                     The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40% compared to traditional aluminum frames.
                 </p>
@@ -755,6 +790,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Digital Twin Stress Testing</h2>
                 <p class="text-content">
                     Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.
                 </p>
@@ -776,6 +812,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Market Paradigm</h2>
                 <p class="text-content">
                     Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and off-the-shelf EV battery technology, we reduce production costs significantly compared to traditional light aircraft.
                 </p>
@@ -785,8 +822,9 @@
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Projected Scaling</h2>
                 <p class="text-content">
-                    <strong>Projected Market Entry:</strong> Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
+                    Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line">
@@ -795,9 +833,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       CONTACT PAGE
-    ----------------------------------------------------------- -->
     <div id="contact-page" class="page">
         <div class="sub-wrap" style="text-align:center;">
             <div class="glass-panel">
