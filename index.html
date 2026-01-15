@@ -99,18 +99,19 @@
         #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
         #hero-header h1, .hero-sub, .final-hero h1, .sub-page-header h1 { 
-            max-width: 1000px; padding: 0 20px; line-height: 1.2;
+            max-width: 1200px; padding: 0 20px; line-height: 1.1;
             color: #e0faff; 
             text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 2px 2px 15px rgba(0,0,0,0.7); 
         }
 
-        #hero-header h1 { font-size: 4.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; }
+        /* MAIN HEADER SIZE INCREASED */
+        #hero-header h1 { font-size: 5.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; }
 
         .hero-sub {
-            font-size: 1rem;
-            letter-spacing: 4px;
+            font-size: 1.1rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            margin-top: 25px;
+            margin-top: 30px;
             font-weight: 400;
         }
 
@@ -234,6 +235,8 @@
             .video-text-container { flex-direction: column; text-align: center; }
             .wide-video { width: 100%; }
             .glass-text-box { max-width: 100%; margin-top: 20px; }
+            #hero-header h1 { font-size: 3.5rem; }
+            .sub-page-header h1 { font-size: 3.2rem; }
         }
 
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
@@ -286,10 +289,10 @@
         .bottom-left { bottom: 0; left: 0; }
 
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .final-hero h1 { font-size: 3.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
+        .final-hero h1 { font-size: 4.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
 
         /* -----------------------------------------------------------
-           SUB-PAGE STYLES - UPDATED FOR CENTERING
+           SUB-PAGE STYLES - UPDATED FOR LARGER HEADERS & TEXT
         ----------------------------------------------------------- */
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
         
@@ -303,6 +306,9 @@
             width: 100%;
         }
 
+        /* INCREASED SUB PAGE HEADER SIZE */
+        .sub-page-header h1 { font-size: 5.2rem !important; }
+
         .glass-panel { 
             background: var(--glass-bg); 
             padding: 4rem; 
@@ -310,19 +316,28 @@
             border: 1px solid var(--border-color); 
             backdrop-filter: blur(25px); 
             margin-bottom: 50px; 
-            text-align: center; /* Center everything inside panels */
+            text-align: center; 
         }
         
         .content-block { display: flex; flex-direction: column; gap: 40px; align-items: center; }
         
+        /* Centered description text */
         .text-content { 
             font-size: 1.2rem; 
             line-height: 1.8; 
             margin-bottom: 30px; 
-            text-align: center; /* Centered description text */
+            text-align: center; 
             max-width: 1000px;
         }
         
+        /* Panel Heading Size Increased */
+        .glass-panel h2 { 
+            font-size: 2.2rem; 
+            color: var(--primary-accent); 
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
         .media-placeholder {
             width: 100%; height: 500px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
             border-radius: 20px; display: flex; align-items: center; justify-content: center;
@@ -337,15 +352,16 @@
             background: rgba(0,0,0,0.3); 
             border-radius: 15px; 
             margin-top: 20px; 
-            display: inline-block; /* Helps in centering the list container */
-            min-width: 400px;
+            display: inline-block; 
+            min-width: 450px;
         }
         .spec-list li { 
-            padding: 10px 0; 
+            padding: 12px 0; 
             border-bottom: 1px solid rgba(255,255,255,0.1); 
             display: flex; 
             justify-content: space-between; 
             gap: 40px;
+            font-size: 1.1rem;
         }
         .spec-list li strong { color: var(--primary-accent); }
 
@@ -526,7 +542,6 @@
                         <h3>TAIL</h3>
                         <p>Stability & Pitch Authority</p>
                     </div>
-                    <!-- Centered Row via Flex Container -->
                     <div class="landing-card" onclick="showPage('systems-page')">
                         <h3>SYSTEMS/UI</h3>
                         <p>Holographic HUD & Neural-Link</p>
@@ -571,7 +586,7 @@
     </div>
 
     <!-- -----------------------------------------------------------
-       WINGS PAGE
+       INDIVIDUAL SUBPAGES
     ----------------------------------------------------------- -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
@@ -581,7 +596,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Morphing Architecture</h2>
+                <h2>Morphing Architecture</h2>
                 <p class="text-content">
                     We believe that with only one set of wings, a pilot should be able to experience easy takeoff, efficient cruising, fast dives, and quick turns. This versatility is made possible by physically morphing the wings in flight. 
                     <br><br>
@@ -593,7 +608,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Dimensional Properties & Wing Load</h2>
+                <h2>Dimensional Properties & Wing Load</h2>
                 <p class="text-content">
                     To effectively carry a human, we look to nature's most efficient glider: the Wandering Albatross. An albatross typically has a wing load of approx. 24 kg/m². Our engineering goal is to match this natural upper limit.
                 </p>
@@ -608,11 +623,11 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Mechanical Segmentation</h2>
+                <h2>Mechanical Segmentation</h2>
                 <p class="text-content">
                     The morphing mechanism is symmetrical, but for this breakdown, we analyze one side. Each wing half is divided into two primary sections: a stationary base and a moving array.
                     <br><br>
-                    The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries to ensure they morph under one another smoothly without mechanical binding.
+                    The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries (Figure X) to ensure they morph under one another smoothly without mechanical binding.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation">
@@ -620,7 +635,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Tension-Based Actuation</h2>
+                <h2>Tension-Based Actuation</h2>
                 <p class="text-content">
                     All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process.
                     <br><br>
@@ -633,9 +648,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       BODY PAGE
-    ----------------------------------------------------------- -->
     <div id="body-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -644,11 +656,9 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Emergency Wing Detachment</h2>
+                <h2>Emergency Wing Detachment</h2>
                 <p class="text-content">
                     With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures beyond that which is built into the wings. In case of emergency, the back of the suit can detach the wings from the body and release a parachute.
-                    <br><br>
-                    Detaching the wings eliminates the danger of any wing malfunction. Then, the parachute is free to guide the user slowly down to safety.
                 </p>
                 <div class="media-placeholder">
                      <img src="https://images.unsplash.com/photo-1545624773-7729b5a32b6e?q=80&w=1200" alt="Parachute Safety System">
@@ -656,7 +666,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Ventral Electric Turbine</h2>
+                <h2>Ventral Electric Turbine</h2>
                 <p class="text-content">
                     The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit.
                 </p>
@@ -674,9 +684,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       TAIL PAGE
-    ----------------------------------------------------------- -->
     <div id="tail-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -685,7 +692,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">The Aerodynamic Glue</h2>
+                <h2>The Aerodynamic Glue</h2>
                 <p class="text-content">
                     The Tail is the glue that holds the whole design together. Its surface area is specifically matched to the surface area of the wings to balance and control the center of lift for the system. This results in stable flight.
                 </p>
@@ -695,7 +702,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Pitch Authority</h2>
+                <h2>Pitch Authority</h2>
                 <p class="text-content">
                     The Tail also is the center of flight controls. With the ability to move up/down the tail can change the angle of attack aka the pitch of the suit in order to generate lift or initiate a dive.
                 </p>
@@ -706,9 +713,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       SYSTEMS PAGE
-    ----------------------------------------------------------- -->
     <div id="systems-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -726,7 +730,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Neural-Link & Haptics</h2>
+                <h2>Neural-Link & Haptics</h2>
                 <p class="text-content">
                     The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
                 </p>
@@ -737,9 +741,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       SAFETY PAGE
-    ----------------------------------------------------------- -->
     <div id="safety-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -748,7 +749,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Triple-Redundant Architecture</h2>
+                <h2>Triple-Redundant Architecture</h2>
                 <p class="text-content">
                     Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds.
                 </p>
@@ -758,7 +759,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Ballistic Recovery System (BRS)</h2>
+                <h2>Ballistic Recovery System (BRS)</h2>
                 <p class="text-content">
                     The Ultimate Failsafe: Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
                 </p>
@@ -769,9 +770,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       STRUCTURE PAGE
-    ----------------------------------------------------------- -->
     <div id="structure-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -780,9 +778,9 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">AI-Generative Frame Design</h2>
+                <h2>AI-Generative Frame Design</h2>
                 <p class="text-content">
-                    The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40% compared to traditional aluminum frames.
+                    The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40%.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure">
@@ -790,7 +788,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Digital Twin Stress Testing</h2>
+                <h2>Digital Twin Stress Testing</h2>
                 <p class="text-content">
                     Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.
                 </p>
@@ -801,9 +799,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       COST PAGE
-    ----------------------------------------------------------- -->
     <div id="cost-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -812,7 +807,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Market Paradigm</h2>
+                <h2>Market Paradigm</h2>
                 <p class="text-content">
                     Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and off-the-shelf EV battery technology, we reduce production costs significantly compared to traditional light aircraft.
                 </p>
@@ -822,7 +817,7 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2 style="color:var(--primary-accent); margin-bottom:15px;">Projected Scaling</h2>
+                <h2>Projected Scaling</h2>
                 <p class="text-content">
                     Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
                 </p>
