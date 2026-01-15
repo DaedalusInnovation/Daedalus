@@ -7,23 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
 
     <style>
-        /* -----------------------------------------------------------
-           1. VARIABLE CONTROL CENTER
-        ----------------------------------------------------------- */
         :root {
             --primary-accent: #00d4ff;    
             --text-main: #ffffff;
             --glass-bg: rgba(0, 0, 0, 0.4); 
             --glass-darker: rgba(0, 0, 0, 0.7);
             --border-color: rgba(255, 255, 255, 0.25);
-
-            /* High-Altitude Earth Cloud Background */
             --main-bg-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&q=80&w=1920');
-
             --transition-speed: 0.8s;       
             --nav-height: 80px;
-
-            /* Defined Neon Blue Glow */
             --neon-glow: 0 0 15px rgba(0, 212, 255, 0.9), 
                          0 0 30px rgba(0, 212, 255, 0.4);
         }
@@ -31,29 +23,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #001428; overflow-x: hidden; }
 
-        /* -----------------------------------------------------------
-           ADDITION: LOADING SCREEN
-        ----------------------------------------------------------- */
-        #system-loader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #000; z-index: 10000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
-        }
-        .loader-ring {
-            width: 80px; height: 80px; border: 4px solid rgba(0, 212, 255, 0.2);
-            border-top: 4px solid var(--primary-accent); border-radius: 50%;
-            animation: spin 1s linear infinite; margin-bottom: 20px;
-            box-shadow: var(--neon-glow);
-        }
-        .loader-text { font-weight: 800; letter-spacing: 5px; animation: blink 1.5s infinite; }
-        
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-        /* -----------------------------------------------------------
-           CORE BACKGROUND ENGINE
-        ----------------------------------------------------------- */
+        /* BACKGROUND */
         .bg-fixed { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
             background-image: var(--main-bg-image); 
@@ -67,9 +37,7 @@
             z-index: -1; pointer-events: none; 
         }
 
-        /* -----------------------------------------------------------
-           NAVIGATION
-        ----------------------------------------------------------- */
+        /* NAVIGATION */
         nav { 
             position: fixed; top: 0; width: 100%; min-height: var(--nav-height); 
             z-index: 9999; display: flex; justify-content: center; align-items: center; 
@@ -88,7 +56,7 @@
         }
         nav ul li a:hover { color: var(--primary-accent); text-shadow: var(--neon-glow); }
 
-        /* Dropdown Menu */
+        /* Dropdown */
         .dropdown-menu {
             position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
             background: var(--glass-darker); backdrop-filter: blur(15px);
@@ -108,9 +76,7 @@
 
         @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* -----------------------------------------------------------
-           HOME & LANDING PAGE STYLES
-        ----------------------------------------------------------- */
+        /* HOME STYLES */
         #hero-header { 
             height: 75vh; display: flex; flex-direction: column; 
             align-items: center; justify-content: center; text-align: center; 
@@ -181,7 +147,7 @@
         .center-text-wrapper.active { opacity: 1; transform: translateY(0); }
 
         /* -----------------------------------------------------------
-           NEURAL PATH LINES (WITH ADDED PULSE ANIMATION)
+           YOUR ADDITION: CONNECTING LINES (Neural Layer)
         ----------------------------------------------------------- */
         .neural-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -193,16 +159,10 @@
             stroke-linecap: round; stroke-dasharray: 4, 10;
             filter: drop-shadow(0 0 5px var(--primary-accent));
             opacity: 0.6;
-            animation: dashPulse 3s linear infinite;
         }
 
-        @keyframes dashPulse {
-            to { stroke-dashoffset: -28; }
-        }
-
-        /* Mobile Adjustments */
         @media (max-width: 1100px) {
-            .neural-layer { display: none; }
+            .neural-layer { display: none; } /* Hide lines on mobile */
             .video-text-container { flex-direction: column; text-align: center; gap: 40px; }
             .wide-video { width: 100%; }
             .glass-text-box { max-width: 100%; margin-top: 20px; }
@@ -211,9 +171,7 @@
             nav ul { gap: 20px; }
         }
 
-        /* -----------------------------------------------------------
-           LANDING GRID & CARDS
-        ----------------------------------------------------------- */
+        /* LANDING & CARDS */
         .landing-grid {
             display: flex; flex-wrap: wrap; justify-content: center;
             gap: 30px; margin-top: 60px;
@@ -268,7 +226,7 @@
             60% {transform: translateY(-10px) rotate(45deg);}
         }
 
-        /* Feature Section */
+        /* FEATURES */
         .feature-container { 
             position: relative; width: 100%; max-width: 1300px; margin: 120px auto; 
             height: 85vh; display: flex; align-items: center; justify-content: center; 
@@ -296,9 +254,7 @@
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .final-hero h1 { font-size: 4.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
 
-        /* -----------------------------------------------------------
-           SUB-PAGE & CONTENT STYLES
-        ----------------------------------------------------------- */
+        /* SUB-PAGE & CONTENT */
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 100px 40px; }
         
         .sub-page-header { 
@@ -350,11 +306,6 @@
     </style>
 </head>
 <body>
-
-    <div id="system-loader">
-        <div class="loader-ring"></div>
-        <div class="loader-text">INITIALIZING DAEDALUS PROTOCOL...</div>
-    </div>
 
     <div class="bg-fixed"></div>
     <div id="dimmer" class="bg-dimmer"></div>
@@ -852,15 +803,6 @@
             const features = document.getElementById('features-start');
             features.scrollIntoView({ behavior: 'smooth' });
         }
-
-        // 4. LOADER REMOVAL
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('system-loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-            }, 1200); // 1.2 second loading simulation
-        });
     </script>
 
 </body>
