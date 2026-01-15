@@ -7,7 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. VARIABLE CONTROL CENTER */
+        /* -----------------------------------------------------------
+           1. VARIABLE CONTROL CENTER
+        ----------------------------------------------------------- */
         :root {
             --primary-accent: #00d4ff;    
             --text-main: #ffffff;
@@ -18,7 +20,7 @@
             /* High-Altitude Earth Cloud Background */
             --main-bg-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&q=80&w=1920');
 
-            --transition-speed: 0.8s;      
+            --transition-speed: 0.8s;       
             --nav-height: 80px;
 
             /* Defined Neon Blue Glow */
@@ -27,76 +29,92 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #7ab8ef; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #001428; overflow-x: hidden; }
 
-        /* FIXED BACKGROUND ENGINE */
+        /* -----------------------------------------------------------
+           ADDITION: LOADING SCREEN
+        ----------------------------------------------------------- */
+        #system-loader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 10000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+        .loader-ring {
+            width: 80px; height: 80px; border: 4px solid rgba(0, 212, 255, 0.2);
+            border-top: 4px solid var(--primary-accent); border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 20px;
+            box-shadow: var(--neon-glow);
+        }
+        .loader-text { font-weight: 800; letter-spacing: 5px; animation: blink 1.5s infinite; }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* -----------------------------------------------------------
+           CORE BACKGROUND ENGINE
+        ----------------------------------------------------------- */
         .bg-fixed { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100vw; 
-            height: 100vh; 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
             background-image: var(--main-bg-image); 
-            background-size: cover; 
-            background-position: center; 
+            background-size: cover; background-position: center; 
             z-index: -2; 
         }
 
-        /* STATIC OVERLAY */
         .bg-dimmer { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100vw; 
-            height: 100vh; 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
             background: rgba(0, 40, 80, 0.1); 
-            z-index: -1; 
-            pointer-events: none; 
+            z-index: -1; pointer-events: none; 
         }
 
-        /* Navigation */
+        /* -----------------------------------------------------------
+           NAVIGATION
+        ----------------------------------------------------------- */
         nav { 
-            position: fixed; top: 0; width: 100%; height: var(--nav-height); 
+            position: fixed; top: 0; width: 100%; min-height: var(--nav-height); 
             z-index: 9999; display: flex; justify-content: center; align-items: center; 
-            background: rgba(0,20,40,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); 
+            background: rgba(0,20,40,0.3); backdrop-filter: blur(10px); 
+            border-bottom: 1px solid var(--border-color); 
+            padding: 0 20px;
         }
-        nav ul { display: flex; list-style: none; gap: 45px; align-items: center; }
-        nav ul li { position: relative; } 
-        nav ul li a { text-decoration: none; color: var(--text-main); font-weight: 800; letter-spacing: 2px; font-size: 0.85rem; transition: 0.3s; cursor: pointer; display: block; padding: 10px 0; }
+        nav ul { 
+            display: flex; list-style: none; gap: 45px; align-items: center; flex-wrap: wrap; justify-content: center; 
+        }
+        nav ul li { position: relative; padding: 10px 0; } 
+        nav ul li a { 
+            text-decoration: none; color: var(--text-main); font-weight: 800; 
+            letter-spacing: 2px; font-size: 0.85rem; transition: 0.3s; 
+            cursor: pointer; display: block; padding: 5px 10px; 
+        }
         nav ul li a:hover { color: var(--primary-accent); text-shadow: var(--neon-glow); }
 
-        /* DROPDOWN MENU STYLES */
+        /* Dropdown Menu */
         .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--glass-darker);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 0;
-            min-width: 180px;
-            text-align: center;
-            list-style: none;
-            flex-direction: column;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0s linear 1s; 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            background: var(--glass-darker); backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color); border-radius: 10px;
+            padding: 10px 0; min-width: 180px; text-align: center;
+            list-style: none; flex-direction: column; gap: 10px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s linear 0.3s; 
+        }
+        .dropdown-menu li a { padding: 10px 20px; font-size: 0.8rem; white-space: nowrap; }
+        nav ul li:hover .dropdown-menu { 
+            opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s linear 0s; 
         }
 
-        .dropdown-menu li a { padding: 10px 20px; font-size: 0.8rem; white-space: nowrap; }
-        nav ul li:hover .dropdown-menu { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s linear 0s; }
+        .page { width: 100%; display: none; padding-top: var(--nav-height); }
+        .page.active { display: block; animation: fadeInPage 0.5s ease-out; }
 
-        .page { width: 100%; display: none; }
-        .page.active { display: block; }
+        @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* -----------------------------------------------------------
            HOME & LANDING PAGE STYLES
         ----------------------------------------------------------- */
-
-        #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+        #hero-header { 
+            height: 75vh; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; text-align: center; 
+        }
         
         #hero-header h1, .hero-sub, .final-hero h1, .sub-page-header h1 { 
             max-width: 1200px; padding: 0 20px; line-height: 1.1;
@@ -107,113 +125,82 @@
         #hero-header h1 { font-size: 5.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; }
 
         .hero-sub {
-            font-size: 1.1rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-top: 30px;
-            font-weight: 400;
+            font-size: 1.1rem; letter-spacing: 5px; text-transform: uppercase;
+            margin-top: 30px; font-weight: 400;
         }
 
         .main-video-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
         
         .video-box { 
-            position: relative; 
-            width: 100%; 
-            padding-bottom: 42.85%; 
-            background: #000; 
-            border-radius: 40px; 
-            overflow: hidden;
+            position: relative; width: 100%; padding-bottom: 42.85%; 
+            background: #000; border-radius: 40px; overflow: hidden;
             box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
-            border: none; 
-            z-index: 2;
+            border: none; z-index: 2;
         }
-
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        .scroll-video-row { width: 100%; padding: 120px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
+        .scroll-video-row { 
+            width: 100%; padding: 120px 5%; display: flex; 
+            opacity: 0; transform: translateY(50px); transition: var(--transition-speed); 
+        }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
         
         .wide-video { 
             width: 60%; aspect-ratio: 21 / 9; border-radius: 20px; 
             border: 1px solid var(--border-color); overflow: hidden; 
             background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            flex-shrink: 0;
-            z-index: 2;
+            flex-shrink: 0; z-index: 2;
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
         .glass-text-box {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-main);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            max-width: 450px;
-            position: relative;
-            transition: transform 0.3s ease;
+            background: var(--glass-bg); backdrop-filter: blur(15px);
+            border: 1px solid var(--border-color); border-radius: 20px;
+            padding: 30px; font-size: 1rem; line-height: 1.6;
+            color: var(--text-main); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 450px; position: relative; transition: transform 0.3s ease;
             z-index: 2;
         }
 
-        .intro-text-box {
-            max-width: 900px !important; 
-            width: 90%;
-            font-size: 1.25rem; 
-            text-align: center;
-        }
+        .intro-text-box { max-width: 900px !important; width: 90%; font-size: 1.25rem; text-align: center; }
         
         .glass-text-box:hover {
-            transform: scale(1.02);
-            border-color: var(--primary-accent);
+            transform: scale(1.02); border-color: var(--primary-accent);
             box-shadow: var(--neon-glow);
         }
 
         .video-text-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 80px; 
-            width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            gap: 80px; width: 100%;
         }
 
         .center-text-wrapper {
-            display: flex;
-            justify-content: center;
-            margin: 50px 0 100px 0;
+            display: flex; justify-content: center; margin: 50px 0 100px 0;
             opacity: 0; transform: translateY(30px); transition: var(--transition-speed);
         }
         .center-text-wrapper.active { opacity: 1; transform: translateY(0); }
 
         /* -----------------------------------------------------------
-           NEW: SVG NEURAL PATH LINES (NO DOTS)
-           Connects Text Box -> Text Box
+           NEURAL PATH LINES (WITH ADDED PULSE ANIMATION)
         ----------------------------------------------------------- */
         .neural-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Behind text boxes but in front of background */
-            pointer-events: none;
-            overflow: visible;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none; overflow: visible;
         }
 
         .neural-path-line {
-            fill: none;
-            stroke: var(--primary-accent);
-            stroke-width: 2; /* Slightly thinner for cleaner look without dots */
-            stroke-linecap: round;
-            stroke-dasharray: 4, 10; /* Dashed effect */
+            fill: none; stroke: var(--primary-accent); stroke-width: 2;
+            stroke-linecap: round; stroke-dasharray: 4, 10;
             filter: drop-shadow(0 0 5px var(--primary-accent));
-            opacity: 0.8;
-            transition: stroke-dashoffset 1s linear;
+            opacity: 0.6;
+            animation: dashPulse 3s linear infinite;
         }
 
-        /* Hide neural lines on mobile */
+        @keyframes dashPulse {
+            to { stroke-dashoffset: -28; }
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 1100px) {
             .neural-layer { display: none; }
             .video-text-container { flex-direction: column; text-align: center; gap: 40px; }
@@ -221,57 +208,43 @@
             .glass-text-box { max-width: 100%; margin-top: 20px; }
             #hero-header h1 { font-size: 3.5rem; }
             .sub-page-header h1 { font-size: 3.2rem; }
+            nav ul { gap: 20px; }
         }
 
-        /* LANDING GRID STYLES */
+        /* -----------------------------------------------------------
+           LANDING GRID & CARDS
+        ----------------------------------------------------------- */
         .landing-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 60px;
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 30px; margin-top: 60px;
         }
 
         .landing-card {
-            background: var(--glass-darker);
-            border: 1px solid var(--border-color);
-            padding: 40px 20px;
-            border-radius: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.4s;
-            text-decoration: none;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 300px;
-            min-height: 200px;
+            background: var(--glass-darker); border: 1px solid var(--border-color);
+            padding: 40px 20px; border-radius: 25px; text-align: center;
+            cursor: pointer; transition: 0.4s; text-decoration: none;
+            color: white; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            width: 300px; min-height: 200px;
         }
 
         .landing-card:hover {
-            border-color: var(--primary-accent);
-            transform: translateY(-10px);
-            box-shadow: var(--neon-glow);
-            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--primary-accent); transform: translateY(-10px);
+            box-shadow: var(--neon-glow); background: rgba(0, 212, 255, 0.1);
         }
 
         .landing-card h3 {
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            color: var(--primary-accent);
-            text-transform: uppercase;
-            margin-bottom: 10px;
+            font-size: 1.4rem; letter-spacing: 3px; color: var(--primary-accent);
+            text-transform: uppercase; margin-bottom: 10px;
         }
 
-        .landing-card p {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            letter-spacing: 1px;
-        }
+        .landing-card p { font-size: 0.85rem; opacity: 0.7; letter-spacing: 1px; }
 
-        .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
+        .text-break { 
+            text-align: center; padding: 100px 15%; opacity: 0; 
+            transform: translateY(30px); transition: 1s; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
         .text-break.active { opacity: 1; transform: translateY(0); }
         .text-break h2 { 
             font-size: 2.5rem; letter-spacing: 5px; line-height: 1.5; font-weight: 400; 
@@ -279,18 +252,13 @@
             max-width: 900px;
         }
 
-        /* Scroll Arrow Design */
+        /* Scroll Arrow */
         .scroll-arrow {
-            margin-top: 40px;
-            width: 40px;
-            height: 40px;
+            margin-top: 40px; width: 40px; height: 40px;
             border-right: 4px solid var(--primary-accent);
             border-bottom: 4px solid var(--primary-accent);
-            transform: rotate(45deg);
-            animation: bounce 2s infinite;
-            filter: drop-shadow(var(--neon-glow));
-            cursor: pointer; 
-            transition: 0.3s;
+            transform: rotate(45deg); animation: bounce 2s infinite;
+            filter: drop-shadow(var(--neon-glow)); cursor: pointer; transition: 0.3s;
         }
         .scroll-arrow:hover { border-color: #fff; filter: drop-shadow(0 0 20px #fff); }
 
@@ -300,7 +268,11 @@
             60% {transform: translateY(-10px) rotate(45deg);}
         }
 
-        .feature-container { position: relative; width: 100%; max-width: 1300px; margin: 120px auto; height: 85vh; display: flex; align-items: center; justify-content: center; }
+        /* Feature Section */
+        .feature-container { 
+            position: relative; width: 100%; max-width: 1300px; margin: 120px auto; 
+            height: 85vh; display: flex; align-items: center; justify-content: center; 
+        }
         .feature-img { 
             width: 80%; height: 85%; object-fit: cover; border-radius: 40px; 
             border: 1px solid var(--border-color); filter: brightness(0.85); 
@@ -325,79 +297,64 @@
         .final-hero h1 { font-size: 4.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
 
         /* -----------------------------------------------------------
-           SUB-PAGE STYLES
+           SUB-PAGE & CONTENT STYLES
         ----------------------------------------------------------- */
-        .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
+        .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 100px 40px; }
         
         .sub-page-header { 
-            text-align: center; 
-            margin-bottom: 80px; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
+            text-align: center; margin-bottom: 80px; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; width: 100%;
         }
 
         .sub-page-header h1 { font-size: 5.2rem !important; }
 
         .glass-panel { 
-            background: var(--glass-bg); 
-            padding: 4rem; 
-            border-radius: 30px; 
-            border: 1px solid var(--border-color); 
-            backdrop-filter: blur(25px); 
-            margin-bottom: 50px; 
+            background: var(--glass-bg); padding: 4rem; 
+            border-radius: 30px; border: 1px solid var(--border-color); 
+            backdrop-filter: blur(25px); margin-bottom: 50px; 
             text-align: center; 
         }
         
         .content-block { display: flex; flex-direction: column; gap: 40px; align-items: center; }
         
         .text-content { 
-            font-size: 1.2rem; 
-            line-height: 1.8; 
-            margin-bottom: 30px; 
-            text-align: center; 
-            max-width: 1000px;
+            font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; 
+            text-align: center; max-width: 1000px;
         }
         
         .glass-panel h2 { 
-            font-size: 2.2rem; 
-            color: var(--primary-accent); 
-            margin-bottom: 15px;
-            text-align: center;
+            font-size: 2.2rem; color: var(--primary-accent); margin-bottom: 15px; text-align: center;
         }
 
         .media-placeholder {
-            width: 100%; height: 500px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
-            border-radius: 20px; display: flex; align-items: center; justify-content: center;
+            width: 100%; height: 500px; background: rgba(0,0,0,0.5); 
+            border: 1px solid var(--border-color); border-radius: 20px; 
+            display: flex; align-items: center; justify-content: center;
             font-weight: 800; letter-spacing: 2px; color: var(--primary-accent);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden;
         }
         .media-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
         
         .spec-list { 
-            list-style: none; 
-            padding: 20px; 
-            background: rgba(0,0,0,0.3); 
-            border-radius: 15px; 
-            margin-top: 20px; 
-            display: inline-block; 
-            min-width: 450px;
+            list-style: none; padding: 20px; background: rgba(0,0,0,0.3); 
+            border-radius: 15px; margin-top: 20px; 
+            display: inline-block; min-width: 450px;
         }
         .spec-list li { 
-            padding: 12px 0; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-            display: flex; 
-            justify-content: space-between; 
-            gap: 40px;
-            font-size: 1.1rem;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); 
+            display: flex; justify-content: space-between; gap: 40px; font-size: 1.1rem;
         }
         .spec-list li strong { color: var(--primary-accent); }
 
     </style>
 </head>
 <body>
+
+    <div id="system-loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">INITIALIZING DAEDALUS PROTOCOL...</div>
+    </div>
 
     <div class="bg-fixed"></div>
     <div id="dimmer" class="bg-dimmer"></div>
@@ -429,13 +386,9 @@
     <div id="home-page" class="page active" style="position: relative;">
         
         <svg class="neural-layer" viewBox="0 0 100 2800" preserveAspectRatio="none">
-            
             <path class="neural-path-line" d="M 50,1150 L 80,1400" />
-            
             <path class="neural-path-line" d="M 80,1650 L 20,1950" />
-            
             <path class="neural-path-line" d="M 20,2250 L 80,2450" />
-            
         </svg>
 
         <section id="hero-header">
@@ -510,7 +463,7 @@
         </div>
 
         <div id="features-start" class="feature-container reveal">
-            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=1200" class="feature-img">
+            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=1200" class="feature-img" alt="Morphing Wing">
             <div class="feature-box top-left">
                 <strong>MORPHING GEOMETRY</strong><br><br>
                 By changing shape mid-flight, we optimize aerodynamics for the desired position, mimicking the precision of biological flight.
@@ -522,7 +475,7 @@
         </div>
 
         <div class="feature-container reveal">
-            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200" class="feature-img">
+            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200" class="feature-img" alt="Electric Thrust">
             <div class="feature-box top-right">
                 <strong>ELECTRIC THRUST</strong><br><br>
                 High-torque electric turbines provide necessary vertical lift without the bulk of combustion, ensuring a seamless flight profile.
@@ -534,7 +487,7 @@
         </div>
 
         <div class="feature-container reveal">
-            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" class="feature-img">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" class="feature-img" alt="Neural Link">
             <div class="feature-box top-left">
                 <strong>STABILIZED GLIDE</strong><br><br>
                 The active tail design balances the entire suit, providing precise multi-directional movement and efficiency.
@@ -655,7 +608,7 @@
                 <p class="text-content">
                     The morphing mechanism is symmetrical, but for this breakdown, we analyze one side. Each wing half is divided into two primary sections: a stationary base and a moving array.
                     <br><br>
-                    The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries (Figure X) to ensure they morph under one another smoothly without mechanical binding.
+                    The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries to ensure they morph under one another smoothly without mechanical binding.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation">
@@ -696,13 +649,13 @@
             <div class="glass-panel content-block reveal">
                 <h2>Ventral Electric Turbine</h2>
                 <p class="text-content">
-                    The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit.
+                    The other primary feature built into the body of the suit is the power. An electric turbine that can provide 900 newtons of thrust for 15 minutes with 3 kWh energy consumed will be attached to the belly of the suit.
                 </p>
 
                 <ul class="spec-list">
-                    <li><strong>Thrust Output</strong> <span>X Newtons</span></li>
-                    <li><strong>Run Time</strong> <span>X Minutes</span></li>
-                    <li><strong>Energy Consumed</strong> <span>X kWh</span></li>
+                    <li><strong>Thrust Output</strong> <span>900 Newtons</span></li>
+                    <li><strong>Run Time</strong> <span>15 Minutes</span></li>
+                    <li><strong>Energy Consumed</strong> <span>3 kWh</span></li>
                 </ul>
 
                 <div class="media-placeholder">
@@ -717,7 +670,7 @@
             <div class="sub-page-header">
                 <h1>TAIL</h1>
                 <p style="font-size:1.5rem;">Stability & Flight Control</p>
-            </div>
+             </div>
 
             <div class="glass-panel content-block reveal">
                 <h2>The Aerodynamic Glue</h2>
@@ -888,28 +841,26 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
-        
-        document.querySelectorAll('.feature-container').forEach(el => {
-            observer.observe(el);
-        });
-        document.querySelectorAll('.scroll-video-row').forEach(el => {
-            observer.observe(el);
-        });
-        document.querySelectorAll('.center-text-wrapper').forEach(el => {
-            observer.observe(el);
-        });
-        document.querySelectorAll('.text-break').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.feature-container').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.scroll-video-row').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.center-text-wrapper').forEach(el => { observer.observe(el); });
+        document.querySelectorAll('.text-break').forEach(el => { observer.observe(el); });
 
         // 3. SMOOTH SCROLL FOR ARROW
         function scrollToFeatures() {
             const features = document.getElementById('features-start');
             features.scrollIntoView({ behavior: 'smooth' });
         }
+
+        // 4. LOADER REMOVAL
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('system-loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 1200); // 1.2 second loading simulation
+        });
     </script>
 
 </body>
