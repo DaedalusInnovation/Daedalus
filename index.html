@@ -98,7 +98,6 @@
 
         #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
         
-        /* Shared Header Styling for Hero, Sub-Hero, and Final Hero */
         #hero-header h1, .hero-sub, .final-hero h1 { 
             max-width: 1000px; padding: 0 20px; line-height: 1.2;
             color: #e0faff; 
@@ -130,7 +129,6 @@
 
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        /* Increased vertical spacing between video rows */
         .scroll-video-row { width: 100%; padding: 120px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
         
@@ -142,7 +140,6 @@
         }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        /* Glass Text Box Styling */
         .glass-text-box {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -191,7 +188,6 @@
             .glass-text-box { max-width: 100%; margin-top: 20px; }
         }
 
-        /* Feature Sections */
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
         .text-break.active { opacity: 1; transform: translateY(0); }
         .text-break h2 { 
@@ -200,7 +196,7 @@
             max-width: 900px;
         }
 
-        /* Scroll Arrow Design */
+        /* Scroll Arrow Design with Clickability */
         .scroll-arrow {
             margin-top: 40px;
             width: 40px;
@@ -210,6 +206,12 @@
             transform: rotate(45deg);
             animation: bounce 2s infinite;
             filter: drop-shadow(var(--neon-glow));
+            cursor: pointer; /* Prompt user it is clickable */
+            transition: 0.3s;
+        }
+        .scroll-arrow:hover {
+            border-color: #fff;
+            filter: drop-shadow(0 0 20px #fff);
         }
 
         @keyframes bounce {
@@ -238,7 +240,6 @@
         .top-right { top: 0; right: 0; }
         .bottom-left { bottom: 0; left: 0; }
 
-        /* Final hero styling updated to match top hero */
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .final-hero h1 { 
             font-size: 3.5rem; letter-spacing: 10px;
@@ -365,10 +366,12 @@
 
         <div class="text-break reveal">
             <h2>Here is how the FALCON will take us to our next evolution of human flight:</h2>
-            <div class="scroll-arrow"></div>
+            <!-- Clickable Arrow -->
+            <div class="scroll-arrow" onclick="scrollToFeatures()"></div>
         </div>
 
-        <div class="feature-container reveal">
+        <!-- Target for the scroll arrow -->
+        <div id="features-start" class="feature-container reveal">
             <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=1200" class="feature-img">
             <div class="feature-box top-left">
                 <strong>MORPHING GEOMETRY</strong><br><br>
@@ -675,6 +678,17 @@
                 targetPage.classList.add('active');
                 window.scrollTo(0, 0);
                 if (pushToHistory) history.pushState({ pageId: pageId }, '', '#' + pageId);
+            }
+        }
+
+        // SCROLL ARROW LOGIC
+        function scrollToFeatures() {
+            const element = document.getElementById('features-start');
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
             }
         }
 
