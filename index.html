@@ -1,1757 +1,379 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>DAEDALUS INNOVATION</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
-
-
-
     <style>
-
-        /* 1. VARIABLE CONTROL CENTER */
-
         :root {
-
             --primary-accent: #00d4ff;    
-
             --text-main: #ffffff;
-
             --glass-bg: rgba(0, 0, 0, 0.4); 
-
             --glass-darker: rgba(0, 0, 0, 0.7);
-
             --border-color: rgba(255, 255, 255, 0.25);
-
-
-
-            /* High-Altitude Earth Cloud Background */
-
             --main-bg-image: url('https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&q=80&w=1920');
-
-
-
             --transition-speed: 0.8s;      
-
             --nav-height: 80px;
-
-
-
-            /* Defined Neon Blue Glow */
-
-            --neon-glow: 0 0 15px rgba(0, 212, 255, 0.9), 
-
-                         0 0 30px rgba(0, 212, 255, 0.4);
-
+            --neon-glow: 0 0 15px rgba(0, 212, 255, 0.9), 0 0 30px rgba(0, 212, 255, 0.4);
         }
-
-
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body { font-family: 'Inter', sans-serif; color: var(--text-main); background-color: #7ab8ef; overflow-x: hidden; }
-
-
-
-        /* FIXED BACKGROUND ENGINE */
-
-        .bg-fixed { 
-
-            position: fixed; 
-
-            top: 0; 
-
-            left: 0; 
-
-            width: 100vw; 
-
-            height: 100vh; 
-
-            background-image: var(--main-bg-image); 
-
-            background-size: cover; 
-
-            background-position: center; 
-
-            z-index: -2; 
-
-        }
-
-
-
-        /* STATIC OVERLAY */
-
-        .bg-dimmer { 
-
-            position: fixed; 
-
-            top: 0; 
-
-            left: 0; 
-
-            width: 100vw; 
-
-            height: 100vh; 
-
-            background: rgba(0, 40, 80, 0.1); 
-
-            z-index: -1; 
-
-            pointer-events: none; 
-
-        }
-
-
-
-        /* Navigation */
-
-        nav { 
-
-            position: fixed; top: 0; width: 100%; height: var(--nav-height); 
-
-            z-index: 9999; display: flex; justify-content: center; align-items: center; 
-
-            background: rgba(0,20,40,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); 
-
-        }
-
+        .bg-fixed { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-image: var(--main-bg-image); background-size: cover; background-position: center; z-index: -2; }
+        .bg-dimmer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 40, 80, 0.1); z-index: -1; pointer-events: none; }
+        nav { position: fixed; top: 0; width: 100%; height: var(--nav-height); z-index: 9999; display: flex; justify-content: center; align-items: center; background: rgba(0,20,40,0.3); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); }
         nav ul { display: flex; list-style: none; gap: 45px; align-items: center; }
-
         nav ul li { position: relative; } 
-
         nav ul li a { text-decoration: none; color: var(--text-main); font-weight: 800; letter-spacing: 2px; font-size: 0.85rem; transition: 0.3s; cursor: pointer; display: block; padding: 10px 0; }
-
         nav ul li a:hover { color: var(--primary-accent); text-shadow: var(--neon-glow); }
-
-
-
-        /* DROPDOWN MENU STYLES */
-
-        .dropdown-menu {
-
-            position: absolute;
-
-            top: 100%;
-
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            background: var(--glass-darker);
-
-            backdrop-filter: blur(15px);
-
-            border: 1px solid var(--border-color);
-
-            border-radius: 10px;
-
-            padding: 10px 0;
-
-            min-width: 180px;
-
-            text-align: center;
-
-            list-style: none;
-
-            flex-direction: column;
-
-            gap: 10px;
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            transition: opacity 0.3s ease, visibility 0s linear 1s; 
-
-        }
-
-
-
+        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--glass-darker); backdrop-filter: blur(15px); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 0; min-width: 180px; text-align: center; list-style: none; flex-direction: column; gap: 10px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s linear 1s; }
         .dropdown-menu li a { padding: 10px 20px; font-size: 0.8rem; white-space: nowrap; }
-
         nav ul li:hover .dropdown-menu { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s linear 0s; }
-
-
-
         .page { width: 100%; display: none; }
-
         .page.active { display: block; }
-
-
-
-        /* -----------------------------------------------------------
-
-           HOME & LANDING PAGE STYLES
-
-        ----------------------------------------------------------- */
-
-
-
         #hero-header { height: 75vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-
-        
-
-        #hero-header h1, .hero-sub, .final-hero h1, .sub-page-header h1 { 
-
-            max-width: 1200px; padding: 0 20px; line-height: 1.1;
-
-            color: #e0faff; 
-
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 2px 2px 15px rgba(0,0,0,0.7); 
-
-        }
-
-
-
-        /* MAIN HEADER SIZE INCREASED */
-
+        #hero-header h1, .hero-sub, .final-hero h1, .sub-page-header h1 { max-width: 1200px; padding: 0 20px; line-height: 1.1; color: #e0faff; text-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 2px 2px 15px rgba(0,0,0,0.7); }
         #hero-header h1 { font-size: 5.5rem; letter-spacing: 12px; font-weight: 800; text-transform: uppercase; }
-
-
-
-        .hero-sub {
-
-            font-size: 1.1rem;
-
-            letter-spacing: 5px;
-
-            text-transform: uppercase;
-
-            margin-top: 30px;
-
-            font-weight: 400;
-
-        }
-
-
-
+        .hero-sub { font-size: 1.1rem; letter-spacing: 5px; text-transform: uppercase; margin-top: 30px; font-weight: 400; }
         .main-video-section { max-width: 1200px; margin: 0 auto 100px auto; padding: 0 20px; }
-
-        
-
-        .video-box { 
-
-            position: relative; 
-
-            width: 100%; 
-
-            padding-bottom: 42.85%; 
-
-            background: #000; 
-
-            border-radius: 40px; 
-
-            overflow: hidden;
-
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
-
-            border: none; 
-
-        }
-
-
-
+        .video-box { position: relative; width: 100%; padding-bottom: 42.85%; background: #000; border-radius: 40px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15); border: none; }
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-
-
-
         .scroll-video-row { width: 100%; padding: 120px 5%; display: flex; opacity: 0; transform: translateY(50px); transition: var(--transition-speed); }
-
         .scroll-video-row.active { opacity: 1; transform: translateY(0); }
-
-        
-
-        .wide-video { 
-
-            width: 60%; aspect-ratio: 21 / 9; border-radius: 20px; 
-
-            border: 1px solid var(--border-color); overflow: hidden; 
-
-            background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-
-            flex-shrink: 0;
-
-        }
-
+        .wide-video { width: 60%; aspect-ratio: 21 / 9; border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; background: #000; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.3); flex-shrink: 0; }
         .wide-video video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-
-
-
-        .glass-text-box {
-
-            background: var(--glass-bg);
-
-            backdrop-filter: blur(15px);
-
-            border: 1px solid var(--border-color);
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-            font-size: 1rem;
-
-            line-height: 1.6;
-
-            color: var(--text-main);
-
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-
-            max-width: 450px;
-
-            position: relative;
-
-            transition: transform 0.3s ease;
-
-        }
-
-
-
-        .intro-text-box {
-
-            max-width: 900px !important; 
-
-            width: 90%;
-
-            font-size: 1.25rem; 
-
-            text-align: center;
-
-        }
-
-        
-
-        .glass-text-box:hover {
-
-            transform: scale(1.02);
-
-            border-color: var(--primary-accent);
-
-            box-shadow: var(--neon-glow);
-
-        }
-
-
-
-        .video-text-container {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 50px;
-
-            width: 100%;
-
-        }
-
-
-
-        .center-text-wrapper {
-
-            display: flex;
-
-            justify-content: center;
-
-            margin: 50px 0 100px 0;
-
-        }
-
-
-
-        /* LANDING GRID STYLES */
-
-        .landing-grid {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            justify-content: center;
-
-            gap: 30px;
-
-            margin-top: 60px;
-
-        }
-
-
-
-        .landing-card {
-
-            background: var(--glass-darker);
-
-            border: 1px solid var(--border-color);
-
-            padding: 40px 20px;
-
-            border-radius: 25px;
-
-            text-align: center;
-
-            cursor: pointer;
-
-            transition: 0.4s;
-
-            text-decoration: none;
-
-            color: white;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-            width: 300px;
-
-            min-height: 200px;
-
-        }
-
-
-
-        .landing-card:hover {
-
-            border-color: var(--primary-accent);
-
-            transform: translateY(-10px);
-
-            box-shadow: var(--neon-glow);
-
-            background: rgba(0, 212, 255, 0.1);
-
-        }
-
-
-
-        .landing-card h3 {
-
-            font-size: 1.4rem;
-
-            letter-spacing: 3px;
-
-            color: var(--primary-accent);
-
-            text-transform: uppercase;
-
-            margin-bottom: 10px;
-
-        }
-
-
-
-        .landing-card p {
-
-            font-size: 0.85rem;
-
-            opacity: 0.7;
-
-            letter-spacing: 1px;
-
-        }
-
-
-
-        @media (max-width: 1100px) {
-
-            .video-text-container { flex-direction: column; text-align: center; }
-
-            .wide-video { width: 100%; }
-
-            .glass-text-box { max-width: 100%; margin-top: 20px; }
-
-            #hero-header h1 { font-size: 3.5rem; }
-
-            .sub-page-header h1 { font-size: 3.2rem; }
-
-        }
-
-
-
+        .glass-text-box { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--border-color); border-radius: 20px; padding: 30px; font-size: 1rem; line-height: 1.6; color: var(--text-main); box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-width: 450px; position: relative; transition: transform 0.3s ease; }
+        .intro-text-box { max-width: 900px !important; width: 90%; font-size: 1.25rem; text-align: center; }
+        .glass-text-box:hover { transform: scale(1.02); border-color: var(--primary-accent); box-shadow: var(--neon-glow); }
+        .video-text-container { display: flex; align-items: center; justify-content: center; gap: 50px; width: 100%; }
+        .center-text-wrapper { display: flex; justify-content: center; margin: 50px 0 100px 0; }
+        .landing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 60px; }
+        .landing-card { background: var(--glass-darker); border: 1px solid var(--border-color); padding: 40px 20px; border-radius: 25px; text-align: center; cursor: pointer; transition: 0.4s; text-decoration: none; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 300px; min-height: 200px; }
+        .landing-card:hover { border-color: var(--primary-accent); transform: translateY(-10px); box-shadow: var(--neon-glow); background: rgba(0, 212, 255, 0.1); }
+        .landing-card h3 { font-size: 1.4rem; letter-spacing: 3px; color: var(--primary-accent); text-transform: uppercase; margin-bottom: 10px; }
+        .landing-card p { font-size: 0.85rem; opacity: 0.7; letter-spacing: 1px; }
+        @media (max-width: 1100px) { .video-text-container { flex-direction: column; text-align: center; } .wide-video { width: 100%; } .glass-text-box { max-width: 100%; margin-top: 20px; } #hero-header h1 { font-size: 3.5rem; } .sub-page-header h1 { font-size: 3.2rem; } }
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
-
         .text-break.active { opacity: 1; transform: translateY(0); }
-
-        .text-break h2 { 
-
-            font-size: 2.5rem; letter-spacing: 5px; line-height: 1.5; font-weight: 400; 
-
-            text-shadow: var(--neon-glow), 2px 2px 10px rgba(0,0,0,0.5);
-
-            max-width: 900px;
-
-        }
-
-
-
-        /* Scroll Arrow Design */
-
-        .scroll-arrow {
-
-            margin-top: 40px;
-
-            width: 40px;
-
-            height: 40px;
-
-            border-right: 4px solid var(--primary-accent);
-
-            border-bottom: 4px solid var(--primary-accent);
-
-            transform: rotate(45deg);
-
-            animation: bounce 2s infinite;
-
-            filter: drop-shadow(var(--neon-glow));
-
-            cursor: pointer; 
-
-            transition: 0.3s;
-
-        }
-
+        .text-break h2 { font-size: 2.5rem; letter-spacing: 5px; line-height: 1.5; font-weight: 400; text-shadow: var(--neon-glow), 2px 2px 10px rgba(0,0,0,0.5); max-width: 900px; }
+        .scroll-arrow { margin-top: 40px; width: 40px; height: 40px; border-right: 4px solid var(--primary-accent); border-bottom: 4px solid var(--primary-accent); transform: rotate(45deg); animation: bounce 2s infinite; filter: drop-shadow(var(--neon-glow)); cursor: pointer; transition: 0.3s; }
         .scroll-arrow:hover { border-color: #fff; filter: drop-shadow(0 0 20px #fff); }
-
-
-
-        @keyframes bounce {
-
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0) rotate(45deg);}
-
-            40% {transform: translateY(-20px) rotate(45deg);}
-
-            60% {transform: translateY(-10px) rotate(45deg);}
-
-        }
-
-
-
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0) rotate(45deg);} 40% {transform: translateY(-20px) rotate(45deg);} 60% {transform: translateY(-10px) rotate(45deg);} }
         .feature-container { position: relative; width: 100%; max-width: 1300px; margin: 120px auto; height: 85vh; display: flex; align-items: center; justify-content: center; }
-
-        .feature-img { 
-
-            width: 80%; height: 85%; object-fit: cover; border-radius: 40px; 
-
-            border: 1px solid var(--border-color); filter: brightness(0.85); 
-
-            transition: 1s; box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-
-        }
-
-
-
-        .feature-box { 
-
-            position: absolute; width: 330px; padding: 2.5rem; background: var(--glass-bg); 
-
-            backdrop-filter: blur(30px); border: 1px solid var(--border-color); border-radius: 25px; 
-
-            font-size: 0.95rem; line-height: 1.8; opacity: 0; transition: 1s; z-index: 10;
-
-        }
-
+        .feature-img { width: 80%; height: 85%; object-fit: cover; border-radius: 40px; border: 1px solid var(--border-color); filter: brightness(0.85); transition: 1s; box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
+        .feature-box { position: absolute; width: 330px; padding: 2.5rem; background: var(--glass-bg); backdrop-filter: blur(30px); border: 1px solid var(--border-color); border-radius: 25px; font-size: 0.95rem; line-height: 1.8; opacity: 0; transition: 1s; z-index: 10; }
         .feature-container.active .feature-box { opacity: 1; }
-
         .feature-container.active .feature-img { filter: brightness(0.5); }
-
-
-
-        .top-left { top: 0; left: 0; }
-
-        .bottom-right { bottom: 0; right: 0; }
-
-        .top-right { top: 0; right: 0; }
-
-        .bottom-left { bottom: 0; left: 0; }
-
-
-
+        .top-left { top: 0; left: 0; } .bottom-right { bottom: 0; right: 0; } .top-right { top: 0; right: 0; } .bottom-left { bottom: 0; left: 0; }
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-
         .final-hero h1 { font-size: 4.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
-
-
-
-        /* -----------------------------------------------------------
-
-           SUB-PAGE STYLES - UPDATED FOR LARGER HEADERS & TEXT
-
-        ----------------------------------------------------------- */
-
         .sub-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 40px; }
-
-        
-
-        .sub-page-header { 
-
-            text-align: center; 
-
-            margin-bottom: 80px; 
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-            width: 100%;
-
-        }
-
-
-
-        /* INCREASED SUB PAGE HEADER SIZE */
-
+        .sub-page-header { text-align: center; margin-bottom: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
         .sub-page-header h1 { font-size: 5.2rem !important; }
-
-
-
-        .glass-panel { 
-
-            background: var(--glass-bg); 
-
-            padding: 4rem; 
-
-            border-radius: 30px; 
-
-            border: 1px solid var(--border-color); 
-
-            backdrop-filter: blur(25px); 
-
-            margin-bottom: 50px; 
-
-            text-align: center; 
-
-        }
-
-        
-
+        .glass-panel { background: var(--glass-bg); padding: 4rem; border-radius: 30px; border: 1px solid var(--border-color); backdrop-filter: blur(25px); margin-bottom: 50px; text-align: center; }
         .content-block { display: flex; flex-direction: column; gap: 40px; align-items: center; }
-
-        
-
-        /* Centered description text */
-
-        .text-content { 
-
-            font-size: 1.2rem; 
-
-            line-height: 1.8; 
-
-            margin-bottom: 30px; 
-
-            text-align: center; 
-
-            max-width: 1000px;
-
-        }
-
-        
-
-        /* Panel Heading Size Increased */
-
-        .glass-panel h2 { 
-
-            font-size: 2.2rem; 
-
-            color: var(--primary-accent); 
-
-            margin-bottom: 15px;
-
-            text-align: center;
-
-        }
-
-
-
-        .media-placeholder {
-
-            width: 100%; height: 500px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color);
-
-            border-radius: 20px; display: flex; align-items: center; justify-content: center;
-
-            font-weight: 800; letter-spacing: 2px; color: var(--primary-accent);
-
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden;
-
-        }
-
+        .text-content { font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px; text-align: center; max-width: 1000px; }
+        .glass-panel h2 { font-size: 2.2rem; color: var(--primary-accent); margin-bottom: 15px; text-align: center; }
+        .media-placeholder { width: 100%; height: 500px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: 2px; color: var(--primary-accent); box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden; }
         .media-placeholder img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-
-        
-
-        .spec-list { 
-
-            list-style: none; 
-
-            padding: 20px; 
-
-            background: rgba(0,0,0,0.3); 
-
-            border-radius: 15px; 
-
-            margin-top: 20px; 
-
-            display: inline-block; 
-
-            min-width: 450px;
-
-        }
-
-        .spec-list li { 
-
-            padding: 12px 0; 
-
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-
-            display: flex; 
-
-            justify-content: space-between; 
-
-            gap: 40px;
-
-            font-size: 1.1rem;
-
-        }
-
+        .spec-list { list-style: none; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; margin-top: 20px; display: inline-block; min-width: 450px; }
+        .spec-list li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; gap: 40px; font-size: 1.1rem; }
         .spec-list li strong { color: var(--primary-accent); }
-
-
-
     </style>
-
 </head>
-
 <body>
-
-
-
     <div class="bg-fixed"></div>
-
     <div id="dimmer" class="bg-dimmer"></div>
-
-
-
     <nav>
-
         <ul>
-
             <li><a onclick="showPage('home-page')">DAEDALUS</a></li>
-
-            <li>
-
-                <a onclick="showPage('design-landing')">DESIGN</a>
-
+            <li><a onclick="showPage('design-landing')">DESIGN</a>
                 <ul class="dropdown-menu">
-
                     <li><a onclick="showPage('wings-page')">WINGS</a></li>
-
                     <li><a onclick="showPage('body-page')">BODY</a></li>
-
                     <li><a onclick="showPage('tail-page')">TAIL</a></li>
-
                     <li><a onclick="showPage('systems-page')">SYSTEMS/UI</a></li>
-
                 </ul>
-
             </li>
-
-            <li>
-
-                <a onclick="showPage('practicality-landing')">PRACTICALITY</a>
-
+            <li><a onclick="showPage('practicality-landing')">PRACTICALITY</a>
                 <ul class="dropdown-menu">
-
                     <li><a onclick="showPage('safety-page')">SAFETY</a></li>
-
                     <li><a onclick="showPage('structure-page')">STRUCTURE</a></li>
-
                     <li><a onclick="showPage('cost-page')">COST</a></li>
-
                 </ul>
-
             </li>
-
             <li><a onclick="showPage('contact-page')">CONTACT</a></li>
-
         </ul>
-
     </nav>
 
-
-
-    <!-- -----------------------------------------------------------
-
-       HOME PAGE
-
-    ----------------------------------------------------------- -->
-
+    <!-- HOME PAGE -->
     <div id="home-page" class="page active">
-
-        
-
         <section id="hero-header">
-
             <h1>Humans have always dreamed of flight</h1>
-
             <p class="hero-sub">Scroll down to learn about turning the dream into a reality.</p>
-
         </section>
-
-
-
         <div class="main-video-section">
-
             <div class="video-box">
-
-                <video autoplay muted loop playsinline>
-
-                    <source src="Videos/Bird_video.mp4" type="video/mp4">
-
-                    Your browser does not support the video tag.
-
-                </video>
-
+                <video autoplay muted loop playsinline><source src="Videos/Bird_video.mp4" type="video/mp4"></video>
             </div>
-
-            
-
             <div class="center-text-wrapper reveal">
-
                 <div class="glass-text-box intro-text-box">
-
                     <strong style="color: var(--primary-accent);">THE NATURAL STANDARD</strong><br><br>
-
                     Birds navigate the skies with effortless grace, utilizing every updraft and thermal current. We aspire to capture this natural intuition, moving beyond simple mechanics to achieve a state of true, instinctual flight.
-
                 </div>
-
             </div>
-
         </div>
-
-
-
         <div class="scroll-video-row reveal">
-
             <div class="video-text-container">
-
-                <div class="wide-video">
-
-                    <video autoplay muted loop playsinline>
-
-                        <source src="Videos/Planes+Helicopters.mp4" type="video/mp4">
-
-                        Your browser does not support the video tag.
-
-                    </video>
-
-                </div>
-
+                <div class="wide-video"><video autoplay muted loop playsinline><source src="Videos/Planes+Helicopters.mp4" type="video/mp4"></video></div>
                 <div class="glass-text-box">
-
                     <strong style="color: var(--primary-accent);">ENGINEERING GIANTS</strong><br><br>
-
                     Planes, Jets, and Helicopters are undeniable feats of engineering that have connected the globe. However, they are not the flying experience we dream of; enclosed in pressurized cabins, they lack the immersive, personal connection to the air itself.
-
                 </div>
-
             </div>
-
         </div>
-
-
-
         <div class="scroll-video-row reveal">
-
             <div class="video-text-container">
-
                 <div class="glass-text-box" style="order: -1;">
-
                     <strong style="color: var(--primary-accent);">RECREATIONAL FREEDOM</strong><br><br>
-
                     Hang gliders, wingsuits, and parasails are amazing recreational achievements that bring us a step closer to true flight. Yet, they often rely on gravity or specific weather conditions, falling short in active control, speed, and total self-propulsion.
-
                 </div>
-
-                <div class="wide-video">
-
-                    <video autoplay muted loop playsinline>
-
-                        <source src="Videos/Gliders+Suits.mp4" type="video/mp4">
-
-                        Your browser does not support the video tag.
-
-                    </video>
-
-                </div>
-
+                <div class="wide-video"><video autoplay muted loop playsinline><source src="Videos/Gliders+Suits.mp4" type="video/mp4"></video></div>
             </div>
-
         </div>
-
-
-
         <div class="scroll-video-row reveal">
-
             <div class="video-text-container">
-
-                <div class="wide-video">
-
-                    <video autoplay muted loop playsinline>
-
-                        <source src="Videos/Jetson+Jetman.mp4" type="video/mp4">
-
-                        Your browser does not support the video tag.
-
-                    </video>
-
-                </div>
-
+                <div class="wide-video"><video autoplay muted loop playsinline><source src="Videos/Jetson+Jetman.mp4" type="video/mp4"></video></div>
                 <div class="glass-text-box">
-
                     <strong style="color: var(--primary-accent);">THE MODERN FRONTIER</strong><br><br>
-
                     Innovations like the Jetson 1 and Jetman are massive modern improvements, yet they still fall just short of the true immersion and control we dream of. The FALCON is the next evolution in human flight, fulfilling these deficits to create a seamless extension of the body.
-
                 </div>
-
             </div>
-
         </div>
-
-
-
         <div class="text-break reveal">
-
             <h2>Here is how the FALCON will take us to our next evolution of human flight:</h2>
-
             <div class="scroll-arrow" onclick="scrollToFeatures()"></div>
-
         </div>
-
-
-
         <div id="features-start" class="feature-container reveal">
-
             <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?q=80&w=1200" class="feature-img">
-
-            <div class="feature-box top-left">
-
-                <strong>MORPHING GEOMETRY</strong><br><br>
-
-                By changing shape mid-flight, we optimize aerodynamics for the desired position, mimicking the precision of biological flight.
-
-            </div>
-
-            <div class="feature-box bottom-right">
-
-                <strong>ULTRA-LIGHTWEIGHT</strong><br><br>
-
-                Our skeletal structures use advanced graphene composites that remain virtually weightless while sustaining extreme air pressure.
-
-            </div>
-
+            <div class="feature-box top-left"><strong>MORPHING GEOMETRY</strong><br><br>By changing shape mid-flight, we optimize aerodynamics for the desired position, mimicking the precision of biological flight.</div>
+            <div class="feature-box bottom-right"><strong>ULTRA-LIGHTWEIGHT</strong><br><br>Our skeletal structures use advanced graphene composites that remain virtually weightless while sustaining extreme air pressure.</div>
         </div>
-
-
-
         <div class="feature-container reveal">
-
             <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200" class="feature-img">
-
-            <div class="feature-box top-right">
-
-                <strong>ELECTRIC THRUST</strong><br><br>
-
-                High-torque electric turbines provide necessary vertical lift without the bulk of combustion, ensuring a seamless flight profile.
-
-            </div>
-
-            <div class="feature-box bottom-left">
-
-                <strong>SAFETY NET</strong><br><br>
-
-                An integrated ballistic recovery parachute deploys automatically in milliseconds, providing an absolute failsafe for the pilot.
-
-            </div>
-
+            <div class="feature-box top-right"><strong>ELECTRIC THRUST</strong><br><br>High-torque electric turbines provide necessary vertical lift without the bulk of combustion, ensuring a seamless flight profile.</div>
+            <div class="feature-box bottom-left"><strong>SAFETY NET</strong><br><br>An integrated ballistic recovery parachute deploys automatically in milliseconds, providing an absolute failsafe for the pilot.</div>
         </div>
-
-
-
         <div class="feature-container reveal">
-
             <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" class="feature-img">
-
-            <div class="feature-box top-left">
-
-                <strong>STABILIZED GLIDE</strong><br><br>
-
-                The active tail design balances the entire suit, providing precise multi-directional movement and efficiency.
-
-            </div>
-
-            <div class="feature-box bottom-right">
-
-                <strong>INTUITIVE NEURAL-LINK</strong><br><br>
-
-                Translating pilot joint movements into aerofoil control via a high-speed network of distributed bio-sensors.
-
-            </div>
-
+            <div class="feature-box top-left"><strong>STABILIZED GLIDE</strong><br><br>The active tail design balances the entire suit, providing precise multi-directional movement and efficiency.</div>
+            <div class="feature-box bottom-right"><strong>INTUITIVE NEURAL-LINK</strong><br><br>Translating pilot joint movements into aerofoil control via a high-speed network of distributed bio-sensors.</div>
         </div>
-
-
-
         <section class="final-hero reveal">
-
             <h1>Explore the DESIGN and PRACTICALITY pages to learn more</h1>
-
         </section>
-
     </div>
 
-
-
-    <!-- -----------------------------------------------------------
-
-       DESIGN LANDING PAGE
-
-    ----------------------------------------------------------- -->
-
+    <!-- DESIGN LANDING -->
     <div id="design-landing" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>DESIGN</h1>
-
-                <p class="hero-sub">The Engineering of Evolution</p>
-
-            </div>
-
+            <div class="sub-page-header"><h1>DESIGN</h1><p class="hero-sub">The Engineering of Evolution</p></div>
             <div class="glass-panel content-block">
-
-                <p class="text-content">
-
-                    The FALCON is more than a vehicle; it is a bio-integrated flight surface. Our design philosophy focuses on removing the mechanical barriers between a human and the sky. Through morphing geometry and neural-integrated controls, we have created a concept that pushes the limits of what the human body can achieve in high-altitude environments. 
-
-                    <br><br>
-
-                    Explore the four pillars of our aeronautical architecture below.
-
-                </p>
-
-
-
+                <p class="text-content">The FALCON is more than a vehicle; it is a bio-integrated flight surface. Our design philosophy focuses on removing the mechanical barriers between a human and the sky. Through morphing geometry and neural-integrated controls, we have created a concept that pushes the limits of what the human body can achieve in high-altitude environments.<br><br>Explore the four pillars of our aeronautical architecture below.</p>
                 <div class="landing-grid">
-
-                    <div class="landing-card" onclick="showPage('wings-page')">
-
-                        <h3>WINGS</h3>
-
-                        <p>Morphing Architecture & Lift</p>
-
-                    </div>
-
-                    <div class="landing-card" onclick="showPage('body-page')">
-
-                        <h3>BODY</h3>
-
-                        <p>Propulsion & Safety Core</p>
-
-                    </div>
-
-                    <div class="landing-card" onclick="showPage('tail-page')">
-
-                        <h3>TAIL</h3>
-
-                        <p>Stability & Pitch Authority</p>
-
-                    </div>
-
-                    <div class="landing-card" onclick="showPage('systems-page')">
-
-                        <h3>SYSTEMS/UI</h3>
-
-                        <p>Holographic HUD & Neural-Link</p>
-
-                    </div>
-
+                    <div class="landing-card" onclick="showPage('wings-page')"><h3>WINGS</h3><p>Morphing Architecture & Lift</p></div>
+                    <div class="landing-card" onclick="showPage('body-page')"><h3>BODY</h3><p>Propulsion & Safety Core</p></div>
+                    <div class="landing-card" onclick="showPage('tail-page')"><h3>TAIL</h3><p>Stability & Pitch Authority</p></div>
+                    <div class="landing-card" onclick="showPage('systems-page')"><h3>SYSTEMS/UI</h3><p>Holographic HUD & Neural-Link</p></div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
-
-
-    <!-- -----------------------------------------------------------
-
-       PRACTICALITY LANDING PAGE
-
-    ----------------------------------------------------------- -->
-
+    <!-- PRACTICALITY LANDING -->
     <div id="practicality-landing" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>PRACTICALITY</h1>
-
-                <p class="hero-sub">From Concept to Reality</p>
-
-            </div>
-
+            <div class="sub-page-header"><h1>PRACTICALITY</h1><p class="hero-sub">From Concept to Reality</p></div>
             <div class="glass-panel content-block">
-
-                <p class="text-content">
-
-                    A vision of flight is only as strong as its real-world integrity. We have addressed the critical challenges of personal aviation, focusing on triple-redundant safety protocols, advanced materials science, and a manufacturing roadmap that makes unencumbered flight accessible for the next generation of explorers.
-
-                    <br><br>
-
-                    Review our structural benchmarks and market analysis below.
-
-                </p>
-
-
-
+                <p class="text-content">A vision of flight is only as strong as its real-world integrity. We have addressed the critical challenges of personal aviation, focusing on triple-redundant safety protocols, advanced materials science, and a manufacturing roadmap that makes unencumbered flight accessible for the next generation of explorers.<br><br>Review our structural benchmarks and market analysis below.</p>
                 <div class="landing-grid">
-
-                    <div class="landing-card" onclick="showPage('safety-page')">
-
-                        <h3>SAFETY</h3>
-
-                        <p>Redundancy & Recovery</p>
-
-                    </div>
-
-                    <div class="landing-card" onclick="showPage('structure-page')">
-
-                        <h3>STRUCTURE</h3>
-
-                        <p>AI-Generative Frame Design</p>
-
-                    </div>
-
-                    <div class="landing-card" onclick="showPage('cost-page')">
-
-                        <h3>COST</h3>
-
-                        <p>Economics of Personal Flight</p>
-
-                    </div>
-
+                    <div class="landing-card" onclick="showPage('safety-page')"><h3>SAFETY</h3><p>Redundancy & Recovery</p></div>
+                    <div class="landing-card" onclick="showPage('structure-page')"><h3>STRUCTURE</h3><p>AI-Generative Frame Design</p></div>
+                    <div class="landing-card" onclick="showPage('cost-page')"><h3>COST</h3><p>Economics of Personal Flight</p></div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
-
-
-    <!-- -----------------------------------------------------------
-
-       INDIVIDUAL SUBPAGES
-
-    ----------------------------------------------------------- -->
-
+    <!-- WINGS PAGE -->
     <div id="wings-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>WINGS</h1>
-
-                <p style="font-size:1.5rem;">One Wing. Every Function.</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>WINGS</h1><p style="font-size:1.5rem;">One Wing. Every Function.</p></div>
             <div class="glass-panel content-block reveal">
-
                 <h2>Morphing Architecture</h2>
-
-                <p class="text-content">
-
-                    We believe that with only one set of wings, a pilot should be able to experience easy takeoff, efficient cruising, fast dives, and quick turns. This versatility is made possible by physically morphing the wings in flight. 
-
-                    <br><br>
-
-                    The suit is a one-piece design; the wings work in tandem with the body unit to provide a wearable, aerodynamic shell. To achieve this, the wing structure is broken into three main segments that fit the dimensional criteria of the human form while maintaining high-performance output.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1524388484152-4fe193d50893?q=80&w=1200" alt="Wing Structure">
-
-                </div>
-
+                <p class="text-content">We believe that with only one set of wings, a pilot should be able to experience easy takeoff, efficient cruising, fast dives, and quick turns. This versatility is made possible by physically morphing the wings in flight. The suit is a one-piece design; the wings work in tandem with the body unit to provide a wearable, aerodynamic shell.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1524388484152-4fe193d50893?q=80&w=1200" alt="Wing Structure"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Dimensional Properties & Wing Load</h2>
-
-                <p class="text-content">
-
-                    To effectively carry a human, we look to nature's most efficient glider: the Wandering Albatross. An albatross typically has a wing load of approx. 24 kg/m². Our engineering goal is to match this natural upper limit.
-
-                </p>
-
-
-
                 <ul class="spec-list">
-
                     <li><strong>Max Pilot Weight</strong> <span>100 kg</span></li>
-
                     <li><strong>Est. Craft Weight</strong> <span>40 kg</span></li>
-
                     <li><strong>Total Mass</strong> <span>140 kg</span></li>
-
                     <li><strong>Target Wing Load</strong> <span>25 kg/m²</span></li>
-
                     <li><strong>Req. Surface Area</strong> <span>5.6 m²</span></li>
-
                 </ul>
-
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Mechanical Segmentation</h2>
-
-                <p class="text-content">
-
-                    The morphing mechanism is symmetrical, but for this breakdown, we analyze one side. Each wing half is divided into two primary sections: a stationary base and a moving array.
-
-                    <br><br>
-
-                    The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing. These segments are cut to precise geometries (Figure X) to ensure they morph under one another smoothly without mechanical binding.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation">
-
-                </div>
-
+                <p class="text-content">Each wing half is divided into two primary sections: a stationary base and a moving array. The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Tension-Based Actuation</h2>
-
-                <p class="text-content">
-
-                    All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process.
-
-                    <br><br>
-
-                    The system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended. This is a safety feature; if power is lost, the wings automatically spread to maximum glide surface area.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1567084518774-7d2d34208a3d?q=80&w=1200" alt="Tension Cable Mechanism">
-
-                </div>
-
+                <p class="text-content">All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process. The system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1567084518774-7d2d34208a3d?q=80&w=1200" alt="Tension Cable Mechanism"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- BODY PAGE -->
     <div id="body-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>BODY</h1>
-
-                <p style="font-size:1.5rem;">Safety Core & Propulsion</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>BODY</h1><p style="font-size:1.5rem;">Safety Core & Propulsion</p></div>
             <div class="glass-panel content-block reveal">
-
                 <h2>Emergency Wing Detachment</h2>
-
-                <p class="text-content">
-
-                    With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures beyond that which is built into the wings. In case of emergency, the back of the suit can detach the wings from the body and release a parachute.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                     <img src="https://images.unsplash.com/photo-1545624773-7729b5a32b6e?q=80&w=1200" alt="Parachute Safety System">
-
-                </div>
-
+                <p class="text-content">With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures. In case of emergency, the back of the suit can detach the wings from the body and release a parachute.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1545624773-7729b5a32b6e?q=80&w=1200" alt="Parachute Safety System"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Ventral Electric Turbine</h2>
-
-                <p class="text-content">
-
-                    The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit.
-
-                </p>
-
-
-
+                <p class="text-content">The other primary feature built into the body of the suit is the power. An electric turbine that can provide X newtons of thrust for X minute with X energy consumed will be attached to the belly of the suit.</p>
                 <ul class="spec-list">
-
                     <li><strong>Thrust Output</strong> <span>X Newtons</span></li>
-
                     <li><strong>Run Time</strong> <span>X Minutes</span></li>
-
                     <li><strong>Energy Consumed</strong> <span>X kWh</span></li>
-
                 </ul>
-
-
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1582235940566-b33346d0a7da?q=80&w=1200" alt="Electric Turbine">
-
-                </div>
-
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1582235940566-b33346d0a7da?q=80&w=1200" alt="Electric Turbine"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- TAIL PAGE -->
     <div id="tail-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>TAIL</h1>
-
-                <p style="font-size:1.5rem;">Stability & Flight Control</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>TAIL</h1><p style="font-size:1.5rem;">Stability & Flight Control</p></div>
             <div class="glass-panel content-block reveal">
-
                 <h2>The Aerodynamic Glue</h2>
-
-                <p class="text-content">
-
-                    The Tail is the glue that holds the whole design together. Its surface area is specifically matched to the surface area of the wings to balance and control the center of lift for the system. This results in stable flight.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1534327732298-9676e7371d37?q=80&w=1200" alt="Tail Structure">
-
-                </div>
-
+                <p class="text-content">The Tail is the glue that holds the whole design together. Its surface area is specifically matched to the surface area of the wings to balance and control the center of lift for the system. This results in stable flight.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1534327732298-9676e7371d37?q=80&w=1200" alt="Tail Structure"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Pitch Authority</h2>
-
-                <p class="text-content">
-
-                    The Tail also is the center of flight controls. With the ability to move up/down the tail can change the angle of attack aka the pitch of the suit in order to generate lift or initiate a dive.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?q=80&w=1200" alt="Flight Control Surfaces">
-
-                </div>
-
+                <p class="text-content">The Tail also is the center of flight controls. With the ability to move up/down the tail can change the angle of attack aka the pitch of the suit in order to generate lift or initiate a dive.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?q=80&w=1200" alt="Flight Control Surfaces"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- SYSTEMS PAGE -->
     <div id="systems-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>SYSTEMS / UI</h1>
-
-                <p style="font-size:1.5rem;">Augmented Reality Flight Deck</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>SYSTEMS / UI</h1><p style="font-size:1.5rem;">Augmented Reality Flight Deck</p></div>
             <div class="glass-panel content-block reveal">
-
-                <p class="text-content">
-
-                    Physical gauges are obsolete. The FALCON helmet utilizes a waveguide holographic display, projecting altitude, airspeed, and thermal updraft visualizations directly onto the pilot's retina. The interface is minimal—only showing data when it is critical.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" alt="HUD Interface">
-
-                </div>
-
+                <p class="text-content">Physical gauges are obsolete. The FALCON helmet utilizes a waveguide holographic display, projecting altitude, airspeed, and thermal updraft visualizations directly onto the pilot's retina. The interface is minimal—only showing data when it is critical.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" alt="HUD Interface"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Neural-Link & Haptics</h2>
-
-                <p class="text-content">
-
-                    The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface">
-
-                </div>
-
+                <p class="text-content">The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- SAFETY PAGE -->
     <div id="safety-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>SAFETY</h1>
-
-                <p style="font-size:1.5rem;">Redundancy & Recovery</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>SAFETY</h1><p style="font-size:1.5rem;">Redundancy & Recovery</p></div>
             <div class="glass-panel content-block reveal">
-
                 <h2>Triple-Redundant Architecture</h2>
-
-                <p class="text-content">
-
-                    Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems">
-
-                </div>
-
+                <p class="text-content">Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Ballistic Recovery System (BRS)</h2>
-
-                <p class="text-content">
-
-                    The Ultimate Failsafe: Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment">
-
-                </div>
-
+                <p class="text-content">The Ultimate Failsafe: Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- STRUCTURE PAGE -->
     <div id="structure-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>STRUCTURE</h1>
-
-                <p style="font-size:1.5rem;">Materials Science & Integrity</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>STRUCTURE</h1><p style="font-size:1.5rem;">Materials Science & Integrity</p></div>
             <div class="glass-panel content-block reveal">
-
                 <h2>AI-Generative Frame Design</h2>
-
-                <p class="text-content">
-
-                    The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40%.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure">
-
-                </div>
-
+                <p class="text-content">The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40%.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Digital Twin Stress Testing</h2>
-
-                <p class="text-content">
-
-                    Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1200" alt="Stress Test">
-
-                </div>
-
+                <p class="text-content">Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1200" alt="Stress Test"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- COST PAGE -->
     <div id="cost-page" class="page">
-
         <div class="sub-wrap">
-
-            <div class="sub-page-header">
-
-                <h1>COST</h1>
-
-                <p style="font-size:1.5rem;">Accessibility & Market Economics</p>
-
-            </div>
-
-
-
+            <div class="sub-page-header"><h1>COST</h1><p style="font-size:1.5rem;">Accessibility & Market Economics</p></div>
             <div class="glass-panel content-block reveal">
-
                 <h2>Market Paradigm</h2>
-
-                <p class="text-content">
-
-                    Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and off-the-shelf EV battery technology, we reduce production costs significantly compared to traditional light aircraft.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200" alt="Market Graph">
-
-                </div>
-
+                <p class="text-content">Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and EV battery technology, we reduce production costs significantly compared to traditional light aircraft.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200" alt="Market Graph"></div>
             </div>
-
-
-
             <div class="glass-panel content-block reveal">
-
                 <h2>Projected Scaling</h2>
-
-                <p class="text-content">
-
-                    Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
-
-                </p>
-
-                <div class="media-placeholder">
-
-                    <img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line">
-
-                </div>
-
+                <p class="text-content">Initial units are targeted at the high-end recreational market. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line"></div>
             </div>
-
         </div>
-
     </div>
 
-
-
+    <!-- CONTACT PAGE -->
     <div id="contact-page" class="page">
-
         <div class="sub-wrap" style="text-align:center;">
-
             <div class="glass-panel">
-
                 <h1 style="text-shadow: var(--neon-glow);">Contact</h1>
-
                 <p style="margin: 30px 0; font-size: 1.5rem;">daedalusinnovation@gmail.com</p>
-
                 <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" style="width: 80px; filter: invert(1);">
-
             </div>
-
         </div>
-
     </div>
-
-
 
     <script>
-
-        // NAVIGATION LOGIC
-
         function showPage(pageId, pushToHistory = true) {
-
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-
             const targetPage = document.getElementById(pageId);
-
             if (targetPage) {
-
                 targetPage.classList.add('active');
-
                 window.scrollTo(0, 0);
-
                 if (pushToHistory) history.pushState({ pageId: pageId }, '', '#' + pageId);
-
             }
-
         }
-
-
-
-        // SCROLL ARROW LOGIC
-
         function scrollToFeatures() {
-
             const element = document.getElementById('features-start');
-
-            if (element) {
-
-                element.scrollIntoView({ 
-
-                    behavior: 'smooth', 
-
-                    block: 'center' 
-
-                });
-
-            }
-
+            if (element) { element.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
         }
-
-
-
         window.addEventListener('popstate', (e) => showPage(e.state ? e.state.pageId : 'home-page', false));
-
         window.addEventListener('load', () => { if (window.location.hash) showPage(window.location.hash.replace('#', ''), false); });
-
-
-
-        // ANIMATION LOGIC
-
         const observer = new IntersectionObserver((entries) => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add('active');
-
-                }
-
-            });
-
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } });
         }, { threshold: 0.15 });
-
-
-
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
     </script>
-
 </body>
-
 </html>
