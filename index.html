@@ -188,7 +188,7 @@
         .center-text-wrapper.active { opacity: 1; transform: translateY(0); }
 
         /* -----------------------------------------------------------
-           NEW: SVG NEURAL PATH LINES
+           NEW: SVG NEURAL PATH LINES (NO DOTS)
            Connects Text Box -> Text Box
         ----------------------------------------------------------- */
         .neural-layer {
@@ -205,17 +205,12 @@
         .neural-path-line {
             fill: none;
             stroke: var(--primary-accent);
-            stroke-width: 3;
+            stroke-width: 2; /* Slightly thinner for cleaner look without dots */
             stroke-linecap: round;
-            stroke-dasharray: 1, 12; /* Dotted effect */
-            filter: drop-shadow(0 0 5px var(--primary-accent)) 
-                    drop-shadow(0 0 10px var(--primary-accent));
+            stroke-dasharray: 4, 10; /* Dashed effect */
+            filter: drop-shadow(0 0 5px var(--primary-accent));
             opacity: 0.8;
-        }
-
-        .neural-node {
-            fill: var(--primary-accent);
-            filter: drop-shadow(0 0 8px #fff);
+            transition: stroke-dashoffset 1s linear;
         }
 
         /* Hide neural lines on mobile */
@@ -435,16 +430,12 @@
         
         <svg class="neural-layer" viewBox="0 0 100 2800" preserveAspectRatio="none">
             
-            <circle cx="50" cy="1150" r="0.4" class="neural-node" />
             <path class="neural-path-line" d="M 50,1150 L 80,1400" />
             
-            <circle cx="80" cy="1650" r="0.4" class="neural-node" />
             <path class="neural-path-line" d="M 80,1650 L 20,1950" />
             
-            <circle cx="20" cy="2250" r="0.4" class="neural-node" />
             <path class="neural-path-line" d="M 20,2250 L 80,2450" />
             
-            <circle cx="80" cy="2450" r="0.4" class="neural-node" />
         </svg>
 
         <section id="hero-header">
