@@ -237,6 +237,9 @@
             .glass-text-box { max-width: 100%; margin-top: 20px; }
             #hero-header h1 { font-size: 3.5rem; }
             .sub-page-header h1 { font-size: 3.2rem; }
+            
+            /* Hide connecting lines on small screens */
+            .feature-box::before, .feature-box::after { display: none; }
         }
 
         .text-break { text-align: center; padding: 100px 15%; opacity: 0; transform: translateY(30px); transition: 1s; display: flex; flex-direction: column; align-items: center; }
@@ -273,6 +276,7 @@
             width: 80%; height: 85%; object-fit: cover; border-radius: 40px; 
             border: 1px solid var(--border-color); filter: brightness(0.85); 
             transition: 1s; box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            position: relative; z-index: 1;
         }
 
         .feature-box { 
@@ -287,6 +291,52 @@
         .bottom-right { bottom: 0; right: 0; }
         .top-right { top: 0; right: 0; }
         .bottom-left { bottom: 0; left: 0; }
+
+        /* -----------------------------------------------------------
+           NEW: CONNECTING LINES
+           This adds the lines connecting the text boxes to the image
+        ----------------------------------------------------------- */
+        .feature-box::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            background: var(--primary-accent);
+            box-shadow: var(--neon-glow);
+            width: 0; /* Starts at 0 width for animation */
+            transition: width 1s ease 0.5s; /* Delay ensures box fades in first */
+            z-index: -1;
+        }
+
+        /* Animate line width when active */
+        .feature-container.active .feature-box::after {
+            width: 150px; 
+        }
+
+        /* Specific Angles for each corner */
+        .top-left::after {
+            bottom: 30px; right: -140px;
+            transform-origin: left;
+            transform: rotate(25deg);
+        }
+
+        .top-right::after {
+            bottom: 30px; left: 10px;
+            transform-origin: right;
+            transform: rotate(-155deg); /* Pointing left-down */
+        }
+
+        .bottom-left::after {
+            top: 30px; right: -140px;
+            transform-origin: left;
+            transform: rotate(-25deg);
+        }
+
+        .bottom-right::after {
+            top: 30px; left: 10px;
+            transform-origin: right;
+            transform: rotate(155deg); /* Pointing left-up */
+        }
+        /* ----------------------------------------------------------- */
 
         .final-hero { height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .final-hero h1 { font-size: 4.5rem; letter-spacing: 10px; text-transform: uppercase; font-weight: 800; }
@@ -396,9 +446,6 @@
         </ul>
     </nav>
 
-    <!-- -----------------------------------------------------------
-       HOME PAGE
-    ----------------------------------------------------------- -->
     <div id="home-page" class="page active">
         
         <section id="hero-header">
@@ -513,9 +560,6 @@
         </section>
     </div>
 
-    <!-- -----------------------------------------------------------
-       DESIGN LANDING PAGE
-    ----------------------------------------------------------- -->
     <div id="design-landing" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -551,9 +595,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       PRACTICALITY LANDING PAGE
-    ----------------------------------------------------------- -->
     <div id="practicality-landing" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -585,9 +626,6 @@
         </div>
     </div>
 
-    <!-- -----------------------------------------------------------
-       INDIVIDUAL SUBPAGES
-    ----------------------------------------------------------- -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
@@ -716,13 +754,14 @@
     <div id="systems-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header">
-                <h1>SYSTEMS / UI</h1>
-                <p style="font-size:1.5rem;">Augmented Reality Flight Deck</p>
+                <h1>SYSTEMS & UI</h1>
+                <p class="hero-sub">The Digital Nervous System</p>
             </div>
 
             <div class="glass-panel content-block reveal">
+                <h2>Holographic HUD</h2>
                 <p class="text-content">
-                    Physical gauges are obsolete. The FALCON helmet utilizes a waveguide holographic display, projecting altitude, airspeed, and thermal updraft visualizations directly onto the pilot's retina. The interface is minimal—only showing data when it is critical.
+                    Information is survival. Our helmet visor integrates a transparent OLED Heads-Up Display (HUD) that projects critical telemetry—altitude, airspeed, battery life, and artificial horizon—directly into the pilot's line of sight without obstructing the view of the world below.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" alt="HUD Interface">
@@ -730,13 +769,15 @@
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2>Neural-Link & Haptics</h2>
+                <h2>Neural-Link Integration</h2>
                 <p class="text-content">
-                    The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.
+                    To reduce reaction latency, the FALCON utilizes non-invasive EMG sensors lining the suit's interior. These sensors detect muscle activation milliseconds before movement occurs, priming the control surfaces for instant response.
                 </p>
-                <div class="media-placeholder">
-                    <img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface">
-                </div>
+                <ul class="spec-list">
+                    <li><strong>Latency</strong> <span>< 8ms</span></li>
+                    <li><strong>Sensor Density</strong> <span>40 nodes/limb</span></li>
+                    <li><strong>OS Architecture</strong> <span>Real-Time Linux Kernel</span></li>
+                </ul>
             </div>
         </div>
     </div>
@@ -745,26 +786,23 @@
         <div class="sub-wrap">
             <div class="sub-page-header">
                 <h1>SAFETY</h1>
-                <p style="font-size:1.5rem;">Redundancy & Recovery</p>
+                <p class="hero-sub">Redundancy is Religion</p>
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2>Triple-Redundant Architecture</h2>
+                <h2>Triple-Redundant Electronics</h2>
                 <p class="text-content">
-                    Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds.
+                    Every electronic signal is processed by three independent flight computers. If one fails, the others vote it out and maintain control. This aerospace-standard architecture ensures that a computer glitch never results in a loss of flight control.
                 </p>
-                <div class="media-placeholder">
-                    <img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems">
-                </div>
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2>Ballistic Recovery System (BRS)</h2>
+                <h2>Ballistic Recovery System</h2>
                 <p class="text-content">
-                    The Ultimate Failsafe: Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.
+                    In the event of total structural failure or pilot unconsciousness, a pyrotechnic charge deploys a whole-system parachute. This parachute is capable of slowing the descent of the pilot and the equipment to a survivable velocity from as low as 100 feet.
                 </p>
                 <div class="media-placeholder">
-                    <img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment">
+                    <img src="https://images.unsplash.com/photo-1541696081-30c885934442?q=80&w=1200" alt="Parachute Deployment">
                 </div>
             </div>
         </div>
@@ -774,27 +812,26 @@
         <div class="sub-wrap">
             <div class="sub-page-header">
                 <h1>STRUCTURE</h1>
-                <p style="font-size:1.5rem;">Materials Science & Integrity</p>
+                <p class="hero-sub">Generative Design</p>
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2>AI-Generative Frame Design</h2>
+                <h2>AI-Optimized Topology</h2>
                 <p class="text-content">
-                    The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40%.
+                    We do not design shapes; we grow them. Using generative AI algorithms, we simulate thousands of flight hours to remove every gram of material that isn't structurally necessary. The result is a skeletal frame that looks organic—bone-like—but possesses the strength of titanium.
                 </p>
                 <div class="media-placeholder">
-                    <img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure">
+                    <img src="https://images.unsplash.com/photo-1629800742898-33e1eb5274d8?q=80&w=1200" alt="Generative Structure">
                 </div>
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2>Digital Twin Stress Testing</h2>
-                <p class="text-content">
-                    Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.
-                </p>
-                <div class="media-placeholder">
-                    <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1200" alt="Stress Test">
-                </div>
+                <h2>Material Matrix</h2>
+                <ul class="spec-list">
+                    <li><strong>Primary Frame</strong> <span>Carbon Fiber Reinforced Polymer</span></li>
+                    <li><strong>Joints</strong> <span>Sintered Titanium 6Al-4V</span></li>
+                    <li><strong>Skin</strong> <span>Ripstop Dyneema Composite</span></li>
+                </ul>
             </div>
         </div>
     </div>
@@ -803,26 +840,16 @@
         <div class="sub-wrap">
             <div class="sub-page-header">
                 <h1>COST</h1>
-                <p style="font-size:1.5rem;">Accessibility & Market Economics</p>
+                <p class="hero-sub">The Economics of Flight</p>
             </div>
 
             <div class="glass-panel content-block reveal">
-                <h2>Market Paradigm</h2>
+                <h2>Projected Market Entry</h2>
                 <p class="text-content">
-                    Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and off-the-shelf EV battery technology, we reduce production costs significantly compared to traditional light aircraft.
+                    Initial production runs will be limited to "Founder Series" units. As manufacturing scales and generative molds are finalized, the cost per unit will drop significantly, aiming to rival the price point of a high-end luxury car or small recreational boat.
                 </p>
                 <div class="media-placeholder">
                     <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200" alt="Market Graph">
-                </div>
-            </div>
-
-            <div class="glass-panel content-block reveal">
-                <h2>Projected Scaling</h2>
-                <p class="text-content">
-                    Initial units are targeted at the high-end recreational market, similar to luxury sports cars. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.
-                </p>
-                <div class="media-placeholder">
-                    <img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line">
                 </div>
             </div>
         </div>
@@ -831,49 +858,66 @@
     <div id="contact-page" class="page">
         <div class="sub-wrap" style="text-align:center;">
             <div class="glass-panel">
-                <h1 style="text-shadow: var(--neon-glow);">Contact</h1>
-                <p style="margin: 30px 0; font-size: 1.5rem;">daedalusinnovation@gmail.com</p>
-                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" style="width: 80px; filter: invert(1);">
+                <h1 style="text-shadow: var(--neon-glow); font-size: 3rem;">CONTACT US</h1>
+                <p style="margin: 30px 0; font-size: 1.5rem; letter-spacing: 2px;">DAEDALUSINNOVATION@GMAIL.COM</p>
+                <div style="margin-top: 50px; opacity: 0.7;">
+                    <p>New York • London • Tokyo</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // NAVIGATION LOGIC
-        function showPage(pageId, pushToHistory = true) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                window.scrollTo(0, 0);
-                if (pushToHistory) history.pushState({ pageId: pageId }, '', '#' + pageId);
+        // 1. PAGE NAVIGATION LOGIC
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                // Scroll to top when switching pages
+                window.scrollTo(0,0);
             }
         }
 
-        // SCROLL ARROW LOGIC
-        function scrollToFeatures() {
-            const element = document.getElementById('features-start');
-            if (element) {
-                element.scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'center' 
-                });
-            }
-        }
+        // 2. SCROLL REVEAL ANIMATION (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.15 
+        };
 
-        window.addEventListener('popstate', (e) => showPage(e.state ? e.state.pageId : 'home-page', false));
-        window.addEventListener('load', () => { if (window.location.hash) showPage(window.location.hash.replace('#', ''), false); });
-
-        // ANIMATION LOGIC
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.15 });
+        }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+        
+        document.querySelectorAll('.feature-container').forEach(el => {
+            observer.observe(el);
+        });
+        document.querySelectorAll('.scroll-video-row').forEach(el => {
+            observer.observe(el);
+        });
+        document.querySelectorAll('.text-break').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 3. SMOOTH SCROLL FOR ARROW
+        function scrollToFeatures() {
+            const features = document.getElementById('features-start');
+            features.scrollIntoView({ behavior: 'smooth' });
+        }
     </script>
+
 </body>
 </html>
