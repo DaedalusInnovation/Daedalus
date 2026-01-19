@@ -79,6 +79,8 @@
         .spec-list { list-style: none; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px; margin-top: 20px; display: inline-block; min-width: 450px; }
         .spec-list li { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; gap: 40px; font-size: 1.1rem; }
         .spec-list li strong { color: var(--primary-accent); }
+        .spec-triple-container { display: flex; align-items: center; justify-content: center; gap: 20px; width: 100%; flex-wrap: wrap; }
+        .spec-arrow { font-size: 3rem; color: var(--primary-accent); text-shadow: var(--neon-glow); user-select: none; }
     </style>
 </head>
 <body>
@@ -106,7 +108,6 @@
         </ul>
     </nav>
 
-    <!-- HOME PAGE -->
     <div id="home-page" class="page active">
         <section id="hero-header">
             <h1>Humans have always dreamed of flight</h1>
@@ -174,7 +175,6 @@
         </section>
     </div>
 
-    <!-- DESIGN LANDING -->
     <div id="design-landing" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>DESIGN</h1><p class="hero-sub">The Engineering of Evolution</p></div>
@@ -190,7 +190,6 @@
         </div>
     </div>
 
-    <!-- PRACTICALITY LANDING -->
     <div id="practicality-landing" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>PRACTICALITY</h1><p class="hero-sub">From Concept to Reality</p></div>
@@ -205,7 +204,6 @@
         </div>
     </div>
 
-    <!-- SUBPAGES -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>WINGS</h1><p style="font-size:1.5rem;">One Wing. Every Function.</p></div>
@@ -216,13 +214,31 @@
             </div>
             <div class="glass-panel content-block reveal">
                 <h2>Dimensional Properties & Wing Load</h2>
-                <ul class="spec-list">
-                    <li><strong>Max Pilot Weight</strong> <span>~100 kg</span></li>
-                    <li><strong>Est. Craft Weight</strong> <span>~40 kg</span></li>
-                    <li><strong>Total Mass</strong> <span>~140 kg</span></li>
-                    <li><strong>Target Wing Load</strong> <span>25 kg/m²</span></li>
-                    <li><strong>Req. Surface Area</strong> <span>5.6 m²</span></li>
-                </ul>
+                <div class="spec-triple-container">
+                    <ul class="spec-list" style="min-width: 320px;">
+                        <li><strong>Max Pilot Weight</strong> <span>100 kg</span></li>
+                        <li><strong>Est. Craft Weight</strong> <span>40 kg</span></li>
+                        <li><strong>Total Mass</strong> <span>140 kg</span></li>
+                        <li><strong>Target Wing Load</strong> <span>25 kg/m²</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                    </ul>
+                    <div class="spec-arrow">→</div>
+                    <ul class="spec-list" style="min-width: 320px;">
+                        <li><strong>Req. Surface Area</strong> <span>5.6 m²</span></li>
+                        <li><strong>Wing Span x Avg Chord</strong> <span>5.6 m²</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                    </ul>
+                    <div class="spec-arrow">→</div>
+                    <ul class="spec-list" style="min-width: 320px;">
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                    </ul>
+                </div>
             </div>
             <div class="glass-panel content-block reveal">
                 <h2>Mechanical Segmentation</h2>
@@ -336,12 +352,9 @@
         </div>
     </div>
 
-    <!-- CONTACT PAGE -->
     <div id="contact-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header">
-                <h1>Contact</h1>
-            </div>
+            <div class="sub-page-header"><h1>Contact</h1></div>
             <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
                 <div class="glass-panel" style="flex: 1; min-width: 320px; padding: 3rem; margin-bottom: 0;">
                     <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" style="width: 60px; filter: invert(1); margin-bottom: 20px;">
@@ -380,12 +393,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
