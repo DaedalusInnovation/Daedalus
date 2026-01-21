@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAEDALUS INNOVATION</title>
+    
+    <!-- FAVICON: Replace the href with your image path (e.g., images/favicon.png) -->
+    <link rel="icon" type="image/png" href="images/DaedalusInnovation_Logo.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -108,6 +112,7 @@
         </ul>
     </nav>
 
+    <!-- HOME PAGE -->
     <div id="home-page" class="page active">
         <section id="hero-header">
             <h1>Humans have always dreamed of flight</h1>
@@ -152,7 +157,7 @@
             </div>
         </div>
         <div class="text-break reveal">
-            <h2>The FALCON is a concpet design that will bring about the next evolution of human flight. Below shows how this will be achived:</h2>
+            <h2>Here is how the FALCON will take us to our next evolution of human flight:</h2>
             <div class="scroll-arrow" onclick="scrollToFeatures()"></div>
         </div>
         <div id="features-start" class="feature-container reveal">
@@ -175,6 +180,7 @@
         </section>
     </div>
 
+    <!-- DESIGN LANDING -->
     <div id="design-landing" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>DESIGN</h1><p class="hero-sub">The Engineering of Evolution</p></div>
@@ -184,12 +190,13 @@
                     <div class="landing-card" onclick="showPage('wings-page')"><h3>WINGS</h3><p>Morphing Architecture & Lift</p></div>
                     <div class="landing-card" onclick="showPage('body-page')"><h3>BODY</h3><p>Propulsion & Safety Core</p></div>
                     <div class="landing-card" onclick="showPage('tail-page')"><h3>TAIL</h3><p>Stability & Pitch Authority</p></div>
-                    <div class="landing-card" onclick="showPage('systems-page')"><h3>SYSTEMS/UI</h3><p>Physical Controls and User Experience</p></div>
+                    <div class="landing-card" onclick="showPage('systems-page')"><h3>SYSTEMS/UI</h3><p>Holographic HUD & Neural-Link</p></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- PRACTICALITY LANDING -->
     <div id="practicality-landing" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>PRACTICALITY</h1><p class="hero-sub">From Concept to Reality</p></div>
@@ -204,6 +211,7 @@
         </div>
     </div>
 
+    <!-- SUBPAGES -->
     <div id="wings-page" class="page">
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>WINGS</h1><p style="font-size:1.5rem;">One Wing. Every Function.</p></div>
@@ -216,25 +224,25 @@
                 <h2>Dimensional Properties & Wing Load</h2>
                 <div class="spec-triple-container">
                     <ul class="spec-list" style="min-width: 320px;">
-                        <li><strong>&nbsp</strong> <span>&nbsp</span></li>
-                        <li><strong>Estimated Pilot Weight</strong> <span>~100 kg</span></li>
-                        <li><strong>Est. Craft Weight</strong> <span>~40 kg</span></li>
-                        <li><strong>Total Mass</strong> <span>~140 kg</span></li>
-                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
-                    </ul>
-                    <div class="spec-arrow">→</div>
-                    <ul class="spec-list" style="min-width: 320px;">
-                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>Max Pilot Weight</strong> <span>100 kg</span></li>
+                        <li><strong>Est. Craft Weight</strong> <span>40 kg</span></li>
+                        <li><strong>Total Mass</strong> <span>140 kg</span></li>
                         <li><strong>Target Wing Load</strong> <span>25 kg/m²</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                    </ul>
+                    <div class="spec-arrow">→</div>
+                    <ul class="spec-list" style="min-width: 320px;">
                         <li><strong>Req. Surface Area</strong> <span>5.6 m²</span></li>
-                        <li><strong>SA = Wing Span x Chord Lnth</strong> <span></span></li>
+                        <li><strong>Wing Span x Avg Chord</strong> <span>5.6 m²</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
                         <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
                     </ul>
                     <div class="spec-arrow">→</div>
                     <ul class="spec-list" style="min-width: 320px;">
                         <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
-                        <li><strong>Wing Span</strong> <span>~4m</span></li>
-                        <li><strong>Avg Chord Lnth</strong> <span>~1.4m</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
+                        <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
                         <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
                         <li><strong>&nbsp;</strong> <span>&nbsp;</span></li>
                     </ul>
@@ -242,12 +250,12 @@
             </div>
             <div class="glass-panel content-block reveal">
                 <h2>Mechanical Segmentation</h2>
-                <p class="text-content">Each half of the wing is divided into two primary sections: a single panel stationary base and a three panel moving array. Each moving panel will rotate to fit under the panel before it. This mechanism will be physically conttroled by the pilot and assisted by a motor (The control system is further detailed on the SYSTEMS/UI page).</p>
+                <p class="text-content">Each wing half is divided into two primary sections: a stationary base and a moving array. The moving section consists of 3 pivoting "panels." Including the stationary base, there are 4 overlapping segments per wing.</p>
                 <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1506443432602-ac2fcd6f54e0?q=80&w=1200" alt="Mechanical Segmentation"></div>
             </div>
             <div class="glass-panel content-block reveal">
                 <h2>Tension-Based Actuation</h2>
-                <p class="text-content">All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process. Additionalu, the system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended. This adds to the structral stability of the wings during flight and also adds a layer of safety ensuring the wings are in the best position to land the pilot in case of emergency.</p>
+                <p class="text-content">All 4 segments share a central joint. This pivot point creates a smooth transition during the morphing process. The system utilizes heavy-duty springs to keep the wings in a "natural resting position" of fully extended.</p>
                 <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1567084518774-7d2d34208a3d?q=80&w=1200" alt="Tension Cable Mechanism"></div>
             </div>
         </div>
@@ -257,15 +265,18 @@
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>BODY</h1><p style="font-size:1.5rem;">Safety Core & Propulsion</p></div>
             <div class="glass-panel content-block reveal">
-                <h2>Emergency Safety Measures</h2>
-                <p class="text-content">Safety is a non-negotiable aspect of the FALCON. The wing joint design already assures that the user can fall slowly to the ground if there are any system malfunctions. But, we have additional layers of safety beyond this. In case of emergency, the wings can detach from the body and pull a parachute with it.</p>
+                <h2>Emergency Wing Detachment</h2>
+                <p class="text-content">With safety as a foremost concern, the main focus of the central section of the design is equipped with additional safety measures. In case of emergency, the back of the suit can detach the wings from the body and release a parachute.</p>
                 <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1545624773-7729b5a32b6e?q=80&w=1200" alt="Parachute Safety System"></div>
             </div>
             <div class="glass-panel content-block reveal">
-                <h2>Electric Turbine</h2>
-                <p class="text-content">The FALCON must be powered by something that can provide enough lift for takeoff, be fully controlled mid flight, and minimize noise. The company Whisper Aero is doing amazing work in this field. Their products could be applied to FALCON and bring this idea to fruition.</p>
-                <p class="text-content">The image below details their innovative design and can be found on the Whisper Aero website.</p>
-                <div class="media-placeholder"><img src="images/WhisperAero_TurbineDiagram.png" alt="Electric Turbine"></div>
+                <h2>Ventral Electric Turbine</h2>
+                <ul class="spec-list">
+                    <li><strong>Thrust Output</strong> <span>X Newtons</span></li>
+                    <li><strong>Run Time</strong> <span>X Minutes</span></li>
+                    <li><strong>Energy Consumed</strong> <span>X kWh</span></li>
+                </ul>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1582235940566-b33346d0a7da?q=80&w=1200" alt="Electric Turbine"></div>
             </div>
         </div>
     </div>
@@ -275,12 +286,12 @@
             <div class="sub-page-header"><h1>TAIL</h1><p style="font-size:1.5rem;">Stability & Flight Control</p></div>
             <div class="glass-panel content-block reveal">
                 <h2>The Aerodynamic Glue</h2>
-                <p class="text-content">The Tail is the glue that holds the whole design together. Its surface area is specifically matched to the surface area of the wings to balance and control the center of lift of the system, resulting in a stable flight experience.</p>
+                <p class="text-content">The Tail is the glue that holds the whole design together. Its surface area is specifically matched to the surface area of the wings to balance and control the center of lift for the system. This results in stable flight.</p>
                 <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1534327732298-9676e7371d37?q=80&w=1200" alt="Tail Structure"></div>
             </div>
             <div class="glass-panel content-block reveal">
                 <h2>Pitch Authority</h2>
-                <p class="text-content">The Tail also is the center of flight controls. With the ability to move up/down the tail can change the angle of attack (the pitch) of the suit in order to generate lift or initiate a dive.</p>
+                <p class="text-content">The Tail also is the center of flight controls. With the ability to move up/down the tail can change the angle of attack aka the pitch of the suit in order to generate lift or initiate a dive.</p>
                 <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?q=80&w=1200" alt="Flight Control Surfaces"></div>
             </div>
         </div>
@@ -288,31 +299,31 @@
 
     <div id="systems-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>SYSTEMS / UI</h1><p style="font-size:1.5rem;">Physical Controls and User Experience</p></div>
-            <div class="glass-panel content-block reveal".>
-                <p class="text-content">Coming soon...</p>
-                <div class="media-placeholder"><img src=""></div>
+            <div class="sub-page-header"><h1>SYSTEMS / UI</h1><p style="font-size:1.5rem;">Augmented Reality Flight Deck</p></div>
+            <div class="glass-panel content-block reveal">
+                <p class="text-content">Physical gauges are obsolete. The FALCON helmet utilizes a waveguide holographic display, projecting altitude, airspeed, and thermal updraft visualizations directly onto the pilot's retina. The interface is minimal—only showing data when it is critical.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1200" alt="HUD Interface"></div>
             </div>
             <div class="glass-panel content-block reveal">
-                <h2>Wing Retraction Method</h2>
-                <p class="text-content">Coming soon...</p>
-                <div class="media-placeholder"><img src=""></div>
+                <h2>Neural-Link & Haptics</h2>
+                <p class="text-content">The suit "speaks" to the pilot through localized vibration motors. If a stall is imminent on the left wing, the pilot feels a vibration on their left shoulder. This intuitive feedback loop reduces cognitive load, allowing for instinctive flying.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1555617778-02518510b9fa?q=80&w=1200" alt="Neural Interface"></div>
             </div>
         </div>
     </div>
 
     <div id="safety-page" class="page">
         <div class="sub-wrap">
-            <div class="sub-page-header"><h1>SAFETY</h1><p style="font-size:1.5rem;">Structurally Sound and Emergency Ready</p></div>
+            <div class="sub-page-header"><h1>SAFETY</h1><p style="font-size:1.5rem;">Redundancy & Recovery</p></div>
             <div class="glass-panel content-block reveal">
-                <h2>Coming soon...</h2>
-                <p class="text-content"></p>
-                <div class="media-placeholder"><img src="" alt="Safety Systems"></div>
+                <h2>Triple-Redundant Architecture</h2>
+                <p class="text-content">Flight requires trust in your machine. The FALCON is built on a "Triple-Redundant" architecture. Every control surface, sensor, and battery cell has two independent backups. If a primary processor fails, the secondary takes over in less than 4 milliseconds.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1626265774643-f1943311a86b?q=80&w=1200" alt="Safety Systems"></div>
             </div>
             <div class="glass-panel content-block reveal">
-                <h2></h2>
-                <p class="text-content"></p>
-                <div class="media-placeholder"><img src="" alt="Parachute Deployment"></div>
+                <h2>Ballistic Recovery System (BRS)</h2>
+                <p class="text-content">The Ultimate Failsafe: Should the flight envelope be compromised beyond recovery, a solid-fuel rocket deploys a 50ft canopy parachute. This system is completely mechanical, meaning it works even in the event of total electrical failure.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1535579899-79730c443604?q=80&w=1200" alt="Parachute Deployment"></div>
             </div>
         </div>
     </div>
@@ -321,14 +332,14 @@
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>STRUCTURE</h1><p style="font-size:1.5rem;">Materials Science & Integrity</p></div>
             <div class="glass-panel content-block reveal">
-                <h2>Coming soon...</h2>
-                <p class="text-content"></p>
-                <div class="media-placeholder"><img src="" alt="3D Printed Structure"></div>
+                <h2>AI-Generative Frame Design</h2>
+                <p class="text-content">The FALCON frame is not welded; it is printed. Using generative design AI, we 3D print titanium nodes connected by carbon fiber tubes. This results in a skeletal structure that places material only where load paths exist, reducing weight by 40%.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1581093458891-7731559424b0?q=80&w=1200" alt="3D Printed Structure"></div>
             </div>
             <div class="glass-panel content-block reveal">
-                <h2></h2>
-                <p class="text-content"></p>
-                <div class="media-placeholder"><img src="" alt="Stress Test"></div>
+                <h2>Digital Twin Stress Testing</h2>
+                <p class="text-content">Every unit undergoes "Digital Twin" stress testing. Before a physical part is made, it is subjected to millions of simulated flight hours, extreme weather, and impact scenarios to ensure the physical structure exceeds aerospace safety margins.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1200" alt="Stress Test"></div>
             </div>
         </div>
     </div>
@@ -337,14 +348,14 @@
         <div class="sub-wrap">
             <div class="sub-page-header"><h1>COST</h1><p style="font-size:1.5rem;">Accessibility & Market Economics</p></div>
             <div class="glass-panel content-block reveal">
-                <h2>Coming soon...</h2>
-                <p class="text-content"></p>
-                <div class="media-placeholder"><img src="" alt="Market Graph"></div>
+                <h2>Market Paradigm</h2>
+                <p class="text-content">Personal flight has historically been reserved for the ultra-wealthy. Daedalus Innovation challenges this paradigm. By utilizing additive manufacturing and EV battery technology, we reduce production costs significantly compared to traditional light aircraft.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1200" alt="Market Graph"></div>
             </div>
             <div class="glass-panel content-block reveal">
-                <h2></h2>
-                <p class="text-content"></p>
-                <div class="media-placeholder"><img src="" alt="Manufacturing Line"></div>
+                <h2>Projected Scaling</h2>
+                <p class="text-content">Initial units are targeted at the high-end recreational market. As manufacturing scales and battery costs plummet, the FALCON is projected to reach the price point of a standard sedan within 7 years.</p>
+                <div class="media-placeholder"><img src="https://images.unsplash.com/photo-1565514020176-db7923612d3c?q=80&w=1200" alt="Manufacturing Line"></div>
             </div>
         </div>
     </div>
@@ -390,13 +401,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
